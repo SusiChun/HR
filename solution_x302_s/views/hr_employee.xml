@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <record id="x302_s_employee_view" model="ir.ui.view">
+            <field name="name">x302.s.employee.view</field>
+            <field name="model">hr.employee</field>
+            <field name="inherit_id" ref="hr.view_employee_form"/>
+            <field name="arch" type="xml">
+            <data>
+                <field name="user_id" position="after">
+                    <field name="x302_s_user_id" groups="base.group_no_one"/>
+                </field>
+            </data>
+        </field>
+        </record>
+    </data>
+</odoo>

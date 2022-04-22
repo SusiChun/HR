@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+    <template id="public_holiday_report">
+        <t t-foreach="docs" t-as="o">
+            <t t-call="report.external_layout">
+                <div class="page">
+                    <div>
+                        <h4><center><b><u>
+                            Public Holidays - <span t-field="o.name"/>
+                        </u></b></center></h4>
+                    </div>
+                    <br/>
+                    <t t-if="o.holiday_line_ids">
+                        <div class="container">
+                            <table class="table table-striped">
+                                <thead>
+                                    <tr style="page-break-inside: avoid;">
+                                        <th style="color:#7c7bad;">Date</th>
+                                        <th style="color:#7c7bad;">Day</th>
+                                        <th style="color:#7c7bad;">Reason</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <t t-foreach="o.holiday_line_ids" t-as="holiday_line">
+                                        <tr style="page-break-inside: avoid;">
+                                            <td>
+                                                <span 
+                                                    t-esc="time.strftime('%d-%m-%Y',time.strptime(holiday_line.holiday_date,'%Y-%m-%d'))" />
+                                            </td>
+                                            <td>
+                                                <span t-field="holiday_line.day" />
+                                            </td>
+                                            <td>
+                                                <span t-field="holiday_line.name" />
+                                            </td>
+                                        </tr>
+                                    </t>
+                                </tbody>
+                            </table>
+                        </div>
+                    </t>
+                </div>
+            </t>
+        </t>
+    </template>
+</odoo>

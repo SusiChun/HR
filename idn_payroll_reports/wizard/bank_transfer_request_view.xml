@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+        
+   <!-- Payroll Generic Summary Excel Report View -->
+   <record id="view_payroll_excel_bank_transfer_request_wiz" model="ir.ui.view">
+        <field name="name">view.payroll.excel.bank.transfer.request.wizard</field>
+        <field name="model">payroll.excel.bank.transfer.request</field>
+        <field name="type">form</field>
+        <field name="arch" type="xml">
+            <form string="Bank Tranfer Request Excel Export">
+                <group>
+                    <field name="name" invisible="1"/>
+                	<h4>Click On Link To Download Xls File: &#160;<field name="file" colspan="4" filename="name"/></h4>
+                </group>
+                <footer>
+                <button special="cancel" string="Cancel" colspan="2"/>
+                </footer>
+            </form>
+        </field>
+    </record>
+
+    <record id="payroll_bank_transfer_request_wiz" model="ir.ui.view">
+        <field name="name">view.bank.transfer.request.wizard</field>
+        <field name="model">bank.transfer.request</field>
+        <field name="type">form</field>
+        <field name="arch" type="xml">
+            <form string="Bank Transfer Request">
+                <group colspan="4" col="4">
+                    <field name="date_start" required="1"/>
+                    <field name="date_end" required="1"/>
+                    <field name="select_emp_manually"/>
+                    <separator string="Employees" colspan="4" attrs="{'invisible': [('select_emp_manually', '=', False)]}"/>
+                    <field name="employee_ids" colspan="4" nolabel="1" attrs="{'invisible': [('select_emp_manually', '=', False)], 'required': [('select_emp_manually', '=', True)]}">
+                        <tree string="Employees">
+                            <field name="name"/>
+                            <field name="department_id"/>
+                            <field name="work_email"/>
+                        </tree>
+                    </field>
+                </group>
+                <footer>
+                    <button name="print_bank_transfer_request_xls" string="Print" type="object" colspan="2" class="oe_highlight"/>
+                    or
+                    <button special="cancel" string="Cancel" colspan="2"/>
+                </footer>
+            </form>
+        </field>
+    </record>
+
+    <record id="action_print_bank_transfer_request_xls" model="ir.actions.act_window">
+        <field name="name">Bank Transfer Request</field>
+        <field name="res_model">bank.transfer.request</field>
+        <field name="view_type">form</field>
+        <field name="view_mode">form</field>
+        <field name="target">new</field>
+    </record>
+
+     <menuitem action="action_print_bank_transfer_request_xls" id="menu_print_bank_transfer_request_xls_report" parent="menu_payroll_reports"
+      groups="hr.group_hr_manager,idn_payroll.group_hr_payroll_admin"/>
+
+</odoo>

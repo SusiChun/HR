@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <!-- demo date of employee relationship -->
+    <record id="applicant_relationship_father" model="applicant.relationship">
+        <field name="seq_code">1</field>
+        <field name="name">Father</field>
+    </record>
+    <record id="applicant_relationship_mother" model="applicant.relationship">
+        <field name="seq_code">2</field>
+        <field name="name">Mother</field>
+    </record>
+    <record id="applicant_relationship_son" model="applicant.relationship">
+        <field name="seq_code">3</field>
+        <field name="name">Son</field>
+    </record>
+    <record id="applicant_relationship_daughter" model="applicant.relationship">
+        <field name="seq_code">4</field>
+        <field name="name">Daughter</field>
+    </record>
+
+    <!-- demo date of langage -->
+    <record id="app_lang_english" model="appl.lang">
+        <field name="name">English</field>
+        <field name="code">301</field>
+    </record>
+    <record id="app_lang_hindi" model="appl.lang">
+        <field name="name">Hindi</field>
+        <field name="code">302</field>
+    </record>
+    <record id="app_lang_gujarati" model="appl.lang">
+        <field name="name">Gujarati</field>
+        <field name="code">303</field>
+    </record>
+    <record id="app_lang_thai" model="appl.lang">
+        <field name="name">Thai</field>
+        <field name="code">304</field>
+    </record>
+    <record id="app_lang_indo" model="appl.lang">
+        <field name="name">Indonesian</field>
+        <field name="code">305</field>
+    </record>
+</odoo>

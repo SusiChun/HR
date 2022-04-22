@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+    <data>
+        <template id="employee_attendance_report">
+            <t t-foreach="docs" t-as="o">
+                <t t-call="report.external_layout">
+                    <div class="page">
+                    <center><h1>Employee Attendance sheet</h1></center>
+                    <br/>
+                    <t t-if="o.attendance_details_duplicate">
+                    <span t-raw="o.attendance_details_duplicate"/>
+                    </t>
+                    </div>
+                </t>
+            </t>
+        </template>
+
+    </data>
+</openerp>
+

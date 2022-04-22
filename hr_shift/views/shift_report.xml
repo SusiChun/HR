@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <template id="security_shift_report">
+            <t t-foreach="docs" t-as="o">
+                <t t-call="report.external_layout">
+                    <div class="page">
+                    <center><h1>Security Shift Report</h1></center>
+                    <br/>
+                    <t t-if="o.shift_details_duplicate">
+                    <span t-raw="o.shift_details_duplicate"/>
+                    </t>
+                    </div>
+                </t>
+            </t>
+        </template>
+      <report id="report_shift_security" string="Security Shift Report"
+            model="hr.shift.wizard" report_type="qweb-pdf" file="hr_shift.security_shift_report"
+            name="hr_shift.security_shift_report" menu="False" />
+
+    </data>
+</odoo>
+

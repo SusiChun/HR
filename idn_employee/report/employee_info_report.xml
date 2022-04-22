@@ -1,0 +1,818 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+    <template id="employee_information_report">
+        <t t-call="report.html_container">
+            <t t-foreach="docs" t-as="o">
+                <t t-call="report.external_layout">
+                    <div class="page">
+                        <div class='row'>
+                            <div style="background-color:#98bdf2;hight:100px">
+                                <h4><center><b>Employee Name : <span t-field="o.name"/></b></center></h4>
+                            </div>
+                            <br/>
+                            <table width="50%">
+                                <tr style="font-size:12px;">
+                                    <th width="10%">
+                                        Department
+                                    </th>
+                                    <th width="5%" align="center">:</th>
+                                    <td width="35%">
+                                        <span t-field="o.department_id and o.department_id.name" />
+                                    </td>
+                                </tr>
+                                <tr style="font-size:12px;">
+                                    <th width="10%">
+                                        Direct Manager
+                                    </th>
+                                    <th width="5%" align="center">:</th>
+                                    <td width="35%">
+                                        <span t-field="o.parent_id and o.parent_id.name" />
+                                    </td>
+                                </tr>
+                            </table>
+                            <br/>
+                            <div style="background-color: #98bdf2;hight:100px">
+                                <h4><center><b>Personal Information</b></center></h4>
+                            </div>
+                            <table width="100%">
+                                <tr>
+                                    <td width="50%" style="color:#0d43a8;">
+                                        <b>Social IDs</b>
+                                    </td>
+                                    <td width="50%" style="color:#0d43a8;">
+                                        <b>Status</b>
+                                    </td>
+                                </tr>
+                                <tr  style="font-size:12px;">
+                                    <td colspan="2">
+                                        <table width="100%">
+                                            <tr style="font-size:12px;">
+                                                <th width="12%">Identification</th>
+                                                <th width="3%" align="center">:</th>
+                                                <td width="35%"><span t-field="o.identification_id" /></td>
+                                                <th width="12%">Gender</th>
+                                                <th width="3%" align="center">:</th>
+                                                <td width="35%"><span t-field="o.gender" /></td>
+                                            </tr>
+                                            <tr style="font-size:12px;">
+                                                <th width="12%">Passport No</th>
+                                                <th width="3%" align="center">:</th>
+                                                <td width="35%"><span t-field="o.passport_id" /></td>
+                                                <th width="12%">Marital Status</th>
+                                                <th width="3%" align="center">:</th>
+                                                <td width="35%"><span t-field="o.marital" /></td>
+                                            </tr>
+                                            <tr style="font-size:12px;">
+                                                <th width="12%"></th>
+                                                <th width="3%" align="center"></th>
+                                                <td width="35%"></td>
+                                                <th width="12%">Nationality</th>
+                                                <th width="3%" align="center">:</th>
+                                                <td width="35%"><span t-field="o.emp_country_id" /></td>
+                                            </tr>
+                                            <tr style="font-size:12px;">
+                                                <th width="12%"></th>
+                                                <th width="3%"></th>
+                                                <td width="35%"></td>
+                                                <th width="12%">Date of Birth</th>
+                                                <th width="3%" align="center">:</th>
+                                                <td width="35%">
+                                                    <span t-if="o.birthday">
+                                                        <span t-esc="time.strftime('%d-%m-%Y',time.strptime(o.birthday,'%Y-%m-%d'))" />
+                                                    </span>
+                                                </td>
+                                            </tr>
+                                            <tr style="font-size:12px;">
+                                                <th width="12%"></th>
+                                                <th width="3%"></th>
+                                                <td width="35%"></td>
+                                                <th width="12%">Place of Birth</th>
+                                                <th width="3%" align="center">:</th>
+                                                <td width="35%"><span t-field="o.place_of_birth" /></td>
+                                            </tr>
+                                            <tr style="font-size:12px;">
+                                                <th width="12%"></th>
+                                                <th width="3%"></th>
+                                                <td width="35%"></td>
+                                                <th width="12%">Age</th>
+                                                <th width="3%" align="center">:</th>
+                                                <td width="35%"><span t-field="o.age" /></td>
+                                            </tr>
+                                        </table>
+                                    </td>
+                                </tr>
+                            </table>
+                            <br/>
+                            <table width="50%">
+                                <tr>
+                                    <td width="50%" style="color:#0d43a8;">
+                                        <b>Contact Information</b>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td colspan="2">
+                                        <table width="100%">
+                                            <tr style="font-size:12px;">
+                                                <th width="13%">Home Address</th>
+                                                <th width="3%" align="center">:</th>
+                                                <td width="34%"><span t-field="o.address_home_id" /></td>
+                                            </tr>
+                                            <tr style="font-size:12px;">
+                                                <th width="13%">Country</th>
+                                                <th width="3%" align="center">:</th>
+                                                <td width="34%"><span t-field="o.country_id and o.country_id.name" /></td>
+                                            </tr>
+                                            <tr style="font-size:12px;">
+                                                <th width="13%">State</th>
+                                                <th width="3%" align="center">:</th>
+                                                <td width="34%"><span t-field="o.emp_state_id and o.emp_state_id.name"/></td>
+                                            </tr>
+                                            <tr style="font-size:12px;">
+                                                <th width="13%">City</th>
+                                                <th width="3%" align="center">:</th>
+                                                <td width="34%"><span t-field="o.emp_city_id and o.emp_city_id.name"/></td>
+                                            </tr>
+                                            <tr style="font-size:12px;">
+                                                <th width="13%">Phone</th>
+                                                <th width="3%" align="center">:</th>
+                                                <td width="34%"><span t-field="o.work_phone" /></td>
+                                            </tr>
+                                            <tr style="font-size:12px;">
+                                                <th width="13%">Mobile</th>
+                                                <th width="3%" align="center">:</th>
+                                                <td width="34%"><span t-field="o.mobile_phone" /></td>
+                                            </tr>
+                                            <tr style="font-size:12px;">
+                                                <th width="13%">E-mail</th>
+                                                <th width="3%" align="center">:</th>
+                                                <td width="34%"><span t-field="o.work_email" /></td>
+                                            </tr>
+                                        </table>
+                                    </td>
+                                </tr>
+                            </table>
+                            <br/>
+                            <div style="background-color: #98bdf2;hight:100px; page-break-inside: avoid;">
+                                <h4><center><b>Miscellaneous</b></center></h4>
+                            </div>
+                            <table width="100%">
+                                <tr>
+                                    <td width="50%" style="color:#0d43a8;">
+                                        <b>Personal Info</b>
+                                    </td>
+                                    <td width="50%" style="color:#0d43a8;">
+                                        <b>Job Info</b>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td colspan="2">
+                                        <table width="100%">
+                                            <tr style="font-size:12px;">
+                                                <th width="20%">Bank Account Number</th>
+                                                <th width="3%" align="center">:</th>
+                                                <td width="27%">
+                                                    <t t-if="o.bank_account_id">
+                                                        <span t-esc="o.bank_account_id and o.bank_account_id.acc_number" />
+                                                    </t>
+                                                </td>
+                                                <th width="20%">Is a Manager ?</th>
+                                                <th width="3%" align="center">:</th>
+                                                <td width="27%"><span t-esc="o.manager"/></td>
+                                            </tr>
+                                            <tr style="font-size:12px;">
+                                                <th width="20%">Place of Birth</th>
+                                                <th width="3%" align="center">:</th>
+                                                <td width="27%">
+                                                    <span t-esc="o.place_of_birth" />
+                                                </td>
+                                                <th width="20%">Company Vehicle</th>
+                                                <th width="3%" align="center">:</th>
+                                                <td width="27%"><span t-esc="o.vehicle"/></td>
+                                            </tr>
+                                            <tr style="font-size:12px;">
+                                                <th width="20%">Number of Children</th>
+                                                <th width="3%" align="center">:</th>
+                                                <td width="27%">
+                                                    <span t-esc="o.children" />
+                                                </td>
+                                                <th width="20%">Home-Work Distancee</th>
+                                                <th width="3%" align="center">:</th>
+                                                <td width="27%"><span t-esc="o.vehicle_distance"/></td>
+                                            </tr>
+                                            <tr style="font-size:12px;">
+                                                <th></th>
+                                                <th></th>
+                                                <td></td>
+                                                <th width="20%">Medical Examination</th>
+                                                <th width="3%" align="center">:</th>
+                                                <td width="27%"><span t-esc="o.medic_exam"/></td>
+                                            </tr>
+                                        </table>
+                                    </td>
+                                </tr>
+                            </table>
+                            <div  style="page-break-inside: avoid;">
+                            <t t-if="o.emp_child_ids">
+                                <br/>
+                                <div style="background-color: #98bdf2;hight:100px">
+                                    <h4><center><b>Children Particulars</b></center></h4>
+                                </div>
+                                <div class="container">
+                                    <table class="table table-condensed">
+                                        <thead>
+                                            <tr>
+                                                <th width="50%">Children Names</th>
+                                                <th width="50%">Age</th>
+                                            </tr>
+                                        </thead>
+                                        <tboady>
+                                            <t t-foreach="o.emp_child_ids" t-as="child_ids">
+                                                <tr>
+                                                    <td width="50%"><span t-esc="child_ids.name"/></td>
+                                                    <td width="50%"><span t-esc="child_ids.age" /></td>
+                                                </tr>
+                                            </t>
+                                        </tboady>
+                                    </table>
+                                </div>
+                            </t>
+                            </div>
+                            <div  style="page-break-inside: avoid;">
+                            <t t-if="o.relative_ids">
+                                <br/>
+                                <div style="background-color: #98bdf2;hight:100px">
+                                    <h4><center><b>Family Particulars</b></center></h4>
+                                </div>
+                                <div class="container">
+                                    <table class="table table-condensed">
+                                        <thead>
+                                            <tr>
+                                                <th>Name</th>
+                                                <th>Relationship</th>
+                                                <th>Date of Birth</th>
+                                                <th>Occupation</th>
+                                                <th>Address</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <t t-foreach="o.relative_ids" t-as="relate_ids">
+                                                <tr>
+                                                    <td>
+                                                        <span t-esc="relate_ids.name" />
+                                                    </td>
+                                                    <td>
+                                                        <span t-esc="relate_ids.relationship_id.name" />
+                                                    </td>
+                                                    <td>
+                                                        <span t-esc="relate_ids.date_of_birth" />
+                                                    </td>
+                                                    <td>
+                                                        <span t-esc="relate_ids.occupation" />
+                                                    </td>
+                                                    <td>
+                                                        <span t-esc="relate_ids.address" />
+                                                    </td>
+                                                </tr>
+                                            </t>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </t>
+                            </div>
+                            <div  style="page-break-inside: avoid;">
+                            <t t-if="o.employment_history_ids">
+                                <br/>
+                                <div style="background-color: #98bdf2;hight:100px">
+                                    <h4><center><b>Employment History</b></center></h4>
+                                </div>
+                                <div class="container">
+                                    <table class="table table-condensed">
+                                        <thead>
+                                            <tr>
+                                                <th>Company</th>
+                                                <th>salary</th>
+                                                <th>From Date</th>
+                                                <th>To Date</th>
+                                                <th>Designation</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <t t-foreach="o.employment_history_ids" t-as="emp_hist">
+                                                <tr>
+                                                    <td>
+                                                        <span t-esc="emp_hist.company" />
+                                                    </td>
+                                                    <td>
+                                                        <span t-esc="emp_hist.salary_starting" />
+                                                    </td>
+                                                    <td>
+                                                        <span t-if="emp_hist.from_date">
+                                                            <span>
+                                                                <t
+                                                                    t-esc="time.strftime('%d-%m-%Y',
+                                                                time.strptime(emp_hist.from_date,'%Y-%m-%d'))" />
+                                                            </span>
+                                                        </span>
+                                                    </td>
+                                                    <td>
+                                                        <span t-if="emp_hist.to_date">
+                                                            <span>
+                                                                <t
+                                                                t-esc="time.strftime('%d-%m-%Y',time.strptime(emp_hist.to_date,'%Y-%m-%d'))" />
+                                                            </span>
+                                                        </span>
+                                                    </td>
+                                                    <td>
+                                                        <span t-esc="emp_hist.designation" />
+                                                    </td>
+                                                </tr>
+                                            </t>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </t>
+                            </div>
+                            <div style="page-break-inside: avoid;">
+                                <br/>
+                                <div style="background-color: #98bdf2;hight:100px">
+                                    <h4><center><b>Educational Information</b></center></h4>
+                                </div>
+                                <t t-if="o.edu_ids">
+                                    <div class="container" >
+                                        <div>
+                                            <h5 style="color:#0d43a8;"><b>Education</b></h5>
+                                        </div>
+                                        <table class="table table-condensed">
+                                             <thead>
+                                                <tr>
+                                                    <th>Education Level</th>
+                                                    <th>Name and Country of School</th>
+                                                    <th>Period</th>
+                                                    <th>Certificate Obtained</th>
+                                                </tr>
+                                            </thead>
+                                            <t t-foreach="o.edu_ids" t-as="education_ids">
+                                                <tbody>
+                                                    <tr>
+                                                        <td>
+                                                            <span t-esc="education_ids.edu_level.type" />
+                                                        </td>
+                                                        <td>
+                                                            <span t-esc="education_ids.edu_school" />
+                                                        </td>
+                                                        <td>
+                                                            <span t-esc="education_ids.period" />
+                                                        </td>
+                                                        <td>
+                                                            <span t-esc="education_ids.edu_certificate" />
+                                                        </td>
+                                                    </tr>
+                                                </tbody>
+                                            </t>
+                                        </table>
+                                    </div>
+                                </t>
+                                <t t-if="o.language_ids">
+                                    <div class="container">
+                                        <div>
+                                            <h5 style="color:#0d43a8;"><b>Language Proficiency</b></h5>
+                                        </div>
+                                        <table class="table table-condensed">
+                                             <thead>
+                                                <tr>
+                                                    <th>Language</th>
+                                                    <th>Spoken</th>
+                                                    <th>Written</th>
+                                                </tr>
+                                            </thead>
+                                            <t t-foreach="o.language_ids" t-as="lan_ids">
+                                                <tbody>
+                                                    <tr>
+                                                        <td>
+                                                            <span t-esc="lan_ids.lang_name_id.name" />
+                                                        </td>
+                                                        <td>
+                                                            <span t-esc="lan_ids.spoken" />
+                                                        </td>
+                                                        <td>
+                                                            <span t-esc="lan_ids.written" />
+                                                        </td>
+                                                    </tr>
+                                                </tbody>
+                                            </t>
+                                        </table>
+                                    </div>
+                                </t>
+    
+                                <t>
+                                    <div class="container">
+                                        <div>
+                                            <h5 style="color:#0d43a8;"><b>Computer Knowledge and Skills</b></h5>
+                                        </div>
+                                        <table width="100%">
+                                            <tr>
+                                                <th width="30%">
+                                                    Computer Program Knowledge
+                                                </th>
+                                                <th width="2%" align="center">:</th>
+                                                <td width="18%">
+                                                    <span t-esc="o.comp_prog_knw" />
+                                                </td>
+                                                <th width="25%">
+                                                    Typing
+                                                </th>
+                                                <th width="2%" align="center">:</th>
+                                                <td width="23%">
+                                                    <span t-esc="o.typing" />
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <th>
+                                                    Shorthand
+                                                </th>
+                                                <th>:</th>
+                                                <td>
+                                                    <span t-esc="o.shorthand" />
+                                                </td>
+                                                <th>
+                                                    Other Knowledge and Skill
+                                                </th>
+                                                <th>:</th>
+                                                <td>
+                                                    <span t-esc="o.other_know" />
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <th>
+                                                    Courses Taken
+                                                </th>
+                                                <th>:</th>
+                                                <td>
+                                                    <span t-esc="o.course" />
+                                                </td>
+                                                <th>
+                                                </th>
+                                                <th></th>
+                                                <td>
+                                                </td>
+                                            </tr>
+                                        </table>
+                                    </div>
+                                </t>
+                            </div>
+                            <div style="page-break-inside: avoid;">
+                                <br/>
+                                <div style="background-color: #98bdf2;hight:100px">
+                                    <h4><center><b>Job</b></center></h4>
+                                </div>
+                                <table width="100%">
+                                    <tr>
+                                        <th width="20%">Job</th>
+                                        <th width="5" align="center">:</th>
+                                        <td width="25%"><span t-field="o.job_id and o.job_id.name" /></td>
+                                        <th width="15%">Join Date</th>
+                                        <th width="5" align="center">:</th>
+                                        <td width="30%">
+                                            <span t-if="o.join_date">
+                                                <span
+                                                t-esc="time.strftime('%d-%m-%Y',time.strptime(o.join_date,'%Y-%m-%d'))" />
+                                            </span>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <th width="20%">Employment Status</th>
+                                        <th width="5" align="center">:</th>
+                                        <td width="25%"><span t-field="o.emp_status" /></td>
+                                        <th width="15%"></th>
+                                        <th width="5"></th>
+                                        <td width="30%"></td>
+                                    </tr>
+                                    <tr>
+                                        <th width="20%">Confirm Date</th>
+                                        <th width="5" align="center">:</th>
+                                        <td width="25%">
+                                            <span t-if="o.confirm_date">
+                                                <span
+                                                t-esc="time.strftime('%d-%m-%Y',time.strptime(o.confirm_date,'%Y-%m-%d'))" />
+                                            </span>
+                                        </td>
+                                        <th width="15%"></th>
+                                        <th width="5"></th>
+                                        <td width="35%"></td>
+                                    </tr>
+                                </table>
+                                <t t-if="o.history_ids" style="page-break-inside: avoid">
+                                    <br/>
+                                    <div class="container">
+                                        <div>
+                                            <h5 style="color:#0d43a8;"><b>History of Employee</b></h5>
+                                        </div>
+                                        <table class="table table-condensed">
+                                             <thead>
+                                                <tr>
+                                                    <th>job</th>
+                                                    <th>Employment Status</th>
+                                                    <th>Join Date</th>
+                                                    <th>Confirmation Date</th>
+                                                    <th>Date Changed</th>
+                                                    <th>Changed By</th>
+                                                </tr>
+                                            </thead>
+                                            <t t-foreach="o.history_ids" t-as="emp_hist">
+                                                <tbody>
+                                                    <tr>
+                                                        <td>
+                                                            <span t-esc="emp_hist.job_id and emp_hist.job_id.id and emp_hist.job_id.name or False" />
+                                                        </td>
+                                                        <td>
+                                                            <span t-esc="emp_hist.emp_status" />
+                                                        </td>
+                                                        <td>
+                                                            <span t-if="emp_hist.join_date">
+                                                                <span
+                                                                    t-esc="time.strftime('%d-%m-%Y',time.strptime(emp_hist.join_date,'%Y-%m-%d'))" />
+                                                            </span>
+                                                        </td>
+                                                        <td>
+                                                            <span t-if="emp_hist.confirm_date">
+                                                                <span
+                                                                    t-esc="time.strftime('%d-%m-%Y',time.strptime(emp_hist.confirm_date,'%Y-%m-%d'))" />
+                                                            </span>
+                                                        </td>
+                                                        <td>
+                                                            <span t-if="emp_hist.date_changed">
+                                                                <span
+                                                                    t-esc="time.strftime('%d-%m-%Y',time.strptime(emp_hist.date_changed,'%Y-%m-%d %H:%M:%S'))"/>
+                                                            </span>
+                                                        </td>
+                                                        <td>
+                                                            <span t-if="emp_hist.user_id">
+                                                                <span t-esc="emp_hist.user_id and emp_hist.user_id.name" />
+                                                            </span>
+                                                        </td>
+                                                    </tr>
+                                                </tbody>
+                                            </t>
+                                        </table>
+                                    </div>
+                                </t>
+                            </div>
+                            <div style="page-break-inside: avoid;">
+                                <t t-if="o.immigration_ids">
+                                    <div style="background-color: #98bdf2;hight:100px">
+                                        <h4><center><b>Immigration</b></center></h4>
+                                    </div>
+                                    <div class="container">
+                                        <table class="table table-condensed">
+                                             <thead>
+                                                <tr>
+                                                    <th>Documents</th>
+                                                    <th>Number</th>
+                                                    <th>Issue Date</th>
+                                                    <th>Expire Date</th>
+                                                    <th>Eligible Status</th>
+                                                    <th>Eligible Review Date</th>
+                                                    <th>Issued By</th>
+                                                </tr>
+                                            </thead>
+                                            <t t-foreach="o.immigration_ids" t-as="emp_immg">
+                                                <tbody>
+                                                    <tr>
+                                                        <td>
+                                                            <span t-esc="emp_immg.documents" />
+                                                        </td>
+                                                        <td>
+                                                            <span t-esc="emp_immg.number" />
+                                                        </td>
+                                                        <td>
+                                                            <span t-if="emp_immg.issue_date">
+                                                                <span
+                                                                    t-esc="time.strftime('%d-%m-%Y',time.strptime(emp_immg.issue_date,'%Y-%m-%d'))" />
+                                                            </span>
+                                                        </td>
+                                                        <td>
+                                                            <span t-if="emp_immg.exp_date">
+                                                                <span
+                                                                    t-esc="time.strftime('%d-%m-%Y',time.strptime(emp_immg.exp_date,'%Y-%m-%d'))" />
+                                                            </span>
+                                                        </td>
+                                                        <td>
+                                                            <span t-if="emp_immg.eligible_status">
+                                                                <span t-esc="emp_immg.eligible_status" />
+                                                            </span>
+                                                        </td>
+                                                        <td>
+                                                            <span t-if="emp_immg.eligible_review_date">
+                                                                <span
+                                                                    t-esc="time.strftime('%d-%m-%Y',time.strptime(emp_immg.eligible_review_date,'%Y-%m-%d'))" />
+                                                            </span>
+                                                        </td>
+                                                        <td>
+                                                            <t t-if="emp_immg.issue_by">
+                                                                <span t-esc="emp_immg.issue_by and emp_immg.issue_by.name" />
+                                                            </t>
+                                                        </td>
+                                                    </tr>
+                                                </tbody>
+                                            </t>
+                                        </table>
+                                    </div>
+                                </t>
+                            </div>
+                            <div style="page-break-inside: avoid;" id="training_workshop">
+                                <t t-if="o.training_ids">
+                                    <div style="background-color: #98bdf2;hight:100px">
+                                        <h4><center><b>Training Workshop</b></center></h4>
+                                    </div>
+                                    <div class="container">
+                                        <table class="table table-condensed">
+                                             <thead>
+                                                <tr>
+                                                    <th>Title of TRAINING/WORKSHOP</th>
+                                                    <th>Institution</th>
+                                                    <th>Date</th>
+                                                </tr>
+                                            </thead>
+                                            <t t-foreach="o.training_ids" t-as="emp_training">
+                                                <tbody>
+                                                    <tr>
+                                                        <td>
+                                                            <span t-esc="emp_training.tr_title" />
+                                                        </td>
+                                                        <td width="40%">
+                                                            <span t-esc="emp_training.tr_institution" />
+                                                        </td>
+                                                        <td width="20%">
+                                                            <span t-if="emp_training.tr_date">
+                                                                <span
+                                                                    t-esc="time.strftime('%d-%m-%Y',time.strptime(emp_training.tr_date,'%Y-%m-%d'))" />
+                                                            </span>
+                                                        </td>
+                                                    </tr>
+                                                </tbody>
+                                            </t>
+                                        </table>
+                                    </div>
+                                </t>
+                            </div>
+                            <div style="page-break-inside: avoid;">
+                                <div style="background-color: #98bdf2;hight:100px">
+                                    <h4><center><b>Extra Information</b></center></h4>
+                                </div>
+                                <div>
+                                    <h5 style="color:#0d43a8;"><b>Health Condition:</b></h5>
+                                </div>
+                                <div>
+                                    <p style="text-indent: 15px;"><b>
+                                    ∙ Are you suffering from any physical disability
+                                    or
+                                    illness that requires you to be medication for a
+                                    prolonged
+                                    period?</b></p>
+                                </div>
+                                <div>
+                                    <table width="100%">
+                                        <tr style="text-indent: 15px;">
+                                            <td width="8%">Yes</td>
+                                            <td width="2%" align="center">:</td>
+                                            <td width="90%"><span t-esc="o.physical_stability" /></td>
+                                        </tr>
+                                        <tr style="text-indent: 15px;">
+                                            <td width="8%">No</td>
+                                            <td width="2%" align="center">:</td>
+                                            <td width="90%"><span t-esc="o.physical_stability_no" /></td>
+                                        </tr>
+                                    </table>
+                                </div>
+                                <div>
+                                    <h5 style="color:#0d43a8;"><b>Important Informationn:</b></h5>
+                                </div>
+                                <div>
+                                    <p style="text-indent: 15px;"><b>
+                                    ∙ Have you ever been convicted in a court of law
+                                    in
+                                    any country?</b></p>
+                                </div>
+                                <div>
+                                    <table width="100%">
+                                        <tr style="text-indent: 15px;">
+                                            <td width="8%">Yes</td>
+                                            <td width="2%" align="center">:</td>
+                                            <td width="90%"><span t-esc="o.court_b" /></td>
+                                        </tr>
+                                        <tr style="text-indent: 15px;">
+                                            <td width="8%">No</td>
+                                            <td width="2%" align="center">:</td>
+                                            <td width="90%"><span t-esc="o.court_no" /></td>
+                                        </tr>
+                                    </table>
+                                </div>
+                                <div>
+                                    <p style="text-indent: 15px;"><b>
+                                    ∙ Have you ever been dismissed or suspended from
+                                                    employement?</b></p>
+                                </div>
+                                <div>
+                                    <table width="100%">
+                                        <tr style="text-indent: 15px;">
+                                            <td width="8%">Yes</td>
+                                            <td width="2%" align="center">:</td>
+                                            <td width="90%"><span t-esc="o.court_b" /></td>
+                                        </tr>
+                                        <tr style="text-indent: 15px;">
+                                            <td width="8%">No</td>
+                                            <td width="2%" align="center">:</td>
+                                            <td width="90%"><span t-esc="o.court_no" /></td>
+                                        </tr>
+                                    </table>
+                                </div>
+                                <div>
+                                    <p style="text-indent: 15px;"><b>
+                                    ∙ Have you ever been declared a bankrupt?</b></p>
+                                </div>
+                                <div>
+                                    <table width="100%">
+                                        <tr style="text-indent: 15px;">
+                                            <td width="8%">Yes</td>
+                                            <td width="2%" align="center">:</td>
+                                            <td width="90%"><span t-esc="o.court_b" /></td>
+                                        </tr>
+                                        <tr style="text-indent: 15px;">
+                                            <td width="8%">No</td>
+                                            <td width="2%" align="center">:</td>
+                                            <td width="90%"><span t-esc="o.court_no" /></td>
+                                        </tr>
+                                    </table>
+                                </div>
+                                <table width="100%">
+                                    <tr style="text-indent: 15px;">
+                                        <th>∙ About Yourself :</th>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <span t-esc="o.about" />
+                                        </td>
+                                    </tr>
+                                </table>
+                            </div>
+
+                            <div style="page-break-inside: avoid;">
+                                <t t-if="o.bank_account_id">
+                                    <div style="background-color: #98bdf2;hight:100px">
+                                        <h4><center><b>Bank Details</b></center></h4>
+                                    </div>
+                                    <div class="container">
+                                        <table class="table table-condensed">
+                                             <thead>
+                                                <tr>
+                                                    <th>Name of Bank</th>
+                                                    <th>Bank Code</th>
+                                                    <th>Bank Account Number</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <tr>
+                                                    <td>
+                                                        <t t-if="o.bank_account_id.bank_id">
+                                                            <span
+                                                                t-esc="o.bank_account_id and o.bank_account_id.bank_id and o.bank_account_id.bank_id.name" />
+                                                        </t>
+                                                    </td>
+                                                    <td>
+                                                        <t t-if="o.bank_account_id.bank_id.bic">
+                                                            <span
+                                                                t-esc="o.bank_account_id and o.bank_account_id.bank_id and o.bank_account_id.bank_id.name" />
+                                                        </t>
+                                                    </td>
+                                                    <td>
+                                                        <t t-if="o.bank_account_id">
+                                                            <span t-esc="o.bank_account_id and o.bank_account_id.acc_number" />
+                                                        </t>
+                                                    </td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </t>
+                            </div>
+                            <div style="page-break-inside: avoid;">
+                                <t t-if="o.notes">
+                                    <div style="background-color: #98bdf2;hight:100px">
+                                        <h4><center><b>Notes</b></center></h4>
+                                    </div>
+                                    <table width="100%">
+                                        <tr>
+                                            <td style="font-size:12px;">
+                                                <span t-esc="o.notes" />
+                                            </td>
+                                        </tr>
+                                    </table>
+                                </t>
+                            </div>
+                        </div>
+                    </div>
+                </t>
+            </t>
+        </t>
+    </template>
+</odoo>

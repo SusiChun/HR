@@ -1,0 +1,41 @@
+K 25
+svn:wc:ra_dav:version-url
+V 54
+/tdmerp/!svn/ver/2416/branches/TDMERP-1.0/wtc_kwitansi
+END
+wtc_cancel_kwitansi.py
+K 25
+svn:wc:ra_dav:version-url
+V 77
+/tdmerp/!svn/ver/2416/branches/TDMERP-1.0/wtc_kwitansi/wtc_cancel_kwitansi.py
+END
+__init__.py
+K 25
+svn:wc:ra_dav:version-url
+V 66
+/tdmerp/!svn/ver/1476/branches/TDMERP-1.0/wtc_kwitansi/__init__.py
+END
+wtc_cancel_kwitansi_view.xml
+K 25
+svn:wc:ra_dav:version-url
+V 83
+/tdmerp/!svn/ver/1476/branches/TDMERP-1.0/wtc_kwitansi/wtc_cancel_kwitansi_view.xml
+END
+wtc_kwitansi_report.xml
+K 25
+svn:wc:ra_dav:version-url
+V 77
+/tdmerp/!svn/ver/136/branches/TDMERP-1.0/wtc_kwitansi/wtc_kwitansi_report.xml
+END
+wtc_kwitansi_view.xml
+K 25
+svn:wc:ra_dav:version-url
+V 76
+/tdmerp/!svn/ver/1476/branches/TDMERP-1.0/wtc_kwitansi/wtc_kwitansi_view.xml
+END
+__openerp__.py
+K 25
+svn:wc:ra_dav:version-url
+V 69
+/tdmerp/!svn/ver/1828/branches/TDMERP-1.0/wtc_kwitansi/__openerp__.py
+END

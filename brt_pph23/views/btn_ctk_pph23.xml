@@ -1,0 +1,16 @@
+<odoo>
+    <data>
+        <record id="po_inherit_cetak_btn_pph23" model="ir.ui.view">
+            <field name="name">po_inherit_cetak_btn_pph23</field>
+            <field name="model">account.invoice</field>
+            <field name="inherit_id" ref="account.invoice_supplier_form"/>
+            <field name="arch" type="xml">
+                <xpath expr="//button[@name='253']" postition='after'>
+                    <button name="print_pph23" type="object" string="Print PPh 23" class="oe_highlight" attrs="{'invisible': [('state','!=','paid')]}"/>
+                    <button name="print_pph_total" type="object" string="Print PPh Total" class="oe_highlight" attrs="{'invisible': [('state','!=','paid')]}"/>
+                </xpath>
+            </field>
+        </record>
+
+    </data>
+</odoo>

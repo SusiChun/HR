@@ -1,0 +1,50 @@
+<odoo>
+  <data>
+       <record id="view_pos_config_inherit" model="ir.ui.view">
+        <field name="name">pos.config.inherit.form</field>
+        <field name="model">pos.config</field>
+        <field name="inherit_id" ref="point_of_sale.view_pos_config_form"/>
+        <field name="arch" type="xml">
+
+             <xpath expr="//field[@name='active']"  position="after">
+                <field name="bottom_price_active"/>
+               <field name="bottom_price" attrs="{'readonly':[('bottom_price_active','!=',True)]}"/>
+            </xpath>
+        </field>
+       </record>
+
+       <record id="view_pos_order_inherit" model="ir.ui.view">
+        <field name="name">pos.order.inherit.form</field>
+        <field name="model">pos.order</field>
+        <field name="inherit_id" ref="point_of_sale.view_pos_pos_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='pos_reference']" position="attributes">
+                <attribute name="groups">!sc_pos.group_user_outlet</attribute>
+            </xpath>
+             <xpath expr="//field[@name='pos_reference']"  position="after">
+                <field name="pos_references"/>
+                 <field name="config_id" invisible="1"/>
+                 <field name="bottom_price_active" invisible="1"/>
+                 <field name="bottom_price" invisible="1"/>
+            </xpath>
+        </field>
+       </record>
+
+       <!-- <record id="point_of_sale.action_pos_pos_form" model="ir.actions.server">-->
+      <record id="action_pos_pos_custom" model="ir.actions.server">
+            <field name="name">POS Order</field>
+            <field name="model_id" ref="point_of_sale.model_pos_order"/>
+            <field name="type">ir.actions.server</field>
+            <field name="state">code</field>
+            <field name="code">action = model.action_pos_order()</field>
+            <field eval="True" name="condition"/>
+        </record>
+
+
+          <menuitem id="point_of_sale.menu_point_ofsale"
+                    parent="point_of_sale.menu_point_of_sale"
+                    action="action_pos_pos_custom"
+                    groups="point_of_sale.group_pos_manager,point_of_sale.group_pos_user,sc_pos.group_user_outlet" sequence="1"/>
+
+  </data>
+</odoo>

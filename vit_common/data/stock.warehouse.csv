@@ -1,0 +1,2 @@
+id,code,name,reception_steps,delivery_steps
+warehouse_gbj1,GBJ,Gudang Barang Jadi,two_steps,pick_ship

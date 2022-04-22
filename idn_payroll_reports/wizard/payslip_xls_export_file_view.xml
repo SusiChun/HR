@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+   <!-- Payslip Export Excel Report View -->
+   <record id="view_payslip_xls_export_report_wiz" model="ir.ui.view">
+        <field name="name">view.payslip.xls.export.report.wizard</field>
+        <field name="model">payslip.xls.export.report</field>
+        <field name="type">form</field>
+        <field name="arch" type="xml">
+            <form string="Payslip Excel Export">
+                <group>
+                    <field name="name" invisible="1"/>
+                	<h4>Click On Link To Download Xls File: &#160;<field name="file" colspan="4" filename="name"/></h4>
+                </group>
+                <footer>
+                    <button special="cancel" string="Cancel" colspan="2"/>
+                </footer>
+            </form>
+        </field>
+    </record>
+
+    <record id="payslip_xls_export_file_wizard" model="ir.ui.view">
+        <field name="name">view.payslip.xls.export.file.wizard</field>
+        <field name="model">payslip.xls.export.file</field>
+        <field name="type">form</field>
+        <field name="arch" type="xml">
+            <form string="Payslip Export">
+                <group colspan="4" col="4">
+                    <separator string="Employees" colspan="4"/>
+                    <field name="employee_ids" required="1" colspan="4" nolabel="1">
+                    <tree string="Employees">
+                            <field name="name"/>
+                            <field name="department_id"/>
+                            <field name="work_email"/>
+                        </tree>
+                    </field>
+                    <field name="date_start" required="1"/>
+                    <field name="date_end" required="1"/>
+                </group>
+                <footer>
+                    <button name="print_payslip_xls_export" class="oe_highlight" string="Save" type="object" colspan="2"/>
+                    or
+                    <button special="cancel" string="Cancel" colspan="2"/>
+                    </footer>
+            </form>
+        </field>
+    </record>
+
+    <record id="action_print_payslip_xls_export_file" model="ir.actions.act_window">
+        <field name="name">Payslip Export</field>
+        <field name="res_model">payslip.xls.export.file</field>
+        <field name="view_type">form</field>
+        <field name="view_mode">form</field>
+        <field name="target">new</field>
+   </record>
+
+    <menuitem action="action_print_payslip_xls_export_file" id="menu_print_paylip_export_xls_report" 
+        parent="base.menu_security"
+      groups="hr.group_hr_manager,idn_payroll.group_hr_payroll_admin"/> 
+
+</odoo>

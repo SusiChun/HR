@@ -1,0 +1,195 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+
+         <record id="hr_attendance_view_form_inherit" model="ir.ui.view">
+            <field name="name">hr.attendance.inherit</field>
+            <field name="model">hr.attendance</field>
+             <field name="inherit_id" ref="hr_attendance.hr_attendance_view_form"/>
+            <field name="arch" type="xml">
+                <field name="check_out" position="after">
+                    <field name="note"></field>
+                </field>
+            </field>
+        </record>
+
+         <record id="view_regular_tree1" model="ir.ui.view">
+            <field name="name">attendance.regular_tree</field>
+            <field name="model">attendance.regular</field>
+            <field name="priority" eval="8" />
+            <field name="arch" type="xml">
+                <tree string="Attendance Regularization">
+                    <field name="from_date"/>
+                    <field name="to_date"/>
+                    <field name="employee_id"/>
+                     <field name="company_id"/>
+                </tree>
+            </field>
+        </record>
+
+       <record model="ir.actions.act_window" id="action_view_regularization1">
+            <field name="name">Attendance Correction Request</field>
+            <field name="res_model">attendance.regular</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">tree,form</field>
+            <field name="domain">[]</field>
+            <field name="help" type="html">
+                <p class="oe_view_no_content_create">Create new Request
+                </p>
+            </field>
+        </record>
+
+        <menuitem id="regular_onsight" name="Attendance Correction" parent="hr_attendance.menu_hr_attendance_root"
+                    sequence="9" groups="base.group_user"/>
+        <menuitem id="applying_regular1" name="Request Correction" parent="regular_onsight"
+                  action="action_view_regularization1" sequence="15" groups="base.group_user"/>
+        <record id="view_regular_approve_tree" model="ir.ui.view">
+            <field name="name">attendance.regular_request_tree</field>
+            <field name="model">attendance.regular</field>
+            <field name="priority" eval="8" />
+            <field name="arch" type="xml">
+                <tree string="Approve Regularization">
+                      <field name="name"/>
+                    <field name="from_date"/>
+                    <field name="to_date"/>
+                    <field name="employee_id"/>
+                     <field name="company_id"/>
+                    <field name="state_select"/>
+                </tree>
+            </field>
+        </record>
+
+        <record id="attendance_regular11" model="ir.ui.view">
+            <field name="name">attend.regular</field>
+            <field name="model">attendance.regular</field>
+            <field name="arch" type="xml">
+               <form string="Regularization">
+                   <header>
+                           <button name="submit_reg" string="Submit" type="object" class="btn-primary"
+                           attrs="{'invisible': [('state_select','not in','To Submit')]}"/>
+                           <button name="regular_approval" type="object" string="Approve" class="oe_highlight"
+                                   groups="hr.group_hr_manager"
+                           attrs="{'invisible': [('state_select','not in','Confirm Manager')]}"/>
+                           <button name="confirm_manager" type="object" string="Confirm" class="oe_highlight"
+                                    groups="brt_health_reimburse.manager"
+                           attrs="{'invisible': [('state_select','not in','requested')]}"/>
+                            <button name="reject" type="object" string="Reject"
+                                    groups="hr_attendance.group_hr_attendance_manager,brt_health_reimburse.manager"
+                                attrs="{'invisible': [('state_select','not in',['requested','Confirm Manager'])]}"/>
+                           <field name="state_select" widget="statusbar" statusbar_visible="To Submit,requested,Confirm Manager,Confirm HRD"/>
+                   </header>
+                   <sheet>
+
+                        <div class="oe_title">
+                            <h4>
+                                <field name="name" readonly="1" nolabel="1" />
+                            </h4>
+						</div>
+                       <group col="4" colspan="4">
+                           <field name="from_date"  attrs="{'readonly': [('state_select','not in',['To Submit','requested'])]}"/>
+                           <field name="to_date" attrs="{'readonly': [('state_select','not in',['To Submit','requested'])]}"/>
+                           <field name="company_id"  attrs="{'readonly': [('state_select','not in',['To Submit','requested'])]}"/>
+                           <field name="employee_id" attrs="{'readonly': [('state_select','not in',['To Submit','requested'])]}"/>
+                           <field name="overtime_total"/>
+                           <field name="grade"  readonly="1"/>
+                           <field name="security"  readonly="1"/>
+                           <field name="min_hour_overtime" invisible="1"/>
+                           <field name="basic_salary" invisible="1"/>
+                       </group>
+                       <group>
+                            <button name="generate_attendance" type="object" string="Generate" class="oe_highlight" attrs="{'invisible': [('state_select','in',['Confirm Manager','Confirm HRD'])]}"/>
+
+                       </group>
+                       <notebook>
+                           <page name="attendance" string="Attendance Line">
+                               <field name="attendance_ids" nolabel="1">
+                                   <tree editable="bottom" colors="red:marks in ('Hari Libur','Libur Nasional')">
+                                       <field name="hr_attendance_id" invisible="1"/>
+                                        <field name="atten_id" invisible="1"/>
+                                        <field name="employee_id"  invisible="1"/>
+                                        <field name="check_in" attrs="{'readonly': [('state_select','not in',['To Submit','requested'])]}"/>
+                                        <field name="hari" attrs="{'readonly': [('state_select','not in',['To Submit','requested'])]}"/>
+                                        <field name="check_out" attrs="{'readonly': [('state_select','not in',['To Submit','requested'])]}"/>
+                                        <field name="marks" readonly="1"/>
+                                        <field name="check_in_correction" attrs="{'readonly': [('state_select','not in',['To Submit','requested'])]}"/>
+                                        <field name="check_out_correction" attrs="{'readonly': [('state_select','not in',['To Submit','requested'])]}"/>
+                                       <button name="change_date" type="object" class="oe_highlight" string="Change"  attrs="{'invisible': [('check_in_correction','!=',False)]}"/>
+                                        <field name="max_overtime" invisible="1"/>
+                                        <field name="reg_reason" attrs="{'readonly': [('state_select','not in',['To Submit','requested'])]}"/>
+                                        <field name="overtime" attrs="{'readonly': [('state_select','not in',['To Submit','requested'])]}"/>
+                                        <field name="overtime_amount" groups="hr.group_hr_manager"/>
+                                        <field name="meal_allowance" groups="hr.group_hr_user" attrs="{'readonly': [('state_select','not in',['To Submit','requested','Confirm Manager'])]}"/>
+                                       <field name="ot_total" groups="hr.group_hr_user" attrs="{'readonly': [('state_select','not in',['To Submit','requested','Confirm Manager'])]}"/>
+
+                                       <field name="basic_salary" invisible="1" />
+                                        <field name="state_select" invisible="1" />
+                                   </tree>
+
+                               </field>
+                           </page>
+                       </notebook>
+                   </sheet>
+                 <div class="oe_chatter">
+                    <field name="message_follower_ids" widget="mail_followers" groups="base.group_user" />
+                    <field name="message_ids" widget="mail_thread" />
+                </div>
+               </form>
+            </field>
+        </record>
+          <record model="ir.actions.act_window" id="action_view_request_regularization">
+            <field name="name">Approval Attendance Correction</field>
+            <field name="res_model">attendance.regular</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">tree,form</field>
+            <field name="domain">[('state_select','!=','approved'),('state_select','!=','reject')]</field>
+            <field name="help" type="html">
+                <p class="oe_view_no_content_create">Create new Record
+                </p>
+            </field>
+        </record>
+        <menuitem id="approving_regular" name="Approval Correction" parent="regular_onsight"
+                  action="action_view_request_regularization" groups="hr_attendance.group_hr_attendance_manager" sequence="100"/>
+
+        <record id="approve_attendance_form_view" model="ir.ui.view">
+            <field name="name">approve.attendance.form</field>
+            <field name="model">approve.attendance</field>
+            <field name="arch" type="xml">
+                <form string="Approve Attendance Correction">
+                    <p class="oe_grey">
+                        Apakah anda yakin akan untuk mengApprove data ini?
+                    </p>
+                    <footer>
+                        <button string="Approve" name="approve_masal" type="object" default_focus="1" class="btn-primary"/>
+                        <button string="Cancel" class="btn-default" special="cancel"/>
+                    </footer>
+                </form>
+            </field>
+        </record>
+
+        <act_window id="action_approve_allr"
+            multi="True"
+            key2="client_action_multi" name="Approve All"
+            res_model="approve.attendance" src_model="attendance.regular"
+            view_mode="form" target="new" view_type="form"
+
+        />
+        <!--READONLY BY GORUP-->
+    <record id="view_attendance_readonly" model="ir.ui.view">
+        <field name="name">attendance.regular.form.siswa</field>
+        <field name="model">attendance.regular</field>
+        <field name="inherit_id" ref="attendance_regularization.attendance_regular11" />
+        <field name="groups_id" eval="[(6, 0, [ref('base.group_user')])]"/>
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='attendance_ids']/tree/field[@name='check_in']" position="attributes">
+                <attribute name="readonly">True</attribute>
+            </xpath>
+            <xpath expr="//field[@name='attendance_ids']/tree/field[@name='hari']" position="attributes">
+                <attribute name="readonly">True</attribute>
+            </xpath>
+             <xpath expr="//field[@name='attendance_ids']/tree/field[@name='check_out']" position="attributes">
+                <attribute name="readonly">True</attribute>
+            </xpath>
+          </field>
+    </record>
+    </data>
+</odoo>

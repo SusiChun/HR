@@ -1,0 +1,17 @@
+<odoo>
+    <data>
+        <record id="hr_contract_view_form_inherit23" model="ir.ui.view">
+            <field name="name">hr_contract_view_form_inherit23</field>
+            <field name="model">hr.payslip</field>
+            <field name="inherit_id" ref="hr_payroll.view_hr_payslip_form"/>
+            <field name="arch" type="xml">
+                <xpath expr="//button[@name='action_payslip_done']" position="replace"/>
+                
+                <xpath expr="//button[@name='refund_sheet']" position="before">
+                    <button string="Confirm" name="act_payslip_done" type="object" class="oe_highlight" states="draft"/>
+                    <!-- <button string="Confirm" name="action_payslip_done" type="object" states="draft" class="oe_highlight"/> -->
+                </xpath>
+            </field>
+        </record>
+    </data>
+</odoo>

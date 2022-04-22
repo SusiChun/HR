@@ -1,0 +1,59 @@
+<odoo>
+    <data>
+
+       <record id="view_product_product" model="ir.ui.view">
+        <field name="name">product.template.form.view</field>
+        <field name="model">product.template</field>
+        <field name="inherit_id" ref="product.product_template_only_form_view"/>
+        <field name="arch" type="xml">
+
+            <field name="default_code" position="after">
+                <field name="new_code"/>
+                <field name="golongan"/>
+                <field name="hs_code"/>
+
+            </field>
+        </field>
+       </record>
+
+        <record id="view_purchase_inherit" model="ir.ui.view">
+        <field name="name">purchase.order.form.view</field>
+        <field name="model">purchase.order</field>
+        <field name="inherit_id" ref="purchase.purchase_order_form"/>
+        <field name="arch" type="xml">
+
+            <field name="date_order" position="after">
+
+                 <field name="total_qty_volume"/>
+                <field name="total_volume_a"/>
+                <field name="total_volume_b"/>
+                <field name="total_volume_c"/>
+<!--                 <field name="total_qty" invisible="1"/>-->
+<!--                 <field name="total_volume"  invisible="1"/>-->
+            </field>
+            <xpath expr="//notebook/page/field[@name='order_line']/tree/field[@name='name']"  position="after">
+                <field name="golongan"/>
+                <field name="volume"/>
+                <field name="qty_karton"/>
+                <field name="isi_karton"/>
+                 <field name="total_qty_volume" invisible="1"/>
+            </xpath>
+        </field>
+       </record>
+
+         <record id="view_purchase_inherit_tree" model="ir.ui.view">
+        <field name="name">purchase.order.tree.view</field>
+        <field name="model">purchase.order</field>
+        <field name="inherit_id" ref="purchase.purchase_order_tree"/>
+        <field name="arch" type="xml">
+
+            <field name="amount_total" position="after">
+
+                <field name="total_qty_volume" sum="Total Volume"/>
+            </field>
+        </field>
+       </record>
+
+
+     </data>
+ </odoo>

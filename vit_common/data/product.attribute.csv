@@ -1,0 +1,4 @@
+id,name,create_variant
+att_size,Size,TRUE
+att_color,Color,TRUE
+att_color2,Color2,TRUE

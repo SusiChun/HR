@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Copyright (c) 2015-Present Webkul Software Pvt. Ltd. (<https://webkul.com/>) -->
+<!-- See LICENSE file for full copyright and licensing details. -->
+<!-- "License URL : <https://store.webkul.com/license.html/>" -->
+
+<odoo>
+    <data>
+        <record id="view_sales_config" model="ir.ui.view">
+            <field name="name">sale settings</field>
+            <field name="model">sale.config.settings</field>
+            <field name="inherit_id" ref="sale.view_sales_config"/>
+            <field name="arch" type="xml">
+                <field name="group_discount_per_so_line" position="after">
+                    <label string="Global Discount"/>
+                    <div>
+                        <field name="group_order_global_discount" class="oe_inline" />
+                        <label for="group_order_global_discount"/>
+                    </div>
+                    <field name="discount_account_so" attrs="{'invisible': [('group_order_global_discount', '=', False)], 'required': [('group_order_global_discount', '=', True)]}" class="oe_inline"/>
+                    <field name="global_discount_tax" widget="radio" attrs="{'invisible' : [('group_order_global_discount', '=', False)], 'required' : [('group_order_global_discount', '=', True)]}"/>
+                </field>
+            </field>
+        </record>
+    </data>
+  </odoo>

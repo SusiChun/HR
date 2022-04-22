@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data noupdate="1">
+
+        <!--  Salary rule category -->
+        <record id="JHTEE" model="hr.salary.rule.category">
+            <field name="name">JHT (Employee)</field>
+            <field name="code">JHTEE</field>
+        </record>
+        <record id="JHTER" model="hr.salary.rule.category">
+            <field name="name">JHT (Employer)</field>
+            <field name="code">JHTER</field>
+        </record>
+        <record id="JKMEE" model="hr.salary.rule.category">
+            <field name="name">JKM (Employee)</field>
+            <field name="code">JKMEE</field>
+        </record>
+        <record id="JKMER" model="hr.salary.rule.category">
+            <field name="name">JKM (Employer)</field>
+            <field name="code">JKMER</field>
+        </record>
+        <record id="JKKER" model="hr.salary.rule.category">
+            <field name="name">JKK (Employer)</field>
+            <field name="code">JKKER</field>
+        </record>
+        <record id="PPH21JKMJKK" model="hr.salary.rule.category">
+            <field name="name">PPH21 JKM and JKK</field>
+            <field name="code">PPH21JKMJKK</field>
+        </record>
+        <record id="BasicWholeYear" model="hr.salary.rule.category">
+            <field name="name">Basic Whole Year</field>
+            <field name="code">Basic Whole Year</field>
+        </record>
+        <record id="PTKP" model="hr.salary.rule.category">
+            <field name="name">PTKP</field>
+            <field name="code">PTKP</field>
+        </record>
+        <record id="PPH21JHT" model="hr.salary.rule.category">
+            <field name="name">PPH21 JHT</field>
+            <field name="code">PPH21JHT</field>
+        </record>
+        <record id="PPH21" model="hr.salary.rule.category">
+            <field name="name">PPH21</field>
+            <field name="code">PPH21</field>
+        </record>
+        <record id="PPH21PKP" model="hr.salary.rule.category">
+            <field name="name">PPH21 PKP</field>
+            <field name="code">PPH21PKP</field>
+        </record>
+        <record id="PPH21PERMONTH" model="hr.salary.rule.category">
+            <field name="name">PPH21 PER MONTH</field>
+            <field name="code">PPH21PERMONTH</field>
+        </record>
+        <record id="PPH21GROSS" model="hr.salary.rule.category">
+            <field name="name">PPH21 GROSS</field>
+            <field name="code">PPH21GROSS</field>
+        </record>
+        <record id="PPH21POSITION" model="hr.salary.rule.category">
+            <field name="name">PPH21 POSITION</field>
+            <field name="code">PPH21POSITION</field>
+        </record>
+        <record id="PPH21NETT" model="hr.salary.rule.category">
+            <field name="name">PPH21 NETT</field>
+            <field name="code">PPH21NETT</field>
+        </record>
+
+        <!--  contribution register -->
+        <record id="JHT_reg_01" model="hr.contribution.register">
+            <field name="name">JHT</field>
+        </record>
+        <record id="JKM_reg_01" model="hr.contribution.register">
+            <field name="name">JKM</field>
+        </record>
+        <record id="JKK_reg_01" model="hr.contribution.register">
+            <field name="name">JKK</field>
+        </record>
+        <record id="PPH21_reg_01" model="hr.contribution.register">
+            <field name="name">PPH21</field>
+        </record>
+        <record id="NET_reg_01" model="hr.contribution.register">
+            <field name="name">NET</field>
+        </record>
+
+    </data>
+</odoo>

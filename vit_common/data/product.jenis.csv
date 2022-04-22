@@ -1,0 +1,135 @@
+id,code,name,description,group_id
+jenis1,1,Stelan Casual,,Busana Wanita
+jenis2,2,Stelan Resmi,,Busana Wanita
+jenis3,3,Stelan Kerja,,Busana Wanita
+jenis4,4,Rok,,Busana Wanita
+jenis5,5,Celana Panjang,,Busana Wanita
+jenis6,6,Kebaya,,Busana Wanita
+jenis7,7,Tunik,,Busana Wanita
+jenis8,8,Gaun Sackdress Jubah,,Busana Wanita
+jenis9,9,Sarimbit Ibu,,Busana Wanita
+jenis10,A,Blouse Pant,,Busana Wanita
+jenis11,B,Blouse Skirt,,Busana Wanita
+jenis12,C,Jacket,,Busana Wanita
+jenis13,D,Jalaba,,Busana Wanita
+jenis14,E,Cape,,Busana Wanita
+jenis15,F,Top,,Busana Wanita
+jenis16,1,Selendang,,Perlengkapan Busana Wanita
+jenis17,2,Kerudung Jilbab,,Perlengkapan Busana Wanita
+jenis18,3,Ciput Topi,,Perlengkapan Busana Wanita
+jenis19,4,Bandana,,Perlengkapan Busana Wanita
+jenis20,5,Manset,,Perlengkapan Busana Wanita
+jenis21,6,Bergo,,Perlengkapan Busana Wanita
+jenis22,7,Syal,,Perlengkapan Busana Wanita
+jenis23,8,Underware,,Perlengkapan Busana Wanita
+jenis24,1,MW Stelan Casual,,Busana Pria
+jenis25,2,MW Evening,,Busana Pria
+jenis26,3,MW Stelan Evening,,Busana Pria
+jenis27,4,MW Ibadah,,Busana Pria
+jenis28,5,MW Semi Formal,,Busana Pria
+jenis29,6,MW Casual,,Busana Pria
+jenis30,7,Jacket Evening,,Busana Pria
+jenis31,8,MW Sarimbit Casual,,Busana Pria
+jenis32,9,MW Sarimbit Evening,,Busana Pria
+jenis33,A,T Shirt,,Busana Pria
+jenis34,B,Pant,,Busana Pria
+jenis35,C,Jacket Casual,,Busana Pria
+jenis36,D,Kaftan,,Busana Pria
+jenis37,1,Peci,,Perlengkapan Busana Pria
+jenis38,2,Sarung,,Perlengkapan Busana Pria
+jenis39,3,Sorban,,Perlengkapan Busana Pria
+jenis40,4,Stolla,,Perlengkapan Busana Pria
+jenis41,1,Stelan Anak Wanita,,Busana & Plkp Anak Wanita
+jenis42,2,Kerudung Anak,,Busana & Plkp Anak Wanita
+jenis43,3,Mukena Anak,,Busana & Plkp Anak Wanita
+jenis44,4,Atasan Anak,,Busana & Plkp Anak Wanita
+jenis45,5,Celana anak,,Busana & Plkp Anak Wanita
+jenis46,6,Bergo Anak,,Busana & Plkp Anak Wanita
+jenis47,8,Dress Anak Wanita,,Busana & Plkp Anak Wanita
+jenis48,9,Sarimbit Anak Wanita,,Busana & Plkp Anak Wanita
+jenis49,A,Anak Blouse Skirt,,Busana & Plkp Anak Wanita
+jenis50,B,Anak Blouse Pant,,Busana & Plkp Anak Wanita
+jenis51,C,Anak Dress,,Busana & Plkp Anak Wanita
+jenis52,D,Skirt,,Busana & Plkp Anak Wanita
+jenis53,E,Pant,,Busana & Plkp Anak Wanita
+jenis54,1,Stelan Anak Pria,,Busana & Plkp Anak Pria
+jenis55,2,Peci Anak,,Busana & Plkp Anak Pria
+jenis56,3,Sarung Anak,,Busana & Plkp Anak Pria
+jenis57,4,Atasan Anak Pria,,Busana & Plkp Anak Pria
+jenis58,5,Celana Anak,,Busana & Plkp Anak Pria
+jenis59,9,Sarimbit Anak Pria,,Busana & Plkp Anak Pria
+jenis60,A,Pant,,Busana & Plkp Anak Pria
+jenis61,1,Sajadah,,Perlengkapan Ibadah
+jenis62,2,Mukena Stelan,,Perlengkapan Ibadah
+jenis63,3,Mukena Atasan,,Perlengkapan Ibadah
+jenis64,4,Mukena Tas,,Perlengkapan Ibadah
+jenis65,5,Tas Mukena,,Perlengkapan Ibadah
+jenis66,6,Kompas,,Perlengkapan Ibadah
+jenis67,7,Mukena Terusan/Abaya,,Perlengkapan Ibadah
+jenis68,8,0 Tasbih 5 Penunjuk kalam,,Perlengkapan Ibadah
+jenis69,1,Busana Haji,,Busana & Plkp Haji
+jenis70,2,Kain Ihrom,,Busana & Plkp Haji
+jenis71,3,Sabuk Haji,,Busana & Plkp Haji
+jenis72,4,Singlet Haji,,Busana & Plkp Haji
+jenis73,5,Plkp Haji,,Busana & Plkp Haji
+jenis74,6,Celana Panjang Haji Pria,,Busana & Plkp Haji
+jenis75,7,Celana Panjang Haji Wanita,,Busana & Plkp Haji
+jenis76,8,Sepatu Haji,,Busana & Plkp Haji
+jenis77,9,Malaya,,Busana & Plkp Haji
+jenis78,1,Al Quran,,Barang Cetakan & Elektronik
+jenis79,2,Buku,,Barang Cetakan & Elektronik
+jenis80,3,Majalah,,Barang Cetakan & Elektronik
+jenis81,4,Poster/Vandel/Kalender,,Barang Cetakan & Elektronik
+jenis82,5,Alat Peraga/Mainan,,Barang Cetakan & Elektronik
+jenis83,6,Kaset/CD/VCD,,Barang Cetakan & Elektronik
+jenis84,7,Kertas Kado,,Barang Cetakan & Elektronik
+jenis85,8,Stiker/Pembatas Buku,,Barang Cetakan & Elektronik
+jenis86,9,Kartu Ucapan,,Barang Cetakan & Elektronik
+jenis87,1,Assesories,,Aksesories & Souvenir
+jenis88,2,Rechal,,Aksesories & Souvenir
+jenis89,3,Kaligrafi/Hiasan Dinding,,Aksesories & Souvenir
+jenis90,4,Gantungan Mobil,,Aksesories & Souvenir
+jenis91,5,Gantungan Kunci,,Aksesories & Souvenir
+jenis92,6,Perlengkapan Mahar,,Aksesories & Souvenir
+jenis93,7,Hiasan,,Aksesories & Souvenir
+jenis94,8,Sabuk,,Aksesories & Souvenir
+jenis95,1,Bedak,,Kosmetik
+jenis96,2,Lipstik,,Kosmetik
+jenis97,3,Perawatan Wajah,,Kosmetik
+jenis98,4,Minyak Wangi,,Kosmetik
+jenis99,5,Kosmetik Mata,,Kosmetik
+jenis100,6,Perawatan Tubuh,,Kosmetik
+jenis101,7,Perawatan Rambut,,Kosmetik
+jenis102,8,Pembersih Wajah,,Kosmetik
+jenis103,1,Makanan,,Oleh-oleh Haji
+jenis104,2,Non Makanan,,Oleh-oleh Haji
+jenis105,1,Kain,,Lain-Lain
+jenis106,2,Parcel,,Lain-Lain
+jenis107,3,Kaos Kaki,,Lain-Lain
+jenis108,4,Sepatu,,Lain-Lain
+jenis109,5,Tas dan Sejenisnya,,Lain-Lain
+jenis110,6,Tikar/Karpet,,Lain-Lain
+jenis111,7,Dompet,,Lain-Lain
+jenis112,1,Busana Junior Wanita,,Busana Junior/Remaja
+jenis113,2,Busana Junior Pria,,Busana Junior/Remaja
+jenis114,7,Tunik teens,,Busana Junior/Remaja
+jenis115,C,Jacket teens,,Busana Junior/Remaja
+jenis116,D,Skirt teens,,Busana Junior/Remaja
+jenis117,1,Stelan Olah Raga Wanita,,Busana Olah Raga
+jenis118,2,Atasan Olah Raga Wanita,,Busana Olah Raga
+jenis119,3,Celana Olah Raga Wanita,,Busana Olah Raga
+jenis120,4,Busana Renang,,Busana Olah Raga
+jenis121,5,Tas Olah Raga,,Busana Olah Raga
+jenis122,6,Celana Renang Pria,,Busana Olah Raga
+jenis123,1,Busana Wanita,,Busana & Plkp Show
+jenis124,2,Busana Pria,,Busana & Plkp Show
+jenis125,3,Busana Anak Wanita,,Busana & Plkp Show
+jenis126,4,Busana Anak Pria,,Busana & Plkp Show
+jenis127,5,Tas,,Busana & Plkp Show
+jenis128,6,Sepatu/Sandal,,Busana & Plkp Show
+jenis129,7,Assesories,,Busana & Plkp Show
+jenis130,A,Kurung,,Tudung/Bergo
+jenis131,B,Kurung Sambung,,Tudung/Bergo
+jenis132,C,Segitiga (Belah Depan),,Tudung/Bergo
+jenis133,D,Belah Pinggir,,Tudung/Bergo
+jenis134,E,Belah Belakang,,Tudung/Bergo

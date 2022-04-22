@@ -1,0 +1,272 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <!-- form view of salary rule
+    <record id="hr_salary_admin_rule_form" model="ir.ui.view">
+        <field name="name">hr.salary.rule.admin.form</field>
+        <field name="model">hr.salary.rule</field>
+        <field name="type">form</field>
+        <field name="arch" type="xml">
+            <form string="Salary Rules">
+                <group col="6" colspan="6">
+                    <field name="name" />
+                    <field name="code"/>
+                    <field name="category_id"/>
+                    <field name="sequence"/>
+                    <field name="active"/>
+                    <field name="appears_on_payslip" invisible="1"/>
+                    <field name="company_id" widget="selection" groups="base.group_multi_company"/>
+                </group>
+                <notebook>
+                    <page string="General">
+                        <group string="Conditions">
+                            <group>
+                                <field name="condition_select" class="oe_inline"/>
+                            </group>
+                            <group>
+                                <field name="condition_python" attrs="{'invisible':[('condition_select','&lt;&gt;','python')],
+                                'required': [('condition_select','=','python')]}" class="oe_inline"/> 
+                                <field name="condition_range" attrs="{'invisible':[('condition_select','&lt;&gt;','range')],
+                                'required':[('condition_select','=','range')]}" class="oe_inline"/>
+                                <field name="condition_range_min" class="oe_inline"
+                                attrs="{'invisible':[('condition_select','&lt;&gt;','range')],
+                                        'required':[('condition_select','=','range')]}"/>
+                                <field name="condition_range_max" class="oe_inline"
+                                attrs="{'invisible':[('condition_select','&lt;&gt;','range')],
+                                        'required':[('condition_select','=','range')]}"/>
+                            </group> 
+                        </group>
+                        <group string="Computation" cols="4">
+                            <group>
+                                <field name="amount_select" class="oe_inline"/>
+                            </group>
+                            <group>
+                                <field name="amount_percentage_base" 
+                                attrs="{'invisible':[('amount_select','&lt;&gt;','percentage')], 
+                                    'required': [('amount_select','=','percentage')]}" class="oe_inline"/> 
+                                <field name="quantity" 
+                                attrs="{'invisible':[('amount_select','=','code')],
+                                'required':[('amount_select','!=','code')]}" class="oe_inline"/> 
+                                <field name="amount_fix" class="oe_inline"
+                                attrs="{'invisible':[('amount_select','&lt;&gt;','fix')], 
+                                    'required':[('amount_select','=','fix')]}"/><newline/>
+                                <field name="amount_percentage" class="oe_inline"
+                                attrs="{'invisible':[('amount_select','&lt;&gt;','percentage')],
+                                'required':[('amount_select','=','percentage')]}"/>
+                                <field name="amount_python_compute" class="oe_inline"
+                                attrs="{'invisible':[('amount_select','&lt;&gt;','code')],
+                                'required':[('amount_select','=','code')]}"/>
+                                
+                            </group>
+                        </group>
+                        <group string="Company contribution">
+                            <field name="register_id" class="oe_inline"/>
+                        </group>
+                    </page>
+                    <page string="Child Rules">
+                        <group>
+                            <field name="parent_rule_id" class="oe_inline"/>
+                        </group>
+                        <separator colspan="4" string="Children definition"/>
+                        <field colspan="4" name="child_ids" nolabel="1"/>
+                    </page>
+                    <page string="Inputs">
+                        <field name="input_ids" colspan="4" nolabel="1" mode="tree">
+                            <tree string="Input Data" editable="bottom">
+                                <field name="name"/>
+                                <field name="code"/>
+                            </tree>
+                        </field>
+                    </page>
+                    <page string="Description">
+                        <field name="note" colspan="4" nolabel="1"/>
+                    </page>
+                </notebook>
+            </form>
+        </field>
+    </record> -->
+
+    <!-- inherit tree view of hr salary rule to add id and sequence fields-->
+    <record id="hr_salary_rule_sequence_tree" model="ir.ui.view">
+        <field name="name">hr.salary.rule.sequence.tree</field>
+        <field name="model">hr.salary.rule</field>
+        <field name="type">tree</field>
+        <field name="inherit_id" ref="hr_payroll.hr_salary_rule_list" />
+        <field name="arch" type="xml">
+            <field name="name" position="before">
+                <field name="id"/>
+                <field name="sequence"/>
+            </field>
+        </field>
+    </record>
+
+    <!-- inherit payroll structure form view to add context -->
+    <record id="hr_salary_rule_category_admin_form" model="ir.ui.view">
+        <field name="name">hr.payroll.structure.form</field>
+        <field name="model">hr.payroll.structure</field>
+        <field name="type">tree</field>
+        <field name="inherit_id" ref="hr_payroll.view_hr_employee_grade_form" />
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='rule_ids']" position="attributes">
+                <attribute name="context">{'form_view_ref':'hr_salary_admin_rule_form'}</attribute>
+            </xpath>
+        </field>
+    </record>
+
+    <!-- inherit form view of partner bank to vanck_id field -->
+    <record id="res_partner_bank_inherits" model="ir.ui.view">
+        <field name="name">hr.partner.bank.inherits</field>
+        <field name="model">res.partner.bank</field>
+        <field name="type">form</field>
+        <field name="inherit_id" ref="base.view_partner_bank_form" />
+        <field name="arch" type="xml">
+            <field name="bank_id" position="after">
+                <field name="branch_id"/>
+            </field>
+        </field>
+    </record>
+
+    <!-- inherit hr_payroll action to add context -->
+    <record id="hr_payroll.action_view_hr_payslip_form" model="ir.actions.act_window">
+        <field name="name">Employee Payslips</field>
+        <field name="res_model">hr.payslip</field>
+        <field name="view_type">form</field>
+        <field name="context">{'search_default_draft': True, 'default_active': True}</field>
+        <field name="view_id" ref="hr_payroll.view_hr_payslip_tree"/>
+        <field name="search_view_id" ref="hr_payroll.view_hr_payslip_filter"/>
+    </record>
+
+    <!-- inherit hr_payroll form view -->
+    <record model="ir.ui.view" id="l10n_idn_hr_payroll_form_view">
+        <field name="name">idn.payroll.extended.form</field>
+        <field name="model">hr.payslip</field>
+        <field name="type">form</field>
+        <field name="inherit_id" ref="hr_payroll.view_hr_payslip_form" />
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='contract_id']" position="attributes">
+                <attribute name="required">1</attribute>
+            </xpath>
+            <xpath expr="//field[@name='struct_id']" position="attributes">
+                <attribute name="required">1</attribute>
+            </xpath>
+            <field name="credit_note" position="replace">
+                <field name="active"/>
+                <field name="pay_by_cheque" attrs="{'readonly':[('state','!=','draft')]}"/>
+                <field name="cheque_number" attrs="{'invisible':[('pay_by_cheque', '=', False)], 
+                'required':[('pay_by_cheque', '=', True)],'readonly':[('state','!=','draft')]}"/>
+            </field>
+            <xpath expr="//form/sheet/notebook/page[3]" position="replace"/>
+            <xpath expr="//form/sheet/notebook/page[2]/field/tree/field[@name='sequence']" position="replace"/>
+            <xpath expr="//form/sheet/notebook/page[2]/field/tree/field[@name='name']" position="before">
+                <field name="sequence"/>
+            </xpath>
+            <xpath expr="//form/sheet/notebook/page[2]/field/tree/field[@name='quantity']" position="replace"/>
+            <xpath expr="//form/sheet/notebook/page[2]/field/tree/field[@name='rate']" position="replace"/>
+            <xpath expr="//form/sheet/notebook/page[2]/field/tree/field[@name='code']" position="attributes">
+                <attribute name="string">SALARY CODE</attribute>
+            </xpath>
+            <xpath expr="//form/sheet/notebook/page[1]/field[@name='input_line_ids']/tree/field[@name='code']" position="replace"/>
+            <xpath expr="//form/sheet/notebook/page[1]/field[@name='input_line_ids']/tree/field[@name='name']" position="before">
+                <field name="code"/>
+            </xpath>
+            <xpath expr="//form/sheet/notebook/page[1]/field[@name='worked_days_line_ids']/tree/field[@name='sequence']" position="replace"/>
+            <xpath expr="//form/sheet/notebook/page[1]/field[@name='worked_days_line_ids']/tree/field[@name='contract_id']" position="replace"/>
+        </field>
+    </record>
+
+    <!-- inherit search view of hr payroll -->
+    <record model="ir.ui.view" id="ppi_hr_payslip_extended_search_view">
+        <field name="name">ppi.hr.payslip.extended.search</field>
+        <field name="model">hr.payslip</field>
+        <field name="type">search</field>
+        <field name="inherit_id" ref="hr_payroll.view_hr_payslip_filter" />
+        <field name="arch" type="xml">
+            <xpath expr="//search/field[@name='date_from']" position="after">
+                <field name="date_to"/>
+                <filter icon="gtk-no" string="Pay" domain="[('active','=',False)]" help="Inactive Slip"/>
+            </xpath>
+            <xpath expr="//search/group[1]/filter[@name='employee_id']" position="replace"/>
+        </field>
+    </record>
+
+    <!-- inherit menu to add group -->
+    <menuitem id="hr_payroll.menu_hr_payroll_root"
+    name="Payroll"
+    sequence="45"
+    web_icon="hr_payroll,static/description/icon.png"
+    groups="idn_payroll.group_hr_payroll_admin" 
+    />
+
+    <!-- inherit hr contract form view to add fileds -->
+    <record id="view_hr_contract_commission_form_inherited1" model="ir.ui.view">
+        <field name="name">view.hr.contract.commission.form.inherit</field>
+        <field name="model">hr.contract</field>
+        <field name="type">form</field>
+        <field name="inherit_id" ref="hr_contract.hr_contract_view_form"/>
+        <field name="arch" type="xml">
+            <field name="wage" position="after">
+                <field name="wage_to_pay" invisible="True" />
+                <field name="rate_per_hour" invisible="True" />
+            </field>
+            <field name="name" position="attributes">
+                <attribute name="readonly">1</attribute>
+            </field>
+        </field>
+    </record>
+
+    <!-- HR Contract Tree View Inherited -->
+    <record id="hr_contract_view_tree_inherited" model="ir.ui.view">
+        <field name="name">hr.contract.tree</field>
+        <field name="model">hr.contract</field>
+        <field name="type">tree</field>
+        <field name="inherit_id" ref="hr_contract.hr_contract_view_tree" />
+        <field name="arch" type="xml">
+            <field name="job_id" position="after">
+                <field name="wage" groups="idn_payroll.group_hr_payroll_admin"/>
+
+            </field>
+        </field>
+    </record>
+
+    <!-- inherit tree view of hr employee to remove remaining_leaves field -->
+    <record id="view_hr_employee_small_tree" model="ir.ui.view">
+        <field name="name">view.hr.employee.tree</field>
+        <field name="model">hr.employee</field>
+        <field name="type">tree</field>
+        <field name="inherit_id" ref="hr_holidays.hr_holidays_leaves_assign_tree_view"/>
+        <field name="arch" type="xml">
+            <field name="remaining_leaves" position="replace"/>
+        </field>
+    </record>
+
+    <!-- inherit form view of payslip run to replace button -->
+    <record id="hr_payslip_run_form_view_inherit" model="ir.ui.view">
+        <field name="name">hr.payslip.run.form</field>
+        <field name="model">hr.payslip.run</field>
+        <field name="inherit_id" ref="hr_payroll.hr_payslip_run_form"/>
+        <field name="type">form</field>
+        <field name="arch" type="xml">
+            <button name="%(hr_payroll.action_hr_payslip_by_employees)d" position="replace">
+                <button name="open_payslip_employee" type="object" states="draft" string="Generate Payslips" class="oe_highlight"/>
+            </button>
+        </field>
+    </record>
+
+
+    <!-- Res Users usr_ids m2m field Inherited -->
+    <record id="view_res_users_form_view_inherited" model="ir.ui.view">
+        <field name="name">view.res.user.form.view.inherited</field>
+        <field name="model">res.users</field>
+        <field name="inherit_id" ref="base.view_users_form"/>
+        <field name="type">form</field>
+        <field name="arch" type="xml">
+            <xpath expr="//form/sheet/notebook/page[@name='access_rights']" position="after">
+                <page string="Payroll Users">
+                    <!-- <field nolabel="1" name="user_ids"/> -->
+                    <field nolabel="1" name="employee_payroll_ids"/>
+                </page>
+            </xpath>
+        </field>
+    </record>
+
+</odoo>

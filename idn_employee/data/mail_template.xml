@@ -1,0 +1,120 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <!-- Email Template for hr manager to notify while application create -->
+    <record id="email_template_application_create" model="mail.template">
+        <field name="name">Notification for New application to HR</field>
+        <field name="subject">Notification for application</field>
+        <field name="model_id" ref="model_hr_applicant"/>
+        <field name="auto_delete" eval="True"/>
+        <field name="body_html"><![CDATA[<div style="font-family: 'Lucica Grande', Ubuntu, Arial, Verdana, sans-serif; font-size: 12px; color: rgb(34, 34, 34); background-color: #FFF; ">
+        <p> Dear Sir/Madam,</p>
+            <p>New application is entered into the system with the following details.</p>
+            <p style="border-left: 1px solid #8e0000; margin-left: 30px;" >
+            &nbsp; Name : ${object.partner_name or ''}<br/>
+            &nbsp; Applied for Job : ${object.job_id.name}<br/>
+            &nbsp; Email : ${object.email_from}
+            </p>
+            <p> So please do the needful.</p>
+                <br>
+                <P>Thanks,<br>
+                <b>${user.name},</b><br>
+                <b>${user.company_id.name}</b><br>
+                </p>
+        </p>
+        ]]>
+         </field>
+    </record>
+
+    <!-- Email Template for hr manager to notify while application create -->
+    <record id="email_template_application_create_to_applicant" model="mail.template">
+        <field name="name">Notification to Applicant</field>
+        <field name="subject">Notification for your application</field>
+        <field name="model_id" ref="model_hr_applicant"/>
+        <field name="auto_delete" eval="True"/>
+        <field name="body_html"><![CDATA[<div style="font-family: 'Lucica Grande', Ubuntu, Arial, Verdana, sans-serif; font-size: 12px; color: rgb(34, 34, 34); background-color: #FFF; ">
+        <p> Hi ${object.partner_name or ''},</p>
+            <p>Your application for the <b>${object.job_id.name}</b> is being processed.</p>
+            <p Only shortlisted applicants will be notified</p>
+                <P>Thanks,<br>
+                <b>${user.name},</b><br>
+                <b>${user.company_id.name}</b><br>
+                </p>
+        </p>
+        ]]>
+         </field>
+    </record>
+
+    <!-- Email template for HR manager to notify which employee's notice period will be going to finish in 3 days -->
+    <record id="email_template_emp_status_notification_to_hr" model="mail.template">
+        <field name="name">Notification for Terminate with in 3 days</field>
+        <field name="subject">Notification for Terminate with in 3 days</field>
+        <field name="model_id" ref="hr.model_hr_employee"/>
+        <field name="auto_delete" eval="True"/>
+        <field name="body_html"><![CDATA[<div style="font-family: 'Lucica Grande', Ubuntu, Arial, Verdana, sans-serif; font-size: 12px; color: rgb(34, 34, 34); background-color: #FFF; ">
+        <p> Hello,</p>
+            <p>Below is the list of employees who are resigning this month:</p>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Name</th>
+                        <th>Last Date</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    % for line in object.fetch_employee_list():
+                    <tr>
+                        <td>${line.name}</td>
+                        <td>${line.last_date}</td>
+                    </tr>
+                    % endfor
+                </tbody>
+            </table>
+
+                <P>Thanks,<br>
+                <b>${user.name},</b><br>
+                <b>${user.company_id.name}</b><br>
+                </p>
+        </p>
+        ]]>
+         </field>
+    </record>
+
+    <!-- Email template for HR manager to notify which employee's immigration dovument will expire between 113 to 123 days -->
+    <record id="email_template_emp_exp_doc_notification_to_hr" model="mail.template">
+        <field name="name">Notification for Document Expiry Date</field>
+        <field name="subject">Notification for Document Expiry Date</field>
+        <field name="model_id" ref="model_employee_immigration"/>
+        <field name="auto_delete" eval="True"/>
+        <field name="body_html"><![CDATA[<div style="font-family: 'Lucica Grande', Ubuntu, Arial, Verdana, sans-serif; font-size: 12px; color: rgb(34, 34, 34); background-color: #FFF; ">
+        <p> Hello,</p>
+            <p>Below is the list of names which documents are going to expire within this month:</p>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Employee Name</th>
+                        <th>Document</th>
+                        <th>Expiry Date</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    % for line in object.fetch_exp_doc_list():
+                    <tr>
+                        <td>${line.employee_id.name}</td>
+                        <td>${line.documents}</td>
+                        <td>${line.exp_date}</td>
+                    </tr>
+                    % endfor
+                </tbody>
+            </table>
+
+                <P>Thanks,<br>
+                <b>${user.name},</b><br>
+                <b>${user.company_id.name}</b><br>
+                </p>
+        </p>
+        ]]>
+         </field>
+    </record>
+
+</odoo>

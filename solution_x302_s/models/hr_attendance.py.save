@@ -1,0 +1,97 @@
+# -*- coding: utf-8 -*-
+from odoo import api, fields, models, _
+import datetime
+import requests
+import re
+import logging
+_logger = logging.getLogger(__name__)
+
+class HrEmployee(models.Model):
+    """ Add user id machine in employee """
+    _inherit = 'hr.employee'
+
+    x302_s_user_id = fields.Integer('User ID in machine', help="Solution type X302-S User ID.")
+
+class HrAttendance(models.Model):
+    """ Cron to read and update attendance in odoo """
+    _inherit = 'hr.attendance'
+
+    x302_s_user_id = fields.Integer('User ID in machine', help="Solution type X302-S User ID.")
+
+    def get_data_from_x302_s(self, date, x302_user_id):
+        r = requests.session()
+        datas = {
+            'sdate': date, 'edate': date, 
+            'uid': x302_user_id}
+        block = []
+        try:
+            response = r.post('http://192.168.10.80/form/Download', data=datas, stream=True)
+            block = response.text.split('\n')
+        except:
+            pass
+        return block
+
+    @api.model
+    def sync_attendance(self):
+        today = fields.date.today()
+        emp_obj = self.env['hr.employee']
+        attendance_obj = self.env['hr.attendance']
+
+                    _logger.debug("Employee : "+ str(employee.name))
+sql_employees = """ select id from hr_employee where x302_s_user_id > 0 """
+        self.env.cr.execute(sql_employees)
+        result_employees = [emp_obj.browse(x['id']) for x in self.env.cr.dictfetchall()]
+
+        nilai1= (datetime.datetime.strptime(str(today)+ " 00:00:00", '%Y-%m-%d %H:%M:%S') - datetime.timedelta(hours=2)).strftime('%Y-%m-%d %H:%M:%S')
+        nilai2 = str(today) + " 23:59:59"
+        regex = re.compile(r'[\n\r\t]') # remove 3 character
+        for employee in result_employees:
+            block = self.get_data_from_x302_s(date=today, x302_user_id=employee.x302_s_user_id)
+            for x in block:
+                _logger.debug("Isi Block : "+ str(x))
+            _logger.debug("Employee : "+ str(employee.name))
+            
+            sql_filter_absen = """ select id from hr_attendance WHERE employee_id = %s AND check_in >= '%s' AND check_in <= '%s' """ % (employee.id,nilai1,nilai2)
+            self.env.cr.execute(sql_filter_absen)
+            # print sql_filter_absen
+            attendance_today = [attendance_obj.browse(x['id']) for x in self.env.cr.dictfetchall()]
+
+            if attendance_today:
+                for attendance in attendance_today:
+                    # if not attendance.check_out:
+                    block = self.get_data_from_x302_s(date=today, x302_user_id=attendance.employee_id.x302_s_user_id)
+                    if not len(block) == 0:
+                        for b in block[::-1]:
+                            row = regex.sub(' ', b)
+                            if len(row) != 0:
+                                row = row
+                                break
+                        if len(row) > 10:
+                            # if row[-2] == '0' or row[-2] == "1":               
+                            final = (datetime.datetime.strptime(row[-24:-6], '%Y-%m-%d %H:%M:%S') - datetime.timedelta(hours=7)).strftime('%Y-%m-%d %H:%M:%S')
+                            if attendance.check_in < final:
+                                attendance.write({
+                                    'check_out': final,
+                                })                
+            else:
+                _logger.debug("membuat absen baru ")
+                block = self.get_data_from_x302_s(date=today, x302_user_id=employee.x302_s_user_id)
+                if not len(block) == 0:
+                    for b in block:
+                        row = regex.sub(' ', b)
+                        break
+                    for x in block:
+                        _logger.info("Isi Block : "+ str(x))
+                    if len(row) > 10:                    
+                        # if row[-2] == '0' or row[-2] == "1":
+                        final = (datetime.datetime.strptime(row[-24:-6], '%Y-%m-%d %H:%M:%S') - datetime.timedelta(hours=7)).strftime('%Y-%m-%d %H:%M:%S')
+                        data_absen = {
+                            'employee_id': employee.id,
+                            'check_in': final,
+                        }
+                        self.env['hr.attendance'].create(data_absen)
+                elif len(block) == 0:
+                    _logger.debug("absen kosong ")
+                else:
+                    _logger.debug("gagal membuat absen baru ")
+

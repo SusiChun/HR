@@ -1,0 +1,10 @@
+id,code,name,note
+caracuci1,1,BIRU – KAIN PUTIH,"Cuci dengan mesin, cuci terpisah dengan warna lain, dapat digelantang jika dibutuhkan, pengeringan putar dengan suhu normal, setrika dengan suhu rendah max 110C, bisa dry clean."
+caracuci2,2,COKLAT – BATIK/ATBM,"Cuci dengan tangan, gunakan detergen dengan konsentrasi rendah, jangan diperas dengan dipuntir, jemur ditempat teduh, setrika dengan suhu rendah max 110C, bagian berpayet jangan disetrika."
+caracuci3,3,HIJAU,"Cuci dengan tangan, Jangan direndam, Cuci terpisah dari warna lain"
+caracuci4,4,KUNING (UNTUK KNITTING),"Cuci dengan tangan, jangan diperas dengan dipuntir, jangan gunakan pemutih, jemur ditempat datar, setrika dengan suhu rendah max 110C, penyimpanan dengan dilipat."
+caracuci5,5,MERAH (HAND WASH),"Cuci dengan tangan, cuci terpisah dengan warna lain, jangan direndam, jangan dikeringkan dengan mesin, jemur di tempat teduh, setrika dengan suhu sedang max 150C, jangan gunakan pemutih, dry clean untuk hasil terbaik."
+caracuci6,6,NONE,NONE
+caracuci7,7,ORANGE – MACHINE WASH,"Cuci dengan mesin, pengeringan putar dengan suhu normal, jemur dengan bagian dalam baju diluar, setrika dengan suhu rendah max. 100C, bisa dry clean."
+caracuci8,8,POLLY COTTON,"Cuci dengan tangan, bisa dry clean, jangan diperas dengan dipuntir, setrika dengan panas rendah (110), bagian berpayet jangan disetrika, penyimpanan baju jangan dilipat"
+caracuci9,9,UNGU – DRY CLEAN,"Hanya bisa di dry clean, setrika uap dengan suhu rendah max 110C, bagian berpayet jangan di setrika, penyimpanan digantung dengan menggunakan cover set."

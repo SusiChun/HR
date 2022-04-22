@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+   <!-- Payroll Generic Summary Excel Report View -->
+   <record id="view_ihrms_payroll_execl_generic_report_wiz" model="ir.ui.view">
+        <field name="name">view.payroll.excel.export.summay.wizard</field>
+        <field name="model">payroll.excel.export.summay</field>
+        <field name="type">form</field>
+        <field name="arch" type="xml">
+            <form string="Excel Export">
+               <group cospan="2" col="2">
+                    <field name="name" invisible="1"/>
+                    <h4>Click On Link To Download Xls File: &#160;<field name="file" filename="name" nolabel="1"/></h4>
+                </group>
+                <footer>
+                    <button special="cancel" string="Cancel" colspan="2" />
+                </footer>
+            </form>
+        </field>
+    </record>
+
+    <!-- form view of generic summary report -->
+    <record id="payroll_summary_generic_report_wiz" model="ir.ui.view">
+        <field name="name">view.payroll.generic.summary.wizard</field>
+        <field name="model">payroll.generic.summary.wizard</field>
+        <field name="type">form</field>
+        <field name="arch" type="xml">
+            <form string="Payroll Generic Summary">
+                <separator string="Employees" colspan="4"/>
+                <field name="employee_ids" required="1" colspan="4" nolabel="1">
+                <tree string="Employees">
+                        <field name="name"/>
+                        <field name="department_id"/>
+                        <field name="work_email"/>
+                    </tree>
+                </field>
+                <group colspan="4">
+                    <separator string="Salary Rules" colspan="4"/>
+                    <field name="salary_rule_ids" nolabel="1" >
+                        <tree string="Salary Rule">
+                            <field name="name"/>
+                            <field name="code"/>
+                            <field name="category_id"/>
+                            <field name="active"/>
+                        </tree>
+                    </field>
+                </group>
+                <group col="4" colspan="1">
+                    <field name="date_from" required="1" colspan="2"/>
+                    <field name="date_to" required="1" colspan="2"/>
+                </group>
+                <footer>
+                    <button name="print_order" class="oe_highlight" string="Save" type="object" colspan="2"/>
+                    or
+                    <button special="cancel" string="Cancel" colspan="2"/>
+                </footer>
+            </form>
+        </field>
+    </record>
+
+    <!-- action for payslip generic summary report -->
+    <record id="action_print_generic_summaryorder" model="ir.actions.act_window">
+        <field name="name">Generic Summary</field>
+        <field name="res_model">payroll.generic.summary.wizard</field>
+        <field name="view_type">form</field>
+        <field name="view_mode">form</field>
+        <field name="target">new</field>
+   </record>
+
+    <!-- menu for payslip generic summary report -->
+     <menuitem action="action_print_generic_summaryorder" id="menu_print_generic_report" parent="base.menu_security"
+     groups="hr.group_hr_manager,idn_payroll.group_hr_payroll_admin" />
+
+</odoo>

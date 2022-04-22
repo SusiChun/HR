@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <data noupdate="1">
+        <record id="reset_contract_name" model="ir.cron">
+            <field name="name">Payroll : New Year Started</field>
+            <field name="interval_number">12</field>
+            <field name="interval_type">months</field>
+            <field name="numbercall">-1</field>
+            <field name="nextcall" eval="datetime(datetime.now().year,01,01)"/>
+            <field name="model" eval="'hr.contract'"/>
+            <field name="function" eval="'reminder_to_change_year_number'"/>
+            <field name="args" eval="'()'"/>
+        </record>
+    </data>
+
+</odoo>

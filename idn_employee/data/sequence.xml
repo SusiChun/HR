@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <record id="seq_metrocom_employee" model="ir.sequence">
+            <field name="name">Sequence Employee MGS</field>
+            <field name="code">MGS-EMPLOYEE</field>
+           <!-- <field name="prefix"></field>-->
+            <field name="padding">4</field>
+            <field name="company_id" ref="base.main_company"/>
+        </record>
+    </data>
+</odoo>

@@ -1,0 +1,294 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <record model="ir.ui.view" id="view_holiday_status_tree_ext">
+        <field name="name">hr.holidays.status.tree.ext</field>
+        <field name="model">hr.holidays.status</field>
+        <field name="type">form</field>
+        <field name="inherit_id" ref="hr_holidays.view_holiday_status_tree"/>
+        <field name="arch" type="xml">
+            <field name="max_leaves" position="replace">
+                <field name="max_leaves" invisible="1"/>
+            </field>
+            <field name="name" position="before">
+                <field name="name2"/>
+            </field>
+            <field name="name" position="attributes">
+                <attribute name="string">Code</attribute>
+            </field>
+        </field>
+    </record>
+    
+        <record model="ir.ui.view" id="edit_holiday_extended_status_normal_tree">
+            <field name="name">hr.holidays.status.tree</field>
+            <field name="model">hr.holidays.status</field>
+            <field name="inherit_id" ref="hr_holidays.view_holiday_status_normal_tree"/>
+            <field name="type">tree</field>
+            <field name="arch" type="xml">      
+                <field name="name" position="before">
+                    <field name="name2"/>
+                </field>
+                <field name="name" position="attributes">
+                    <attribute name="string">Code</attribute>
+                </field>
+            </field>
+        </record>
+        <record model="ir.ui.view" id="edit_holiday_extended_status_form">
+            <field name="name">hr.holidays.status.form</field>
+            <field name="model">hr.holidays.status</field>
+            <field name="inherit_id" ref="hr_holidays.edit_holiday_status_form"/>
+            <field name="type">form</field>
+            <field name="arch" type="xml">      
+                <xpath expr="//field[@name='name']" position="before">
+                    <field name="name2" required="1"/>
+                </xpath>
+                <xpath expr="//field[@name='name']" position="attributes">
+                    <attribute name="string">Code</attribute>
+                </xpath>
+                <field name="categ_id" position="replace">
+                </field>
+                <field name="active" position="after">
+                    <field name="weekend_calculation" />
+                </field>
+                <xpath expr="//form/group" position="after">
+                    <notebook>
+                        <page string="Carry Forward Leaves">
+                           <group>
+                               <field name="cry_frd_leave" />
+                               <field name="default_leave_allocation"/>
+                           </group>
+                        </page>
+                        <page string="Details">
+                            <group>
+                                <field name="count_days_by"/>
+                            </group>
+                        </page>
+                    </notebook>
+                </xpath>
+            </field>
+        </record>
+
+    <!-- Search view of hr_holiday_public -->
+        <record id="hr_holiday_public_search" model="ir.ui.view">
+            <field name='name'>hr.holiday.public.search</field>
+            <field name='model'>hr.holiday.public</field>
+            <field name='type'>search</field>
+            <field name='arch' type='xml'>
+                <search string="Search holiday">
+                        <field name="name"/>
+                        <field name="state"/>
+                </search>
+            </field>
+        </record>
+        
+        <!-- Tree view of hr_holiday_public -->
+                
+        <record id="hr_holiday_public_tree" model="ir.ui.view">
+            <field name='name'>hr.holiday.public.tree</field>
+            <field name='model'>hr.holiday.public</field>
+            <field name='type'>tree</field>
+            <field name='arch' type='xml'>
+                <tree string="Holidays">
+                    <field name="name"/>
+                    <field name="state"/>
+                </tree>
+            </field>
+        </record>
+        
+        <!-- Form view of hr_holiday_public -->
+        <record id="hr_holiday_public_form" model="ir.ui.view">
+            <field name='name'>hr.holiday.public.form</field>
+            <field name='model'>hr.holiday.public</field>
+            <field name='type'>form</field>
+            <field name='arch' type='xml'>
+                <form string="Holiday detail">
+                    <header>
+                        <button string="Reset to Draft" type="object" name="action_draft" 
+                        states="cancelled" groups="hr.group_hr_manager"/>
+                        <button string="Confirm" type="object" name="action_confirm" 
+                        states="draft" groups="hr.group_hr_manager"/>
+                        <button string="Validate" type="object" name="action_validate" states="confirmed" 
+                        groups="hr.group_hr_manager"/>
+                        <button string="Refuse" type="object" name="action_refuse" 
+                        states="confirmed" groups="hr.group_hr_manager"/>
+                        <button string="Cancel" type="object" name="action_cancel" 
+                        states="validated,confirmed,refused" groups="hr.group_hr_manager"/>
+                        <field name="state" widget="statusbar" groups="hr.group_hr_manager" 
+                        statusbar_visible="draft,confirmed,validated"/>
+                    </header>
+                    <sheet>
+                        <group>
+                            <group>            
+                                <field name="name" attrs="{'readonly':[('state','=','validated')]}"/>
+                            </group>
+                        </group>
+                        <newline />
+                        <notebook colspan="4">
+                            <page string="Holidays">
+                                <field name="holiday_line_ids" nolabel="1" colspan="4" 
+                                                                attrs="{'readonly':[('state','=','validated')]}">
+                                    <tree editable="bottom">
+	                                    <field name="holiday_date" required="1"/>
+	                                    <field name="day"/>
+	                                    <field name="name"/>
+	                                </tree>
+                                </field>
+                            </page>
+                            <page string="Email body">
+                                <field name="email_body" nolabel="1" colspan="4"/>
+                            </page>
+                        </notebook>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+        
+        <!-- Action of hr_holiday_public -->
+        <record id="hr_holiday_public_action" model="ir.actions.act_window">
+            <field name='name'>Public Holidays</field>
+            <field name='res_model'>hr.holiday.public</field>
+            <field name='view_type'>form</field>
+            <field name='view_mode'>tree,form</field>
+        </record>
+        
+        <!-- Menu of hr_holiday_public -->
+        <record id="hr_holiday_public_menu" model="ir.ui.menu">
+            <field name="name">Public Holidays</field>
+            <field name="sequence">100</field>
+            <field name="parent_id" ref="hr_holidays.menu_hr_holidays_my_leaves"/>
+            <field name="groups_id" eval="[(6, 0, [ref('hr.group_hr_manager'), ref('hr.group_hr_user'), ref('base.group_user')])]"/>
+            <field name="action" ref="hr_holiday_public_action"/>
+        </record>
+
+        <!-- Search view of hr_holiday_lines -->
+        
+        <record id="hr_holiday_lines_search" model="ir.ui.view">
+            <field name='name'>hr.holiday.lines.search</field>
+            <field name='model'>hr.holiday.lines</field>
+            <field name='type'>search</field>
+            <field name='arch' type='xml'>
+                <search string="Search holiday">
+                    <field name="holiday_date"/>
+                    <field name="name"/>
+                    <field name="day"/>
+                    <field name="holiday_id"/>
+                </search>
+            </field>
+        </record>
+
+        <!-- Tree view of hr_holiday_lines -->
+                
+        <record id="hr_holiday_lines_tree" model="ir.ui.view">
+            <field name='name'>hr.holiday.lines.tree</field>
+            <field name='model'>hr.holiday.lines</field>
+            <field name='type'>tree</field>
+            <field name='arch' type='xml'>
+                <tree string="Holidays">
+                    <field name="holiday_date"/>
+                    <field name="name"/>
+                    <field name="day"/>    
+                </tree>
+            </field>
+        </record>
+        
+        <!-- Form view of hr_holiday_lines -->
+        
+        <record id="hr_holiday_lines_form" model="ir.ui.view">
+            <field name='name'>hr.holiday.lines.form</field>
+            <field name='model'>hr.holiday.lines</field>
+            <field name='type'>form</field>
+            <field name='arch' type='xml'>
+                <form string="Holiday detail">
+                    <group colspan="4" col="4">
+                        <field name="holiday_date"/>
+                        <field name="name"/>
+                        <field name="day"/>
+                    </group>    
+                </form>
+            </field>
+        </record>
+
+        
+        <record id="edit_holiday_new_inherited_view" model="ir.ui.view">
+            <field name="name">edit.holiday.new.inherited.view</field>
+            <field name="model">hr.holidays</field>
+            <field name="inherit_id" ref="hr_holidays.edit_holiday_new"/>
+            <field name="arch" type="xml">
+                <xpath expr="//field[@name='notes']" position='replace'/>
+                <xpath expr="//sheet/group[1]/div[1]" position="replace"/>
+                <xpath expr="//field[@name='employee_id']" position="after">
+                    <field name="user_view" invisible="1"/>
+                </xpath>
+                <xpath expr="//button[@name='action_approve']" position="replace">
+                    <button string="Approve" name="action_approve" type="object"  groups="brt_health_reimburse.manager"  class="oe_highlight" attrs="{'invisible':['|',('user_view','=',True),('state','!=','confirm')]}"/>
+                </xpath>
+                <xpath expr="//button[@name='action_validate']" position="replace">
+                    <button string="Validate" name="action_validate" states="validate1" type="object" groups="hr.group_hr_manager" class="oe_highlight"/>                </xpath>
+                <xpath expr="//sheet/group[1]/group[2]" position="after">
+                    <group>
+                        <field name="hr_year_id" widget="selection" required="1"/>
+                        <field name="leave_month" invisible="1"/>
+                        <field name="sisa_cuti_bulanan" invisible="1"/>
+
+                    </group>
+                </xpath>
+                <xpath expr="//field[@name='holiday_type']" position="attributes">
+                    <attribute name="attrs">{'readonly': [('state', 'not in',['draft','confirm'])]}</attribute>
+                    <attribute name="groups">hr.group_hr_manager</attribute> <!-- Modify by Baim -->
+	            </xpath>
+                <xpath expr="//sheet/group[1]" position="after">
+                    <notebook>
+                        <page string="Notes" name="notes" attrs="{'invisible': [('type', '=', 'remove')]}">
+                            <field name="notes" placeholder="Add a reason..."/>
+                        </page>
+                        <page string="Rejection reason" name="rejection_reason" 
+                            attrs="{'invisible':[('state','!=','refuse')]}"> 
+                            <field name="rejection" placeholder="Add a rejection reason..."/>
+                        </page>
+                        <page string="Comment by Mnanager" name="comment_by_manager" 
+                            attrs="{'invisible':[('type','=','add')]}">
+                            <field name="report_note" placeholder="e.g. Report to the next month..."/>
+                        </page>
+                    </notebook>
+                </xpath>
+                <xpath expr="//sheet/group/group[1]/div/div[2]" position="after">
+	                <div>
+	                    <field name="ttl_days" class="oe_inline" invisible="1"/>
+	                </div>
+	            </xpath>
+            </field>
+        </record>
+        
+        <menuitem
+            id="hr_holidays.menu_open_allocation_holidays"
+            parent="hr_holidays.menu_hr_holidays_my_leaves"
+            action="hr_holidays.open_allocation_holidays"
+            groups="hr.group_hr_manager"
+            sequence="40"/>
+
+        <record model="ir.ui.view" id="hr_employee_inherit_form_extended_view">
+            <field name="name">hr.employee.inherit.form.extended.view</field>
+            <field name="model">hr.employee</field>
+            <field name="inherit_id" ref="idn_employee.view_employee_form_parent2"/>
+            <field name="arch" type="xml">
+                
+                <xpath expr="//page[@name='training_workshop']" position="after">
+                    <page name="leave_history" string="Leave History">
+                        <separator string="Leave History" colspan="2"/>
+                        <field name="employee_leave_ids" nolabel="1" colspan="4" readonly="1">
+                            <tree string="Leave History" >
+                                <field name="date_from" widget="date"/>
+                                <field name="date_to" widget="date"/>
+                                <field name="number_of_days_temp"/>
+                                <field name="holiday_status_id" />
+                                <field name="type"/>
+                                <field name="state" />
+                                <field name="hr_year_id"/>
+                            </tree>
+                        </field>
+                    </page>
+                </xpath>        
+            </field>
+        </record>
+
+</odoo>

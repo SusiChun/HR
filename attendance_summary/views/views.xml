@@ -1,0 +1,41 @@
+<odoo>
+	<data>
+
+    <record id="view_attendance_summary_wizard" model="ir.ui.view">
+		<field name="name">Attendance Summary Wizard</field>
+		<field name="model">attendance.summary</field>
+		<field name="type">form</field>
+		<field name="arch" type="xml">
+
+	        <form string="Attendance Summary Report">
+				<group colspan="4">
+                    <field name="start_date"/>
+					<field name="end_date"/>
+					<field name="employee_ids" widget="many2many_tags"/>
+				</group>
+	          	<footer>
+                  <button string="Print" name="print_report" type="object" class="btn-primary"/>
+					<label string="or  . " />
+					<button string="Cancel" class="oe_link" special="cancel" />
+			   </footer>
+	        </form>
+
+    	</field>
+    </record>
+
+    <record id="action_attendance_summary_wizard" model="ir.actions.act_window">
+		<field name="name">Attendance Summary Report</field>
+		<field name="type">ir.actions.act_window</field>
+		<field name="res_model">attendance.summary</field>
+		<field name="view_type">form</field>
+		<field name="view_mode">form</field>
+		<field name="view_id" ref="view_attendance_summary_wizard"/>
+		<field name="target">new</field>
+    </record>
+
+
+	<menuitem id="menu_attendance_summary_wizard1" parent="attendance_regularization.regular_onsight" sequence="99"
+			action="action_attendance_summary_wizard" name="Attendance Summary Report"/>
+
+	</data>
+</odoo>

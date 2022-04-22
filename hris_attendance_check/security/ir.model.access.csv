@@ -1,0 +1,7 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+request,request_regular,model_attendance_regular_check,base.group_user,1,1,1,0
+request_line,request_regular_line,model_attendance_correction_check,base.group_user,1,1,1,0
+request_reg,request_reg,model_attendance_regular,base.group_user,1,1,1,1
+request_reg_line,request_reg_line,model_attendance_correction_line,base.group_user,1,1,1,1
+access_resource_calendar_employee,attendace.correction.employee.user,resource.model_resource_calendar,base.group_user,1,0,0,0
+access_resource_attendance_calendar_employee,attendace.correction.resource.employee.user,resource.model_resource_calendar_attendance,base.group_user,1,0,0,0

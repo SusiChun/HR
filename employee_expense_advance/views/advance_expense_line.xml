@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <data>
+        <record id="view_advance_expense_line_tree" model="ir.ui.view">
+            <field name="name">view_advance_expense_line_tree</field>
+            <field name="model">advance.expense.line</field>
+            <field name="arch" type="xml">
+                <tree>
+                    <field name="product_id" context="{'default_can_be_expensed': 1}" domain="[('can_be_expensed', '=', True)]"/>
+                    <field name="description"/>
+                    <field name="unit_amount" required="1" widget="monetary" options="{'currency_field': 'currency_id'}"/>
+                    <field name="quantity"/>
+                    <field name="product_uom_id" string="Unit of Measure" groups="product.group_uom" readonly="1"/>
+                    <field name="currency_id"/>
+                    <field name="total_amount" widget="monetary" options="{'currency_field': 'currency_id'}"/>
+                    <field name="state"/>
+                </tree>
+            </field>
+        </record>
+
+        <record id="view_advance_expense_line_form" model="ir.ui.view">
+            <field name="name">view_advance_expense_line_form</field>
+            <field name="model">advance.expense.line</field>
+            <field name="arch" type="xml">
+                <form>
+                    <header>
+                        <field name="state" widget="statusbar" statusbar_visible="draft,confirm,approved_hr_manager,paid,done" colspan="2"/>
+                    </header>
+                    <sheet>
+                        <group>
+                            <group>
+                                <field name="name"/>
+                                <field name="employee_id"/>
+                                <field name="currency_id"/>
+                                <field name="last_balance"/>
+                            </group>
+                            <group>
+                                <field name="product_id"/>
+                                <field name="product_uom_id"/>
+                                <field name="unit_amount"/>
+                                <field name="quantity"/>
+                                <field name="total_amount"/>
+                            </group>
+                        </group>
+                        <notebook>
+                            <page name="expense" string="Expense Lines">
+                                <field name="expense_line_ids" readonly="1"/>
+                            </page>
+                        </notebook>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+    </data>
+</odoo>

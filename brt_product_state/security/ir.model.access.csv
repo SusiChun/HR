@@ -1,0 +1,2 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_brt_product_state_brt_product_state,brt_product_state.brt_product_state,model_brt_product_state_brt_product_state,,1,0,0,0

@@ -1,0 +1,43 @@
+<odoo>
+    <data>
+
+
+        <record id="vit_additional_form_warehouse" model="ir.ui.view">
+            <field name="name">additional.form.view.stock.warehouse</field>
+            <field name="model">stock.warehouse</field>
+            <field name="inherit_id" ref="stock.view_warehouse"/>
+            <field name="arch" type="xml">               
+                <xpath expr="//notebook" position="inside">
+                    <page string="General Information" groups="base.group_no_one">
+                        <group>
+                            <group string="Responsible">
+                                <field name="user_id" options="{'no_open':True,'no_create':True}"/>
+                                <field name="user_id2" options="{'no_open':True,'no_create':True}"/>
+                            </group>
+                            <group string="Localization">
+                                <field name="latitude"/>    
+                                <field name="longitude"/> 
+                                <field name="radius"/>
+                                <field name="interval_checking"/>
+                            </group>
+                        </group>
+                    </page> 
+                    <field name="note" placeholder="Notes...."/>   
+                </xpath>
+            </field>
+        </record>
+
+        <record id="warehouse_common_tree" model="ir.ui.view">
+            <field name="name">brand.warehouse.tree</field>
+            <field name="model">stock.warehouse</field>
+            <field name="inherit_id" ref="stock.view_warehouse_tree"/>
+            <field name="arch" type="xml">
+                <field name="partner_id" position="after">
+                    <field name="user_id" invisible="1"/>
+                    <field name="user_id2" invisible="1"/>
+                </field>
+            </field>
+        </record>
+
+    </data>
+</odoo>

@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <!-- Employee Leave Dashboard -->
+    <record model="ir.ui.view" id="view_holiday_ext_allocation_tree">
+        <field name="name">hr.holidays.allocation.tree</field>
+        <field name="model">hr.holidays</field>
+        <field name="type">tree</field>
+        <field name="arch" type="xml">
+            <tree colors="red:state == 'refuse';blue:state == 'draft';black:state in ('confirm','validate','validate1')" string="Allocation Requests">
+                <field name="employee_id"/>
+                <field name="date_from" widget="date"/>
+                <field name="date_to" widget="date"/>
+                <field name="name"/>
+                <field name="number_of_days_temp" string="Number of Days" sum="Remaining Days"/>
+                <field name="state"/>
+            </tree>
+        </field>
+    </record>
+
+    <record id="action_view_holiday_status_board" model="ir.actions.act_window">
+        <field name="name">Leaves</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">hr.holidays</field>
+        <field name="view_type">form</field>
+        <field name="view_mode">tree,form</field>
+        <field name="domain">[('type','=','remove'),('state','in',('draft','confirm', 'validate', 'validate1')), 
+        ('employee_id.user_id','=', uid)]</field>
+        <field name="view_id" ref="view_holiday_ext_allocation_tree"/>
+    </record>
+
+    <record id="board_hr_holidays_form" model="ir.ui.view">
+        <field name="name">board.hr.holidays.form</field>
+        <field name="model">board.board</field>
+        <field name="inherit_id" ref="board.board_my_dash_view"/>
+        <field name="type">form</field>
+        <field name="arch" type="xml">
+              <xpath expr="/form/board/column" position="inside">
+                <action name="%(action_view_holiday_status_board)d" string="Employee Leaves"/>
+            </xpath>
+        </field>
+    </record>
+
+</odoo>

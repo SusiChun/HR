@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+
+
+        <record id="hr_shift_kanban_view" model="ir.ui.view">
+            <field name="name">hr.shift.kanban</field>
+            <field name="model">hr.shift</field>
+            <field name="arch" type="xml">
+                <kanban class="oe_background_grey o_kanban_dashboard o_shift_kanban">
+                    <field name="color"/>
+                    <templates>
+                        <t t-name="kanban-box">
+                            <div t-attf-class="oe_kanban_color_#{kanban_getcolor(record.color.raw_value)} oe_kanban_card oe_kanban_global_click ">
+                                <div class="o_dropdown_kanban dropdown">
+                                    <a class="dropdown-toggle btn" data-toggle="dropdown" href="#" >
+                                        <span class="fa fa-bars fa-lg"/>
+                                    </a>
+                                    <ul class="dropdown-menu" role="menu" aria-labelledby="dLabel">
+                                        <t t-if="widget.editable"><li><a type="edit">Edit</a></li></t>
+                                        <t t-if="widget.deletable"><li><a type="delete">Delete</a></li></t>
+                                        <li><ul class="oe_kanban_colorpicker" data-field="color"/></li>
+                                    </ul>
+                                </div>
+                                <div class="oe_kanban_content">
+                                    <div class="row">
+                                        <div class="o_primary style_shift">
+                                            <div class="text-center"><strong><field name="rule_shift"/></strong></div>
+                                        </div>
+
+                                    </div>
+                                </div>
+                                <div class="oe_kanban_details">
+                                    <strong>
+                                        <div class="text-center">
+                                            <strong><field name="from_date"/>-<field name="to_date"/></strong>
+                                        </div>
+                                    </strong>
+                                </div>
+                            </div>
+                            </t>
+                    </templates>
+                </kanban>
+            </field>
+        </record>
+         <record id="view_hr_shift_tree" model="ir.ui.view">
+            <field name="name">hr.shift_tree</field>
+            <field name="model">hr.shift</field>
+            <field name="priority" eval="8" />
+            <field name="arch" type="xml">
+                <tree string="HR Shift">
+                    <field name="from_date"/>
+                    <field name="to_date"/>
+                    <field name="rule_shift"/>
+                </tree>
+            </field>
+        </record>
+         <record id="hr_shift_form_view" model="ir.ui.view">
+            <field name="name">hr.shift_form_view</field>
+            <field name="model">hr.shift</field>
+            <field name="arch" type="xml">
+               <form string="HR Shift">
+                   <header>
+                       <button name="generate_shift" type="object" string="Generate" class="oe_highlight"/>
+                   </header>
+                   <sheet>
+                       <group col="4" colspan="4">
+                           <field name="from_date"/>
+                           <field name="to_date"/>
+                           <field name="rule_shift"/>
+                       </group>
+                       <notebook>
+                           <page name="hr_shift" string="Shift Line">
+                               <field name="date_ids" nolabel="1">
+                                   <tree editable="bottom" create="0" edit="0">
+                                       <field name="shift_id" invisible="1"/>
+                                       <field name="rule_shift" invisible="1"/>
+                                        <field name="date"/>
+                                        <field name="marks"/>
+                                    </tree>
+                               </field>
+                           </page>
+                       </notebook>
+                   </sheet>
+                 <div class="oe_chatter">
+                    <field name="message_follower_ids" widget="mail_followers" groups="base.group_user" />
+                    <field name="message_ids" widget="mail_thread" />
+                </div>
+               </form>
+            </field>
+        </record>
+
+        <record id="action_hr_shift" model="ir.actions.act_window">
+            <field name="name">Security Shift</field>
+            <field name="res_model">hr.shift</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">kanban,tree,form</field>
+            <field name="help" type="html">
+              <p class="oe_view_nocontent_create">
+                Generate Security Shift
+              </p>
+            </field>
+        </record>
+
+        <menuitem name="Security Shifts" id="menu_security_shift" parent="hr.menu_hr_root"
+               sequence="80"/>
+        <menuitem name="Generate Security Shifts" id="generate_menu_security_shift" parent="menu_security_shift"
+              action="action_hr_shift" sequence="10"/>
+
+    </data>
+</odoo>

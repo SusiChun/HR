@@ -1,0 +1,196 @@
+<odoo>
+  <data>
+
+       <record id="all_viewhealth_reimburse" model="ir.actions.act_window">
+         <field name="name">All Health Reimburse </field>
+         <field name="res_model">brt_health.reimburse</field>
+         <field name="target">current</field>
+         <field name="context">{}</field> 
+         <field name="domain"></field>
+         <field name="limit">80</field> 
+         <field name="view_type">form</field>
+         <field name="view_mode">tree,form,pivot,graph</field>
+         <field name="help" type="html">
+            <p class="oe_view_nocontent_create">Belum Ada Data</p>
+         </field>
+      </record>
+
+      <!-- Manager -->
+      <record id="my_viewhealth_reimburse" model="ir.actions.act_window">
+         <field name="name">My Health Reimburse </field>
+         <field name="res_model">brt_health.reimburse</field>
+         <field name="target">current</field>
+         <field name="context">{}</field> 
+         <field name="domain">[('create_uid','=', uid)]</field>
+         <field name="limit">80</field> 
+         <field name="view_type">form</field>
+         <field name="view_mode">tree,form,pivot,graph</field>
+         <field name="help" type="html">
+            <p class="oe_view_nocontent_create">Belum Ada Data</p>
+         </field>
+      </record>
+
+      <menuitem name="Health Reimburse" id="brt_health_reimburse.menu_health_reimburse" web_icon="brt_health_reimburse,static/description/iconr.png"/>
+
+      <menuitem name="All Health Reimburse" id="brt_health_reimburse.allmenu_health_reimburse" action="all_viewhealth_reimburse" parent="brt_health_reimburse.menu_health_reimburse"/>
+
+      <menuitem name="My Health Reimburse" id="brt_health_reimburse.mymenu_health_reimburse" action="my_viewhealth_reimburse" parent="brt_health_reimburse.menu_health_reimburse"/>
+
+
+      <record id="brt_health_tree_view" model="ir.ui.view">
+          <field name="name">alth Reimburse Tree</field>
+          <field name="model">brt_health.reimburse</field>
+          <field name="arch" type="xml">
+              <tree string="Expenses" decoration-bf="message_unread == True">
+                  <field name="currency_id" invisible="True"/>
+                  <field name="attachment_number" invisible="True"/>
+                  <field name="date"/>
+                  <field name="name"/>
+                  <field name="employee_id"/>
+                  <field name="sheet_id" invisible="not context.get('show_report', False)"/>
+                  <field name="analytic_account_id" groups="analytic.group_analytic_accounting"/>
+                  <field name="total_amount" sum="Total Amount" widget="monetary" options="{'currency_field': 'currency_id'}"/>
+                  <field name="state"/>
+                  <field name="message_unread" invisible="1"/>
+                  <button name="action_get_attachment_view" string="View Attached Documents" type="object" icon="fa-paperclip" attrs="{'invisible': [('attachment_number', '=', 0)]}"/>
+              </tree>
+          </field>
+      </record>
+
+      <!-- <record id="view_reimburse_inherit_search" model="ir.ui.view">
+        <field name="name">brt_health.reimburse.search.expand</field>
+        <field name="model">brt_health.reimburse</field>
+        <field name="inherit_id" ref="brt_health_reimburse.my_viewhealth_reimburse"/>
+        <field name="arch" type="xml">
+          <xpath expr="//search" position="inside">
+            <field name="employee_id"/>
+          </xpath>
+        </field>
+      </record> -->
+
+     <!--  <record id="inherit_remimburse_filter_view" model="ir.ui.view">
+        <field name="name">brt_health.reimburse</field>
+        <field name="model">brt_health.reimburse</field>
+        <field name="inherit_id" ref="sale.inherit_remimburse_filter_view"/>
+        <field name="arch" type="xml">
+            <search>
+                <filter string="Pending" domain="[('remian_qty','&gt;',0)]" name = "qty_available"/>
+                <filter string="Lost" domain="[('remian_qty','=',0)]" name = "qty_lost"/>
+           </search>
+        </field>
+     </record> -->
+
+    <record model="ir.ui.view" id="brt_health_search_view">
+        <field name="name">Health Reimburse Search</field>
+        <field name="model">brt_health.reimburse</field>
+        <field name="arch" type="xml">
+          <search>
+              <field name="name"/>
+              <field name="employee_id"/>
+          </search>
+        </field> <!-- end arch -->
+    </record>
+
+    
+    <record id="brt_health_form_view" model="ir.ui.view">
+        <field name="name">Health Reimburse Form</field>
+        <field name="model">brt_health.reimburse</field>
+        <field eval="25" name="priority"/>
+        <field name="arch" type="xml">
+            <form>
+            <header>
+                <button name="submit_expenses" states="draft" string="Submit to Manager" type="object" class="oe_highlight o_expense_submit"/>
+
+                <button name="submit_approve_manager" states="waitmanager" string="Approve Manager" type="object" class="oe_highlight o_expense_submit" groups="brt_health_reimburse.manager"/>
+
+                <button name="submit_approve_hrd" states="waithrd" string="Approve HRD" type="object" class="oe_highlight o_expense_submit" groups="hr.group_hr_manager"/>
+
+                <button name="reset_to_draft" states="waithrd" string="Back To Draft" type="object" class="oe_highlight o_expense_submit"/>
+
+                <button name="reset_to_draft" states="waitmanager" string="Back To Draft" type="object" class="oe_highlight o_expense_submit"/>
+
+                <field name="state" widget="statusbar" statusbar_visible="draft,waitmanager,waithrd,done"/> 
+                <!-- <button name="view_sheet" type="object" string="View Report" class="oe_highlight" attrs="{'invisible': [('state', '=','draft')]}"/> -->
+            </header>
+            <sheet>
+                <!-- <div class="oe_button_box" invisible="context.get('expense_adding_line')">
+                    <button name="action_get_attachment_view"
+                        class="oe_stat_button"
+                        icon="fa-book"
+                        type="object">
+                        <field name="attachment_number" widget="statinfo" string="Documents"/>
+                    </button>
+                </div> -->
+                <div class="oe_title">
+                    <label for="name"/>
+                    <h1>
+                        <field name="name" placeholder="e.g. Cost of eye treatment"/>
+                    </h1>
+                </div>
+                <group>
+                    <group>
+                       
+                        <!-- <field name="product_id"/> -->
+                        <field name="product_id" domain = "[('can_be_reimburse', '=', True)] "/>
+                        <field name="unit_amount" required="1" widget="monetary" options="{'currency_field': 'currency_id'}"/>
+                        <label for="quantity"/>
+                        <div>
+                            <field name="quantity" class="oe_inline"/>
+                            <field name="product_uom_id" widget="selection" class="oe_inline" groups="product.group_uom"/>
+                        </div>
+                        <field name="tax_ids" domain="[('type_tax_use', '=', 'purchase')]" widget="many2many_tags" groups="base.group_no_one"/>
+                    </group>
+                    <group>
+                        <field name="employee_id" groups="brt_health_reimburse.admin_reimburse"/>
+                        <field name="company_id" groups="base.group_multi_company"/>
+                        <field name="reference"/>
+                        <field name="date"/>
+                        <field name="account_id" domain="[('internal_type', '=', 'other')]"/>
+                        <field name="sheet_id" invisible="1"/>
+                        <field name="currency_id" groups="base.group_multi_currency"/>
+                        <field name="analytic_account_id" groups="analytic.group_analytic_accounting"/>
+                    </group>
+                    <group>
+                        <field name="total_amount" widget='monetary' options="{'currency_field': 'currency_id'}"/>
+                        <label for="payment_mode"/>
+                       <!--  <div>
+                            <field name="payment_mode" widget="radio"/>
+                        </div> -->
+                    </group>
+                    <group string="Reimbursement">
+                            <field name="limit_reimbers_year" readonly="1"/>
+                            <field name="berobat" readonly="1"/>
+                            <field name="kacamata" readonly="1"/>
+                            <field name="sisa" readonly="1"/>
+                        </group>
+                </group>
+                <div>
+                    <field name="description" placeholder="Notes..."/>
+                </div>
+            </sheet>
+            <div class="oe_chatter">
+                <field name="message_follower_ids" widget="mail_followers"/>
+                <field name="message_ids" widget="mail_thread"/>
+            </div>
+            </form>
+        </field>
+    </record>
+
+      <record id="view_product_brt_reimburse_form" model="ir.ui.view">
+            <field name="name">product.template.expense.form</field>
+            <field name="model">product.template</field>
+            <field name="inherit_id" ref="product.product_template_form_view"/>
+            <field name="arch" type="xml">
+                <div name="options" position="inside">
+                    <div>
+                        <field name="can_be_reimburse"/>
+                        <label for="can_be_reimburse"/>
+                    </div>
+                </div>
+            </field>
+        </record>
+
+      
+
+  </data>
+</odoo>

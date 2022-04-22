@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="los_crm_case_form_view_oppor_greenloc" model="ir.ui.view">
+        <field name="name">los_crm_case_form_view_oppor</field>
+        <field name="type">form</field>
+        <field name="inherit_id" ref="crm.crm_case_form_view_oppor"/>
+        <field name="model">crm.lead</field>
+        <field name="arch" type="xml">
+        	<xpath expr="//form/header" position="inside">
+                <button name="next_step_from_rm_to_rmsupport" string="Apply" type="object" class="oe_highlight"/>
+            </xpath>
+            <xpath expr="//field[@name='phone']" position="after">
+                <field name="age"/>
+            </xpath>
+            <xpath expr="//form/sheet/group[1]" position="inside">
+                <group string="Requested Information">
+                    <field name="product_id"/>
+                    <field name="requested_amount"/>
+                    <field name="approved_amount"/>
+                    <field name="salary"/>
+                    <field name="cost_of_living"/>
+                    <field name="installment_amount"/>
+                    <field name="installment_duration"/>
+                    <field name="bi_checking"/>
+                </group>
+                <group string="Pre-screening Information">
+                    <div>
+                        <h3 class="o_row">
+                            <div>
+                                <div class="o_row">
+                                    <field name="prescreening_percentage" widget="progressbar"/>
+                                </div>
+                                <label for="prescreening_percentage" String="Requested Scoring"/>
+                            </div>
+                        </h3>
+                        <br />
+                        <h3 class="o_row">
+                            <div>
+                                <div class="o_row">
+                                    <field name="completenes_doc_percentage" widget="progressbar"/>
+                                </div>
+                                <label for="completenes_doc_percentage" String="Completeness of Document"/>
+                            </div>
+                        </h3>
+                    </div>
+                </group>
+            </xpath>
+            <xpath expr="//notebook" position="inside">
+                <page string="Document Information">
+                    <button name="generate_requirement_document" string="Check Required Document" type="object" class="oe_highlight"/>
+                    <field name="crm_lead_document_ids" domain="[('is_mandatory', '!=', False)]">
+                        <tree string="Required Document" editable="bottom">
+                            <field name="name"/>
+							<field name="lead_id" invisible="1"/>
+							<field name="document_id"/>
+							<field name="file" invisible="0"/>
+							<field name="description"/>
+                            <field name="is_mandatory"/>
+							<field name="status"/>
+                        </tree>
+                    </field>
+                </page>
+            </xpath>
+        </field>
+    </record>
+</odoo>

@@ -1,0 +1,1040 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data noupdate="1">
+
+        <!--  Salary rule -->
+        <record id="hr_salary_rule_pphpermonth0" model="hr.salary.rule">
+            <field name="code">PPH21PERMONTH</field>
+            <field eval="488" name="sequence"/>
+            <field eval="1" name="appears_on_payslip"/>
+            <field name="condition_range">contract.wage</field>
+            <field name="company_id" ref="base.main_company"/>
+            <field name="condition_select">none</field>
+            <field name="register_id" ref="PPH21_reg_01"/>
+            <field name="amount_select">code</field>
+            <field eval="1" name="active"/>
+            <field name="name">PPH21 Per Month</field>
+            <field name="condition_python">
+# Available variables:
+#----------------------
+# payslip: object containing the payslips
+# employee: hr.employee object
+# contract: hr.contract object
+# rules: object containing the rules code (previously computed)
+# categories: object containing the computed salary rule categories (sum of amount of all rules belonging to that category).
+# worked_days: object containing the computed worked days
+# inputs: object containing the computed inputs
+
+# Note: returned value have to be set in the variable 'result'
+
+result = rules.NET &gt; categories.NET * 0.10</field>
+            <field name="amount_python_compute">if categories.PPH21PKP &lt;= 50000000:
+  result = round(((categories.PPH21PKP*0.05))/ 12)
+elif categories.PPH21PKP &gt; 50000000 and categories.PPH21PKP &lt;= 250000000:
+  result = round(((50000000*0.05) + ((categories.PPH21PKP - 50000000) *0.15)) /12)
+elif categories.PPH21PKP &gt; 250000000 and categories.PPH21PKP &lt;= 500000000:
+  result = round(((50000000*0.05) + (200000000 *0.15) + ((categories.PPH21PKP - 250000000) *0.25)) / 12)
+elif PPH21PKP &gt; 500000000:
+  result = round(((categories.PPH21PKP * 0.3)) / 12)
+else:
+  result = 0</field>
+              <field name="category_id" ref="PPH21PERMONTH"/>
+            <field name="quantity">1.0</field>
+        </record>
+
+        <record id="hr_salary_rule_jhtee0" model="hr.salary.rule">
+            <field name="code">JHTEE</field>
+            <field eval="485" name="sequence"/>
+            <field eval="1" name="appears_on_payslip"/>
+            <field name="condition_range">contract.wage</field>
+            <field name="company_id" ref="base.main_company"/>
+            <field name="condition_select">none</field>
+            <field name="register_id" ref="JHT_reg_01"/>
+            <field name="amount_select">code</field>
+            <field eval="1" name="active"/>
+            <field name="name">JHT EE</field>
+            <field name="condition_python">
+# Available variables:
+#----------------------
+# payslip: object containing the payslips
+# employee: hr.employee object
+# contract: hr.contract object
+# rules: object containing the rules code (previously computed)
+# categories: object containing the computed salary rule categories (sum of amount of all rules belonging to that category).
+# worked_days: object containing the computed worked days
+# inputs: object containing the computed inputs
+
+# Note: returned value have to be set in the variable 'result'
+
+result = rules.NET &gt; categories.NET * 0.10</field>
+            <field name="amount_python_compute">if categories.BASIC &gt;= 915000:
+        result = round(categories.BASIC * 0.02)
+else:
+        result=0</field>
+            <field name="category_id" ref="JHTEE"/>
+            <field name="quantity">1.0</field>
+        </record>
+
+        <record id="hr_salary_rule_jhter0" model="hr.salary.rule">
+            <field name="code">JHTER</field>
+            <field eval="486" name="sequence"/>
+            <field eval="1" name="appears_on_payslip"/>
+            <field name="condition_range">contract.wage</field>
+            <field name="company_id" ref="base.main_company"/>
+            <field name="condition_select">none</field>
+            <field name="register_id" ref="JHT_reg_01"/>
+            <field name="amount_select">code</field>
+            <field eval="1" name="active"/>
+            <field name="name">JHT ER</field>
+            <field name="condition_python">
+# Available variables:
+#----------------------
+# payslip: object containing the payslips
+# employee: hr.employee object
+# contract: hr.contract object
+# rules: object containing the rules code (previously computed)
+# categories: object containing the computed salary rule categories (sum of amount of all rules belonging to that category).
+# worked_days: object containing the computed worked days
+# inputs: object containing the computed inputs
+
+# Note: returned value have to be set in the variable 'result'
+
+result = rules.NET &gt; categories.NET * 0.10</field>
+            <field name="amount_python_compute">if categories.BASIC &gt;= 915000:
+        result = round(categories.BASIC * 0.037)
+else:
+        result=0</field>
+            <field name="category_id" ref="JHTER"/>
+            <field name="quantity">1.0</field>
+        </record>
+
+        <record id="hr_salary_rule_jkmer0" model="hr.salary.rule">
+            <field name="code">JKMER</field>
+            <field eval="489" name="sequence"/>
+            <field eval="1" name="appears_on_payslip"/>
+            <field name="condition_range">contract.wage</field>
+            <field name="company_id" ref="base.main_company"/>
+            <field name="condition_select">none</field>
+            <field name="register_id" ref="JKM_reg_01"/>
+            <field name="amount_select">code</field>
+            <field eval="1" name="active"/>
+            <field name="name">JKM ER</field>
+            <field name="condition_python">
+# Available variables:
+#----------------------
+# payslip: object containing the payslips
+# employee: hr.employee object
+# contract: hr.contract object
+# rules: object containing the rules code (previously computed)
+# categories: object containing the computed salary rule categories (sum of amount of all rules belonging to that category).
+# worked_days: object containing the computed worked days
+# inputs: object containing the computed inputs
+
+# Note: returned value have to be set in the variable 'result'
+
+result = rules.NET &gt; categories.NET * 0.10</field>
+            <field name="amount_python_compute">if categories.BASIC &gt;= 915000:
+        result = round(categories.BASIC * 0.003)
+else:
+        result=0</field>
+            <field name="category_id" ref="JKMER"/>
+            <field name="quantity">1.0</field>
+        </record>
+
+        <record id="hr_salary_rule_jkker0" model="hr.salary.rule">
+            <field name="code">JKKER</field>
+            <field eval="487" name="sequence"/>
+            <field eval="1" name="appears_on_payslip"/>
+            <field name="condition_range">contract.wage</field>
+            <field name="company_id" ref="base.main_company"/>
+            <field name="condition_select">none</field>
+            <field name="register_id" ref="JKK_reg_01"/>
+            <field name="amount_select">code</field>
+            <field eval="1" name="active"/>
+            <field name="name">JKK ER</field>
+            <field name="condition_python">
+# Available variables:
+#----------------------
+# payslip: object containing the payslips
+# employee: hr.employee object
+# contract: hr.contract object
+# rules: object containing the rules code (previously computed)
+# categories: object containing the computed salary rule categories (sum of amount of all rules belonging to that category).
+# worked_days: object containing the computed worked days
+# inputs: object containing the computed inputs
+
+# Note: returned value have to be set in the variable 'result'
+
+result = rules.NET &gt; categories.NET * 0.10</field>
+            <field name="amount_python_compute">if categories.BASIC &gt;= 915000:
+        result = round(categories.BASIC * 0.0024)
+else:
+        result=0</field>
+            <field name="category_id" ref="JKKER"/>
+            <field name="quantity">1.0</field>
+        </record>
+
+        <record id="hr_salary_rule_commission0" model="hr.salary.rule">
+            <field name="code">ADDCOMM</field>
+            <field eval="489" name="sequence"/>
+            <field eval="1" name="appears_on_payslip"/>
+            <field name="condition_range">contract.wage</field>
+            <field eval="50000.0" name="amount_fix"/>
+            <field name="company_id" ref="base.main_company"/>
+            <field name="condition_select">none</field>
+            <field name="amount_select">code</field>
+            <field name="name">Commission</field>
+            <field name="condition_python">
+# Available variables:
+#----------------------
+# payslip: object containing the payslips
+# employee: hr.employee object
+# contract: hr.contract object
+# rules: object containing the rules code (previously computed)
+# categories: object containing the computed salary rule categories (sum of amount of all rules belonging to that category).
+# worked_days: object containing the computed worked days
+# inputs: object containing the computed inputs
+
+# Note: returned value have to be set in the variable 'result'
+
+result = rules.NET &gt; categories.NET * 0.10</field>
+            <field name="amount_python_compute">result = (inputs.ICOMM and inputs.ICOMM.amount)</field>
+            <field name="category_id" ref="hr_payroll.ALW"/>
+            <field name="quantity">1.0</field>
+        </record>
+        <record id="hr_rule_input_commission0" model="hr.rule.input">
+            <field name="code">ICOMM</field>
+            <field name="input_id" ref="hr_salary_rule_commission0"/>
+            <field name="name">Commission</field>
+        </record>
+
+        <record id="hr_salary_rule_transportallowance0" model="hr.salary.rule">
+            <field name="code">ADDTRANSPORT</field>
+            <field eval="490" name="sequence"/>
+            <field eval="1" name="appears_on_payslip"/>
+            <field name="condition_range">contract.wage</field>
+            <field eval="50000.0" name="amount_fix"/>
+            <field name="company_id" ref="base.main_company"/>
+            <field name="condition_select">none</field>
+            <field name="amount_select">code</field>
+            <field name="name">Transport Allowance</field>
+            <field name="condition_python">
+# Available variables:
+#----------------------
+# payslip: object containing the payslips
+# employee: hr.employee object
+# contract: hr.contract object
+# rules: object containing the rules code (previously computed)
+# categories: object containing the computed salary rule categories (sum of amount of all rules belonging to that category).
+# worked_days: object containing the computed worked days
+# inputs: object containing the computed inputs
+
+# Note: returned value have to be set in the variable 'result'
+
+result = rules.NET &gt; categories.NET * 0.10</field>
+            <field name="amount_python_compute">result = (inputs.ITRANSPORT and inputs.ITRANSPORT.amount)</field>
+            <field name="category_id" ref="hr_payroll.ALW"/>
+            <field name="quantity">1.0</field>
+        </record>
+        <record id="hr_rule_input_transportallowance0" model="hr.rule.input">
+            <field name="code">ITRANSPORT</field>
+            <field name="input_id" ref="hr_salary_rule_transportallowance0"/>
+            <field name="name">Transport Allowance</field>
+        </record>
+
+        <record id="hr_salary_rule_undertime0" model="hr.salary.rule">
+            <field name="code">DEDUNDERTIME</field>
+            <field eval="493" name="sequence"/>
+            <field eval="1" name="appears_on_payslip"/>
+            <field name="condition_range">contract.wage</field>
+            <field name="company_id" ref="base.main_company"/>
+            <field name="condition_select">none</field>
+            <field name="amount_select">code</field>
+            <field name="name">Undertime</field>
+            <field name="condition_python">
+# Available variables:
+#----------------------
+# payslip: object containing the payslips
+# employee: hr.employee object
+# contract: hr.contract object
+# rules: object containing the rules code (previously computed)
+# categories: object containing the computed salary rule categories (sum of amount of all rules belonging to that category).
+# worked_days: object containing the computed worked days
+# inputs: object containing the computed inputs
+
+# Note: returned value have to be set in the variable 'result'
+
+result = rules.NET &gt; categories.NET * 0.10</field>
+            <field name="amount_python_compute">result = (inputs.IUNDERTIME and inputs.IUNDERTIME.amount)</field>
+            <field name="category_id" ref="hr_payroll.DED"/>
+            <field name="quantity">1.0</field>
+        </record>
+        <record id="hr_rule_input_undertime0" model="hr.rule.input">
+            <field name="code">IUNDERTIME</field>
+            <field name="input_id" ref="hr_salary_rule_undertime0"/>
+            <field name="name">Undertime</field>
+        </record>
+
+        <record id="hr_salary_rule_pphtk0" model="hr.salary.rule">
+            <field name="code">PPH21TK</field>
+            <field eval="494" name="sequence"/>
+            <field eval="1" name="appears_on_payslip"/>
+            <field name="condition_range">contract.wage</field>
+            <field eval="24300000.0" name="amount_fix"/>
+            <field name="company_id" ref="base.main_company"/>
+            <field name="condition_select">none</field>
+            <field name="register_id" ref="PPH21_reg_01"/>
+            <field name="amount_select">fix</field>
+            <field name="name">PPH21- TK</field>
+            <field name="condition_python">
+# Available variables:
+#----------------------
+# payslip: object containing the payslips
+# employee: hr.employee object
+# contract: hr.contract object
+# rules: object containing the rules code (previously computed)
+# categories: object containing the computed salary rule categories (sum of amount of all rules belonging to that category).
+# worked_days: object containing the computed worked days
+# inputs: object containing the computed inputs
+
+# Note: returned value have to be set in the variable 'result'
+
+result = rules.NET &gt; categories.NET * 0.10</field>
+            <field name="amount_python_compute">
+# Available variables:
+#----------------------
+# payslip: object containing the payslips
+# employee: hr.employee object
+# contract: hr.contract object
+# rules: object containing the rules code (previously computed)
+# categories: object containing the computed salary rule categories (sum of amount of all rules belonging to that category).
+# worked_days: object containing the computed worked days.
+# inputs: object containing the computed inputs.
+
+# Note: returned value have to be set in the variable 'result'
+
+result = contract.wage * 0.10</field>
+            <field name="category_id" ref="PTKP"/>
+            <field name="quantity">1.0</field>
+        </record>
+
+        <record id="hr_salary_rule_pphk0" model="hr.salary.rule">
+            <field name="code">PPH21K0</field>
+            <field eval="495" name="sequence"/>
+            <field eval="1" name="appears_on_payslip"/>
+            <field name="condition_range">contract.wage</field>
+            <field eval="26325000.0" name="amount_fix"/>
+            <field name="company_id" ref="base.main_company"/>
+            <field name="condition_select">none</field>
+            <field name="register_id" ref="PPH21_reg_01"/>
+            <field name="amount_select">fix</field>
+            <field name="name">PPH21- K0</field>
+            <field name="condition_python">
+# Available variables:
+#----------------------
+# payslip: object containing the payslips
+# employee: hr.employee object
+# contract: hr.contract object
+# rules: object containing the rules code (previously computed)
+# categories: object containing the computed salary rule categories (sum of amount of all rules belonging to that category).
+# worked_days: object containing the computed worked days
+# inputs: object containing the computed inputs
+
+# Note: returned value have to be set in the variable 'result'
+
+result = rules.NET &gt; categories.NET * 0.10</field>
+            <field name="amount_python_compute">
+# Available variables:
+#----------------------
+# payslip: object containing the payslips
+# employee: hr.employee object
+# contract: hr.contract object
+# rules: object containing the rules code (previously computed)
+# categories: object containing the computed salary rule categories (sum of amount of all rules belonging to that category).
+# worked_days: object containing the computed worked days.
+# inputs: object containing the computed inputs.
+
+# Note: returned value have to be set in the variable 'result'
+
+result = contract.wage * 0.10</field>
+            <field name="category_id" ref="PTKP"/>
+            <field name="quantity">1.0</field>
+        </record>
+
+        <record id="hr_salary_rule_pphk1" model="hr.salary.rule">
+            <field name="code">PPH21K1</field>
+            <field eval="496" name="sequence"/>
+            <field eval="1" name="appears_on_payslip"/>
+            <field name="condition_range">contract.wage</field>
+            <field eval="28350000.0" name="amount_fix"/>
+            <field name="company_id" ref="base.main_company"/>
+            <field name="condition_select">none</field>
+            <field name="register_id" ref="PPH21_reg_01"/>
+            <field name="amount_select">fix</field>
+            <field name="name">PPH21 - K1</field>
+            <field name="condition_python">
+# Available variables:
+#----------------------
+# payslip: object containing the payslips
+# employee: hr.employee object
+# contract: hr.contract object
+# rules: object containing the rules code (previously computed)
+# categories: object containing the computed salary rule categories (sum of amount of all rules belonging to that category).
+# worked_days: object containing the computed worked days
+# inputs: object containing the computed inputs
+
+# Note: returned value have to be set in the variable 'result'
+
+result = rules.NET &gt; categories.NET * 0.10</field>
+            <field name="amount_python_compute">
+# Available variables:
+#----------------------
+# payslip: object containing the payslips
+# employee: hr.employee object
+# contract: hr.contract object
+# rules: object containing the rules code (previously computed)
+# categories: object containing the computed salary rule categories (sum of amount of all rules belonging to that category).
+# worked_days: object containing the computed worked days.
+# inputs: object containing the computed inputs.
+
+# Note: returned value have to be set in the variable 'result'
+
+result = contract.wage * 0.10</field>
+            <field name="category_id" ref="PTKP"/>
+            <field name="quantity">1.0</field>
+        </record>
+
+        <record id="hr_salary_rule_pphk2" model="hr.salary.rule">
+            <field name="code">PPH21K2</field>
+            <field eval="497" name="sequence"/>
+            <field eval="1" name="appears_on_payslip"/>
+            <field name="condition_range">contract.wage</field>
+            <field eval="30375000.0" name="amount_fix"/>
+            <field name="company_id" ref="base.main_company"/>
+            <field name="condition_select">none</field>
+            <field name="register_id" ref="PPH21_reg_01"/>
+            <field name="amount_select">fix</field>
+            <field name="name">PPH21 - K2</field>
+            <field name="condition_python">
+# Available variables:
+#----------------------
+# payslip: object containing the payslips
+# employee: hr.employee object
+# contract: hr.contract object
+# rules: object containing the rules code (previously computed)
+# categories: object containing the computed salary rule categories (sum of amount of all rules belonging to that category).
+# worked_days: object containing the computed worked days
+# inputs: object containing the computed inputs
+
+# Note: returned value have to be set in the variable 'result'
+
+result = rules.NET &gt; categories.NET * 0.10</field>
+            <field name="amount_python_compute">
+# Available variables:
+#----------------------
+# payslip: object containing the payslips
+# employee: hr.employee object
+# contract: hr.contract object
+# rules: object containing the rules code (previously computed)
+# categories: object containing the computed salary rule categories (sum of amount of all rules belonging to that category).
+# worked_days: object containing the computed worked days.
+# inputs: object containing the computed inputs.
+
+# Note: returned value have to be set in the variable 'result'
+
+result = contract.wage * 0.10</field>
+            <field name="category_id" ref="PTKP"/>
+            <field name="quantity">1.0</field>
+        </record>
+        <record id="hr_salary_rule_pphk3" model="hr.salary.rule">
+            <field name="code">PPH21 K3</field>
+            <field eval="498" name="sequence"/>
+            <field eval="1" name="appears_on_payslip"/>
+            <field name="condition_range">contract.wage</field>
+            <field eval="32400000.0" name="amount_fix"/>
+            <field name="company_id" ref="base.main_company"/>
+            <field name="condition_select">none</field>
+            <field name="register_id" ref="PPH21_reg_01"/>
+            <field name="amount_select">fix</field>
+            <field name="name">PPH21 - K3</field>
+            <field name="condition_python">
+# Available variables:
+#----------------------
+# payslip: object containing the payslips
+# employee: hr.employee object
+# contract: hr.contract object
+# rules: object containing the rules code (previously computed)
+# categories: object containing the computed salary rule categories (sum of amount of all rules belonging to that category).
+# worked_days: object containing the computed worked days
+# inputs: object containing the computed inputs
+
+# Note: returned value have to be set in the variable 'result'
+
+result = rules.NET &gt; categories.NET * 0.10</field>
+            <field name="amount_python_compute">
+# Available variables:
+#----------------------
+# payslip: object containing the payslips
+# employee: hr.employee object
+# contract: hr.contract object
+# rules: object containing the rules code (previously computed)
+# categories: object containing the computed salary rule categories (sum of amount of all rules belonging to that category).
+# worked_days: object containing the computed worked days.
+# inputs: object containing the computed inputs.
+
+# Note: returned value have to be set in the variable 'result'
+
+result = contract.wage * 0.10</field>
+            <field name="category_id" ref="PTKP"/>
+            <field name="quantity">1.0</field>
+        </record>
+        <record id="hr_salary_rule_pphkpr0" model="hr.salary.rule">
+            <field name="code">PPH21KPR</field>
+            <field eval="499" name="sequence"/>
+            <field eval="1" name="appears_on_payslip"/>
+            <field name="condition_range">contract.wage</field>
+            <field eval="24300000.0" name="amount_fix"/>
+            <field name="company_id" ref="base.main_company"/>
+            <field name="condition_select">none</field>
+            <field name="register_id" ref="PPH21_reg_01"/>
+            <field name="amount_select">fix</field>
+            <field name="name">PPH21- KPR</field>
+            <field name="condition_python">
+# Available variables:
+#----------------------
+# payslip: object containing the payslips
+# employee: hr.employee object
+# contract: hr.contract object
+# rules: object containing the rules code (previously computed)
+# categories: object containing the computed salary rule categories (sum of amount of all rules belonging to that category).
+# worked_days: object containing the computed worked days
+# inputs: object containing the computed inputs
+
+# Note: returned value have to be set in the variable 'result'
+
+result = rules.NET &gt; categories.NET * 0.10</field>
+            <field name="amount_python_compute">
+# Available variables:
+#----------------------
+# payslip: object containing the payslips
+# employee: hr.employee object
+# contract: hr.contract object
+# rules: object containing the rules code (previously computed)
+# categories: object containing the computed salary rule categories (sum of amount of all rules belonging to that category).
+# worked_days: object containing the computed worked days.
+# inputs: object containing the computed inputs.
+
+# Note: returned value have to be set in the variable 'result'
+
+result = contract.wage * 0.10</field>
+            <field name="category_id" ref="PTKP"/>
+            <field name="quantity">1.0</field>
+        </record>
+        <record id="hr_salary_rule_attendance0" model="hr.salary.rule">
+            <field name="code">ADDATTENDANCE</field>
+            <field eval="500" name="sequence"/>
+            <field eval="1" name="appears_on_payslip"/>
+            <field name="condition_range">contract.wage</field>
+            <field eval="12.0" name="amount_fix"/>
+            <field name="company_id" ref="base.main_company"/>
+            <field name="condition_select">none</field>
+            <field name="amount_select">code</field>
+            <field name="name">Attendance</field>
+            <field name="condition_python">
+# Available variables:
+#----------------------
+# payslip: object containing the payslips
+# employee: hr.employee object
+# contract: hr.contract object
+# rules: object containing the rules code (previously computed)
+# categories: object containing the computed salary rule categories (sum of amount of all rules belonging to that category).
+# worked_days: object containing the computed worked days
+# inputs: object containing the computed inputs
+
+# Note: returned value have to be set in the variable 'result'
+
+result = rules.NET &gt; categories.NET * 0.10</field>
+            <field name="amount_python_compute">result = (inputs.IATTENDANCE and inputs.IATTENDANCE.amount) * 12000</field>
+            <field name="category_id" ref="hr_payroll.ALW"/>
+            <field name="quantity">1</field>
+        </record>
+        <record id="hr_rule_input_attendance0" model="hr.rule.input">
+            <field name="code">IATTENDANCE</field>
+            <field name="input_id" ref="hr_salary_rule_attendance0"/>
+            <field name="name">Attendance</field>
+        </record>
+
+        <record id="hr_salary_rule_overtimeweekend0" model="hr.salary.rule">
+            <field name="code">ADDOTWEEKEND</field>
+            <field eval="501" name="sequence"/>
+            <field eval="1" name="appears_on_payslip"/>
+            <field name="condition_range">contract.wage</field>
+            <field name="company_id" ref="base.main_company"/>
+            <field name="condition_select">none</field>
+            <field name="amount_select">code</field>
+            <field name="name">Overtime (Weekend)</field>
+            <field name="condition_python">
+# Available variables:
+#----------------------
+# payslip: object containing the payslips
+# employee: hr.employee object
+# contract: hr.contract object
+# rules: object containing the rules code (previously computed)
+# categories: object containing the computed salary rule categories (sum of amount of all rules belonging to that category).
+# worked_days: object containing the computed worked days
+# inputs: object containing the computed inputs
+
+# Note: returned value have to be set in the variable 'result'
+
+result = rules.NET &gt; categories.NET * 0.10</field>
+            <field name="amount_python_compute">result = 0.0
+if payslip and payslip.overtime_ids:
+    for overtime in payslip.overtime_ids:
+        if overtime.type == &quot;weekend&quot;:
+            result += overtime.compute_amount</field>
+            <field name="category_id" ref="hr_payroll.ALW"/>
+            <field name="quantity">1.0</field>
+        </record>
+        <record id="hr_salary_rule_basicperyear0" model="hr.salary.rule">
+            <field name="code">BASICWHOLEYEAR</field>
+            <field eval="502" name="sequence"/>
+            <field eval="1" name="appears_on_payslip"/>
+            <field name="condition_range">contract.wage</field>
+            <field name="company_id" ref="base.main_company"/>
+            <field name="condition_select">none</field>
+            <field name="amount_select">code</field>
+            <field name="name">Basic Per Year</field>
+            <field name="condition_python">
+# Available variables:
+#----------------------
+# payslip: object containing the payslips
+# employee: hr.employee object
+# contract: hr.contract object
+# rules: object containing the rules code (previously computed)
+# categories: object containing the computed salary rule categories (sum of amount of all rules belonging to that category).
+# worked_days: object containing the computed worked days
+# inputs: object containing the computed inputs
+
+# Note: returned value have to be set in the variable 'result'
+
+result = rules.NET &gt; categories.NET * 0.10</field>
+            <field name="amount_python_compute">result = (contract.wage * 12)</field>
+            <field name="category_id" ref="BasicWholeYear"/>
+            <field name="quantity">1.0</field>
+        </record>
+        <record id="hr_salary_rule_mealallowance0" model="hr.salary.rule">
+            <field name="code">ADDMEALADDITIONS</field>
+            <field eval="503" name="sequence"/>
+            <field eval="1" name="appears_on_payslip"/>
+            <field name="condition_range">contract.wage</field>
+            <field eval="300000.0" name="amount_fix"/>
+            <field name="company_id" ref="base.main_company"/>
+            <field name="condition_select">none</field>
+            <field name="amount_select">code</field>
+            <field name="name">Meal Allowance</field>
+            <field name="condition_python">
+# Available variables:
+#----------------------
+# payslip: object containing the payslips
+# employee: hr.employee object
+# contract: hr.contract object
+# rules: object containing the rules code (previously computed)
+# categories: object containing the computed salary rule categories (sum of amount of all rules belonging to that category).
+# worked_days: object containing the computed worked days
+# inputs: object containing the computed inputs
+
+# Note: returned value have to be set in the variable 'result'
+
+result = rules.NET &gt; categories.NET * 0.10</field>
+            <field name="amount_python_compute">result = (inputs.IADDMEALALLOWANCE and inputs.IADDMEALALLOWANCE.amount)</field>
+            <field name="category_id" ref="hr_payroll.ALW"/>
+            <field name="quantity">1</field>
+        </record>
+        <record id="hr_rule_input_mealallowance0" model="hr.rule.input">
+            <field name="code">IADDMEALALLOWANCE</field>
+            <field name="input_id" ref="hr_salary_rule_mealallowance0"/>
+            <field name="name">Meal Allowance</field>
+        </record>
+
+        <record id="hr_salary_rule_pphgross0" model="hr.salary.rule">
+            <field name="code">PPH21GROSS</field>
+            <field eval="504" name="sequence"/>
+            <field eval="1" name="appears_on_payslip"/>
+            <field name="condition_range">contract.wage</field>
+            <field name="company_id" ref="base.main_company"/>
+            <field name="condition_select">none</field>
+            <field name="register_id" ref="PPH21_reg_01"/>
+            <field name="amount_select">code</field>
+            <field name="name">PPH21 GROSS</field>
+            <field name="condition_python">
+# Available variables:
+#----------------------
+# payslip: object containing the payslips
+# employee: hr.employee object
+# contract: hr.contract object
+# rules: object containing the rules code (previously computed)
+# categories: object containing the computed salary rule categories (sum of amount of all rules belonging to that category).
+# worked_days: object containing the computed worked days
+# inputs: object containing the computed inputs
+
+# Note: returned value have to be set in the variable 'result'
+
+result = rules.NET &gt; categories.NET * 0.10</field>
+            <field name="amount_python_compute">result = categories.BASICWHOLEYEAR + (ADDMEALADDITIONS * 12) + categories.PPH21JKMJKK</field>
+            <field name="category_id" ref="PPH21GROSS"/>
+            <field name="quantity">1.0</field>
+        </record>
+
+        <record id="hr_salary_rule_pphposition0" model="hr.salary.rule">
+            <field name="code">PPH21POSITION</field>
+            <field eval="505" name="sequence"/>
+            <field eval="1" name="appears_on_payslip"/>
+            <field name="condition_range">contract.wage</field>
+            <field name="company_id" ref="base.main_company"/>
+            <field name="condition_select">none</field>
+            <field name="register_id" ref="PPH21_reg_01"/>
+            <field name="amount_select">code</field>
+            <field name="name">PPH21 Position</field>
+            <field name="condition_python">
+# Available variables:
+#----------------------
+# payslip: object containing the payslips
+# employee: hr.employee object
+# contract: hr.contract object
+# rules: object containing the rules code (previously computed)
+# categories: object containing the computed salary rule categories (sum of amount of all rules belonging to that category).
+# worked_days: object containing the computed worked days
+# inputs: object containing the computed inputs
+
+# Note: returned value have to be set in the variable 'result'
+
+result = rules.NET &gt; categories.NET * 0.10</field>
+            <field name="amount_python_compute">result = categories.PPH21GROSS * 0.05
+if result &gt;= 6000000:
+    result =  6000000
+else:
+    result = categories.PPH21GROSS * 0.05</field>
+            <field name="category_id" ref="PPH21POSITION"/>
+            <field name="quantity">1.0</field>
+        </record>
+
+        <record id="hr_salary_rule_pphnet0" model="hr.salary.rule">
+            <field name="code">PPH21NETT</field>
+            <field eval="506" name="sequence"/>
+            <field eval="1" name="appears_on_payslip"/>
+            <field name="condition_range">contract.wage</field>
+            <field name="company_id" ref="base.main_company"/>
+            <field name="condition_select">none</field>
+            <field name="register_id" ref="PPH21_reg_01"/>
+            <field name="amount_select">code</field>
+            <field name="name">PPH21 NET</field>
+            <field name="condition_python">
+# Available variables:
+#----------------------
+# payslip: object containing the payslips
+# employee: hr.employee object
+# contract: hr.contract object
+# rules: object containing the rules code (previously computed)
+# categories: object containing the computed salary rule categories (sum of amount of all rules belonging to that category).
+# worked_days: object containing the computed worked days
+# inputs: object containing the computed inputs
+
+# Note: returned value have to be set in the variable 'result'
+
+result = rules.NET &gt; categories.NET * 0.10</field>
+            <field name="amount_python_compute">result = categories.PPH21GROSS - categories.PPH21POSITION - categories.PPH21JHT</field>
+            <field name="category_id" ref="PPH21NETT"/>
+            <field name="quantity">1.0</field>
+        </record>
+
+        <record id="hr_salary_rule_pphpkp0" model="hr.salary.rule">
+            <field name="code">PPH21PKP</field>
+            <field eval="507" name="sequence"/>
+            <field eval="1" name="appears_on_payslip"/>
+            <field name="condition_range">contract.wage</field>
+            <field name="company_id" ref="base.main_company"/>
+            <field name="condition_select">none</field>
+            <field name="register_id" ref="PPH21_reg_01"/>
+            <field name="amount_select">code</field>
+            <field name="name">PPH21 PKP</field>
+            <field name="condition_python">
+# Available variables:
+#----------------------
+# payslip: object containing the payslips
+# employee: hr.employee object
+# contract: hr.contract object
+# rules: object containing the rules code (previously computed)
+# categories: object containing the computed salary rule categories (sum of amount of all rules belonging to that category).
+# worked_days: object containing the computed worked days
+# inputs: object containing the computed inputs
+
+# Note: returned value have to be set in the variable 'result'
+
+result = rules.NET &gt; categories.NET * 0.10</field>
+            <field name="amount_python_compute">if (categories.PPH21NETT - categories.PTKP) &gt; 0:
+    result = floor((categories.PPH21NETT - categories.PTKP) / 1000) * 1000
+else:
+    result = 0</field>
+            <field name="category_id" ref="PPH21PKP"/>
+            <field name="quantity">1.0</field>
+        </record>
+        
+        <record id="hr_salary_rule_handphoneclaim0" model="hr.salary.rule">
+            <field name="code">ADDHANDPHONECLAIM</field>
+            <field eval="508" name="sequence"/>
+            <field eval="1" name="appears_on_payslip"/>
+            <field name="condition_range">contract.wage</field>
+            <field eval="50000.0" name="amount_fix"/>
+            <field name="company_id" ref="base.main_company"/>
+            <field name="condition_select">none</field>
+            <field name="amount_select">code</field>
+            <field name="name">Handphone Claim</field>
+            <field name="condition_python">
+# Available variables:
+#----------------------
+# payslip: object containing the payslips
+# employee: hr.employee object
+# contract: hr.contract object
+# rules: object containing the rules code (previously computed)
+# categories: object containing the computed salary rule categories (sum of amount of all rules belonging to that category).
+# worked_days: object containing the computed worked days
+# inputs: object containing the computed inputs
+
+# Note: returned value have to be set in the variable 'result'
+
+result = rules.NET &gt; categories.NET * 0.10</field>
+            <field name="amount_python_compute">result = (inputs.IHANDPHONECLAIM and inputs.IHANDPHONECLAIM.amount)</field>
+            <field name="category_id" ref="hr_payroll.ALW"/>
+            <field name="quantity">1.0</field>
+        </record>
+        <record id="hr_rule_input_handphoneclaim0" model="hr.rule.input">
+            <field name="code">IHANDPHONECLAIM</field>
+            <field name="input_id" ref="hr_salary_rule_handphoneclaim0"/>
+            <field name="name">Handphone Claim</field>
+        </record>
+
+        <record id="hr_salary_rule_otherdeductions0" model="hr.salary.rule">
+            <field name="code">OTHERDEDUCTIONS</field>
+            <field eval="509" name="sequence"/>
+            <field eval="1" name="appears_on_payslip"/>
+            <field name="condition_range">contract.wage</field>
+            <field name="company_id" ref="base.main_company"/>
+            <field name="condition_select">none</field>
+            <field name="amount_select">code</field>
+            <field name="name">Other - Deductions</field>
+            <field name="condition_python">
+# Available variables:
+#----------------------
+# payslip: object containing the payslips
+# employee: hr.employee object
+# contract: hr.contract object
+# rules: object containing the rules code (previously computed)
+# categories: object containing the computed salary rule categories (sum of amount of all rules belonging to that category).
+# worked_days: object containing the computed worked days
+# inputs: object containing the computed inputs
+
+# Note: returned value have to be set in the variable 'result'
+
+result = rules.NET &gt; categories.NET * 0.10</field>
+            <field name="amount_python_compute">result = (inputs.IOTHERDEDUCTIONS and inputs.IOTHERDEDUCTIONS.amount)</field>
+            <field name="category_id" ref="hr_payroll.DED"/>
+            <field name="quantity">1.0</field>
+        </record>
+        <record id="hr_rule_input_otherdeductions0" model="hr.rule.input">
+            <field name="code">IOTHERDEDUCTIONS</field>
+            <field name="input_id" ref="hr_salary_rule_otherdeductions0"/>
+            <field name="name">Other - Deductions</field>
+        </record>
+
+        <record id="hr_salary_rule_otheradditions0" model="hr.salary.rule">
+            <field name="code">OTHERADDITIONS</field>
+            <field eval="510" name="sequence"/>
+            <field eval="1" name="appears_on_payslip"/>
+            <field name="condition_range">contract.wage</field>
+            <field name="company_id" ref="base.main_company"/>
+            <field name="condition_select">none</field>
+            <field name="amount_select">code</field>
+            <field name="name">Other - Additions</field>
+            <field name="condition_python">
+# Available variables:
+#----------------------
+# payslip: object containing the payslips
+# employee: hr.employee object
+# contract: hr.contract object
+# rules: object containing the rules code (previously computed)
+# categories: object containing the computed salary rule categories (sum of amount of all rules belonging to that category).
+# worked_days: object containing the computed worked days
+# inputs: object containing the computed inputs
+
+# Note: returned value have to be set in the variable 'result'
+
+result = rules.NET &gt; categories.NET * 0.10</field>
+            <field name="amount_python_compute">result = (inputs.IOTHERADDITIONS and inputs.IOTHERADDITIONS.amount)</field>
+            <field name="category_id" ref="hr_payroll.ALW"/>
+            <field name="quantity">1.0</field>
+        </record>
+        <record id="hr_rule_input_otheradditions0" model="hr.rule.input">
+            <field name="code">IOTHERADDITIONS</field>
+            <field name="input_id" ref="hr_salary_rule_otheradditions0"/>
+            <field name="name">Other - Additions</field>
+        </record>
+
+        <record id="hr_salary_rule_commissionsupervisors0" model="hr.salary.rule">
+            <field name="code">COMMSUPERVISORS</field>
+            <field eval="511" name="sequence"/>
+            <field eval="1" name="appears_on_payslip"/>
+            <field name="condition_range">contract.wage</field>
+            <field eval="50000.0" name="amount_fix"/>
+            <field name="company_id" ref="base.main_company"/>
+            <field name="condition_select">none</field>
+            <field name="amount_select">code</field>
+            <field name="name">Commission (Supervisors)</field>
+            <field name="condition_python">
+# Available variables:
+#----------------------
+# payslip: object containing the payslips
+# employee: hr.employee object
+# contract: hr.contract object
+# rules: object containing the rules code (previously computed)
+# categories: object containing the computed salary rule categories (sum of amount of all rules belonging to that category).
+# worked_days: object containing the computed worked days
+# inputs: object containing the computed inputs
+
+# Note: returned value have to be set in the variable 'result'
+
+result = rules.NET &gt; categories.NET * 0.10</field>
+            <field name="amount_python_compute">result = (inputs.ICOMMSUPERVISORS and inputs.ICOMMSUPERVISORS.amount)</field>
+            <field name="category_id" ref="hr_payroll.ALW"/>
+            <field name="quantity">1.0</field>
+        </record>
+        <record id="hr_rule_input_commissionsupervisors0" model="hr.rule.input">
+            <field name="code">ICOMMSUPERVISORS</field>
+            <field name="input_id" ref="hr_salary_rule_commissionsupervisors0"/>
+            <field name="name">Commission (Supervisors)</field>
+        </record>
+
+        <record id="hr_salary_rule_otheradditionsbasic0" model="hr.salary.rule">
+            <field name="code">IOTHERADDITIONSBASIC</field>
+            <field eval="520" name="sequence"/>
+            <field eval="1" name="appears_on_payslip"/>
+            <field name="condition_range">contract.wage</field>
+            <field name="company_id" ref="base.main_company"/>
+            <field name="condition_select">none</field>
+            <field name="amount_select">code</field>
+            <field name="name">Other - Additions (Basic)</field>
+            <field name="condition_python">
+# Available variables:
+#----------------------
+# payslip: object containing the payslips
+# employee: hr.employee object
+# contract: hr.contract object
+# rules: object containing the rules code (previously computed)
+# categories: object containing the computed salary rule categories (sum of amount of all rules belonging to that category).
+# worked_days: object containing the computed worked days
+# inputs: object containing the computed inputs
+
+# Note: returned value have to be set in the variable 'result'
+
+result = rules.NET &gt; categories.NET * 0.10</field>
+            <field name="amount_python_compute">result = (inputs.IOTHERADDITIONSBASIC and inputs.IOTHERADDITIONSBASIC.amount)</field>
+            <field name="category_id" ref="hr_payroll.BASIC"/>
+            <field name="quantity">1.0</field>
+        </record>
+        <record id="hr_rule_input_otheradditions1" model="hr.rule.input">
+            <field name="code">IOTHERADDITIONSBASIC</field>
+            <field name="input_id" ref="hr_salary_rule_otheradditionsbasic0"/>
+            <field name="name">Other - Additions</field>
+        </record>
+
+        <record id="hr_salary_rule_pphjkmandjkk0" model="hr.salary.rule">
+            <field name="code">PPH21JKMJKK</field>
+            <field eval="521" name="sequence"/>
+            <field eval="1" name="appears_on_payslip"/>
+            <field name="condition_range">contract.wage</field>
+            <field name="company_id" ref="base.main_company"/>
+            <field name="condition_select">none</field>
+            <field name="register_id" ref="PPH21_reg_01"/>
+            <field name="amount_select">code</field>
+            <field name="name">PPH21 - JKM and JKK</field>
+            <field name="condition_python">
+# Available variables:
+#----------------------
+# payslip: object containing the payslips
+# employee: hr.employee object
+# contract: hr.contract object
+# rules: object containing the rules code (previously computed)
+# categories: object containing the computed salary rule categories (sum of amount of all rules belonging to that category).
+# worked_days: object containing the computed worked days
+# inputs: object containing the computed inputs
+
+# Note: returned value have to be set in the variable 'result'
+
+result = rules.NET &gt; categories.NET * 0.10</field>
+            <field name="amount_python_compute">result = (categories.BASICWHOLEYEAR * 0.0054) + (categories.BASICWHOLEYEAR  * 0.037)</field>
+            <field name="category_id" ref="PPH21JKMJKK"/>
+            <field name="quantity">1.0</field>
+        </record>
+
+        <record id="hr_salary_rule_pphjht0" model="hr.salary.rule">
+            <field name="code">PPH21JHT</field>
+            <field eval="522" name="sequence"/>
+            <field eval="1" name="appears_on_payslip"/>
+            <field name="condition_range">contract.wage</field>
+            <field name="company_id" ref="base.main_company"/>
+            <field name="condition_select">none</field>
+            <field name="register_id" ref="PPH21_reg_01"/>
+            <field name="amount_select">code</field>
+            <field name="name">PPH21 - JHT</field>
+            <field name="condition_python">
+# Available variables:
+#----------------------
+# payslip: object containing the payslips
+# employee: hr.employee object
+# contract: hr.contract object
+# rules: object containing the rules code (previously computed)
+# categories: object containing the computed salary rule categories (sum of amount of all rules belonging to that category).
+# worked_days: object containing the computed worked days
+# inputs: object containing the computed inputs
+
+# Note: returned value have to be set in the variable 'result'
+
+result = rules.NET &gt; categories.NET * 0.10</field>
+            <field name="amount_python_compute">result = categories.BASICWHOLEYEAR * 0.02</field>
+            <field name="category_id" ref="PPH21JHT"/>
+            <field name="quantity">1.0</field>
+        </record>
+        <record id="hr_salary_rule_overtimem0" model="hr.salary.rule">
+            <field name="code">OVERTIMEM</field>
+            <field eval="523" name="sequence"/>
+            <field eval="1" name="appears_on_payslip"/>
+            <field name="condition_range">contract.wage</field>
+            <field name="company_id" ref="base.main_company"/>
+            <field name="condition_select">none</field>
+            <field name="amount_select">code</field>
+            <field name="name">OvertimeM</field>
+            <field name="condition_python">
+# Available variables:
+#----------------------
+# payslip: object containing the payslips
+# employee: hr.employee object
+# contract: hr.contract object
+# rules: object containing the rules code (previously computed)
+# categories: object containing the computed salary rule categories (sum of amount of all rules belonging to that category).
+# worked_days: object containing the computed worked days
+# inputs: object containing the computed inputs
+
+# Note: returned value have to be set in the variable 'result'
+
+result = rules.NET &gt; categories.NET * 0.10</field>
+            <field name="amount_python_compute">result = (inputs.IOVERTIMEM and inputs.IOVERTIMEM.amount)</field>
+            <field name="category_id" ref="hr_payroll.ALW"/>
+            <field name="quantity">1.0</field>
+        </record>
+        <record id="hr_rule_input_overtimem0" model="hr.rule.input">
+            <field name="code">IOVERTIMEM</field>
+            <field name="input_id" ref="hr_salary_rule_overtimem0"/>
+            <field name="name">Overtime M</field>
+        </record>
+
+    </data>
+</odoo>

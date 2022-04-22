@@ -1,0 +1,31 @@
+<odoo>
+    <data>
+        <record id="view_employee_form_inherit" model="ir.ui.view">
+            <field name="name">view_employee_form_inherit</field>
+            <field name="model">hr.employee</field>
+            <field name="inherit_id" ref="hr.view_employee_form"/>
+            <field name="arch" type="xml">
+                <xpath expr="//notebook" position="inside">
+                    <page string="Payroll Settings" groups="hr.group_hr_user">
+                        <group col="4">
+                            <field name="total_pay_balance" groups="idn_payroll.group_hr_payroll_admin"/>
+                            <field name="total_pay_salary" groups="idn_payroll.group_hr_payroll_admin"/>
+                            <field name="total_pph23_balance" groups="idn_payroll.group_hr_payroll_admin"/>
+                            <field name="total_pph23" groups="idn_payroll.group_hr_payroll_admin"/>
+                            <field name="pphprediksipen" groups="idn_payroll.group_hr_payroll_admin"/>
+                            <field name="date_join" groups="idn_payroll.group_hr_payroll_admin"/>
+                            <field name="have_january_slip" groups="base.group_system"/>
+                            <field name="first_slip_join" groups="base.group_system"/>
+                            <field name="pengurang_pajak" groups="idn_payroll.group_hr_payroll_admin"/>
+                            <field name="pengurang_pajak_balance" groups="idn_payroll.group_hr_payroll_admin"/>
+                            <field name="penambah_pajak" groups="idn_payroll.group_hr_payroll_admin"/>
+                            <field name="penambah_pajak_balance" groups="idn_payroll.group_hr_payroll_admin"/>
+                            <field name="rate_jamsostek" groups="hr.group_hr_user"/>
+                            <field name="rate_bpjs" groups="hr.group_hr_user"/>
+                        </group>
+                    </page>
+                </xpath>
+            </field>
+        </record>
+    </data>
+</odoo>

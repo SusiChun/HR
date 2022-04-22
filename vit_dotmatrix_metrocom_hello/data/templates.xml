@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+    <data>
+
+        <record id="template_dotmatrix_invoice" model="mail.template">
+            <field name="name">Dot Matrix Invoice</field>
+            <field name="model_id" ref="account.model_account_invoice"/>
+            <field name="subject">Dot Matrix Template for Invoice</field>
+            <field name="body_html"><![CDATA[
+${'INVOICE'.rjust(40)} ${object.number}
+${''.rjust(80,'-')}
+${'Date     :'} ${object.date_invoice}
+${'To       :'} ${object.partner_id.display_name} 
+${'Reference:'} ${object.reference}
+${'No. Cek  :'} ${object.x_nomor_cek}
+${'Bank     :'} 
+
+Invoice Lines
+${''.rjust(80,'-')}
+${'Product'.ljust(28)} ${'Qty'.rjust(6)} ${'UoM'.ljust(4)} ${'Price Unit'.rjust(13)} ${'Taxes'.ljust(10)} ${'Sub Total'.rjust(14)}
+${''.rjust(80,'-')}
+% for l in object.invoice_line_ids:
+${l.product_id.name[:28].ljust(28)} ${"{:4,.0f}".format(l.quantity).rjust(6)} ${l.uom_id.name.ljust(4)} ${"{:4,.0f}".format(l.price_unit).rjust(13)} ${l.invoice_line_tax_ids.name.ljust(4) if l.invoice_line_tax_ids else ''.ljust(4)} ${"{:4,.0f}".format(l.price_subtotal).rjust(14)}
+% endfor
+${''.rjust(80,'-')}
+${'Total Before Tax:'.rjust(59)} ${ "{:20,.0f}".format(object.amount_untaxed).rjust(20)}
+${'Tax:'.rjust(59)} ${"{:20,.0f}".format(object.amount_tax).rjust(20)}
+${'Total:'.rjust(59)} ${"{:20,.0f}".format(object.amount_total).rjust(20)}
+${'Balance:'.rjust(59)} ${"{:20,.0f}".format(object.residual).rjust(20)}
+
+Tax Lines
+${''.rjust(40,'-')}
+% for m in object.tax_line_ids:
+${m.name[:28]} ${':  '} ${"{:4,.0f}".format(m.amount)}
+% endfor
+
+]]></field>
+        </record>
+
+
+        <record id="template_dotmatrix_po" model="mail.template">
+            <field name="name">Dot Matrix PO</field>
+            <field name="model_id" ref="purchase.model_purchase_order"/>
+            <field name="subject">Dot Matrix Template for PO</field>
+            <field name="body_html"><![CDATA[
+${'PURCHASE ORDER'.rjust(30)} ${object.name}
+${''.rjust(80,'-')}
+${'Vendor:'.rjust(20)} ${object.partner_id.display_name.ljust(20)} ${'Order Date:'.rjust(18)} ${ object.date_order }
+${'Vendor Reference:'.rjust(20)} ${object.partner_ref.ljust(20) if object.partner_ref else ''.ljust(20)} ${'Currency:'.rjust(18)} ${object.currency_id.name}
+
+Products
+
+${''.rjust(80,'-')}
+${'Product'.ljust(24)} ${'Sched. Date'.ljust(11)} ${'Qty'.ljust(6)} ${'UoM'.ljust(4)} ${'Taxes'.ljust(7)} ${'Price Unit'.rjust(10)} ${'Subtotal'.rjust(12)}
+${''.rjust(80,'-')}
+
+% for l in object.order_line:
+${l.product_id.display_name[:24].ljust(24)} ${l.date_planned[:11].ljust(11)} ${"{:4,.0f}".format(l.product_qty).rjust(6)} ${l.product_uom.name.ljust(4)} ${l.taxes_id.name.ljust(7) if l.taxes_id else ''.ljust(7)} ${ "{:4,.0f}".format(l.price_unit).rjust(10)} ${ "{:4,.0f}".format(l.price_subtotal).rjust(12) }
+% endfor
+
+${''.rjust(80,'-')}
+
+${'Untaxed Amount:'.rjust(59)} ${ "{:20,.0f}".format(object.amount_untaxed).rjust(20) }
+${'Taxes:'.rjust(59)} ${ "{:20,.0f}".format(object.amount_tax).rjust(20) }
+
+]]></field>
+        </record>
+    </data>
+</openerp>

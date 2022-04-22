@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <template id="report_invoice_document_inherit_mul" inherit_id="account.report_invoice_document">
+        <xpath expr="//table[@class='table table-condensed']/thead/tr/th[5]" position="replace">
+            <th t-if="o.print_discount" class="text-right" groups="sale.group_discount_per_so_line">Disc.(%)</th>
+            <th t-if="o.print_discount_amount" class="text-right" groups="sale.group_discount_per_so_line">Disc. Amount</th>
+            <th t-if="o.print_discount" class="text-right" groups="sale.group_discount_per_so_line">Disc. Unit Price</th>
+        </xpath>
+        <xpath expr="//table/tbody[@class='invoice_tbody']/tr/td[5]" position="replace">
+            <td t-if="o.print_discount" class="text-right" groups="sale.group_discount_per_so_line">
+                <span t-field="l.discount"/> %
+            </td>
+            <td t-if="o.print_discount_amount" class="text-right" groups="sale.group_discount_per_so_line">
+                <span t-field="l.discount_amount"/>
+            </td>
+            <td t-if="o.print_discount" class="text-right" groups="sale.group_discount_per_so_line">
+                <span t-field="l.discounted_unit_price"/>
+            </td>
+        </xpath>
+        <xpath expr="//tr[@class='border-black']" position="after">
+            <t t-if="o.print_discount" groups="sale.group_discount_per_so_line">
+                <tr>
+                    <td>Total Discount</td> 
+                    <td class="text-right">
+                        <span t-field="o.discount_amount"
+                            t-field-options='{"widget": "monetary", "display_currency": "o.currency_id"}'/>
+                    </td>
+                </tr>
+            </t>
+        </xpath>
+    </template>
+
+    <template id="report_invoice_layouted" inherit_id="sale.report_invoice_layouted">
+        <xpath expr="//t[@groups='sale.group_sale_layout']/table[@class='table table-condensed']/thead/tr/th[4]" position="replace">
+            <th t-if="o.print_discount" class="text-right" groups="sale.group_discount_per_so_line">Disc.(%)</th>
+            <th t-if="o.print_discount_amount" class="text-right" groups="sale.group_discount_per_so_line">Disc. Amount</th>
+            <th t-if="o.print_discount" class="text-right" groups="sale.group_discount_per_so_line">Disc. Unit Price</th>
+        </xpath>
+        <xpath expr="//t[@groups='sale.group_sale_layout']/table/tbody[@class='invoice_tbody']/t/t[2]/tr/td[4]" position="replace">
+            <td t-if="o.print_discount" class="text-right" groups="sale.group_discount_per_so_line">
+                <span t-field="l.discount"/> %
+            </td>
+            <td t-if="o.print_discount_amount" class="text-right" groups="sale.group_discount_per_so_line">
+                <span t-field="l.discount_amount"/>
+            </td>
+            <td t-if="o.print_discount" class="text-right" groups="sale.group_discount_per_so_line">
+                <span t-field="l.discounted_unit_price"/>
+            </td>
+        </xpath>
+        <xpath expr="//t[@groups='sale.group_sale_layout']/table/tbody[@class='invoice_tbody']/t/t[3]/tr/td[1]" position="attributes">
+            <attribute name="colspan">12</attribute>
+        </xpath>
+        <xpath expr="//t[@groups='sale.group_sale_layout']/table/tbody[@class='invoice_tbody']/t/t[1]/tr/td[1]" position="attributes">
+            <attribute name="colspan">12</attribute>
+        </xpath>
+    </template>
+
+</odoo>
+ 

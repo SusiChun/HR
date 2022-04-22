@@ -1,0 +1,63 @@
+<odoo>
+	<data>
+		<record id="crm_lead_document_tree_view" model="ir.ui.view">
+	        <field name="name">crm.lead.document.tree.view</field>
+	        <field name="model">crm.lead.document</field>
+	        <field name="arch" type="xml">
+	           	<tree string="Document Requirement">
+					<field name="name"/>
+					<field name="lead_id"/>
+					<field name="document_id"/>
+					<field name="file"/>
+					<field name="description"/>
+					<field name="status"/>
+				</tree>
+			</field>
+	    </record>
+
+		<record id="crm_lead_document_form_view" model="ir.ui.view">
+	        <field name="name">crm.lead.document.form.view</field>
+	        <field name="model">crm.lead.document</field>
+	        <field name="arch" type="xml">
+				<form string="Document Requirement Config" >
+					<sheet>
+						<group>
+							<field name="name"/>
+							<field name="lead_id"/>
+							<field name="document_id"/>
+							<field name="file"/>
+							<field name="description"/>
+							<field name="status"/>
+						</group>
+					</sheet>
+				</form>
+	        </field>
+	    </record>
+
+		<record model="ir.actions.act_window" id="action_crm_lead_document">
+	        <field name="name">Document Requirement</field>
+	        <field name="type">ir.actions.act_window</field>
+	        <field name="res_model">crm.lead.document</field>
+	        <field name="view_type">form</field>
+	        <field name="view_mode">tree,form</field>
+	        <field name="help" type="html">
+	          <p class="o_view_nocontent_smiling_face">
+	            Add a new Document Require
+	          </p>
+	        </field>
+	    </record>
+
+        <menuitem
+            id="menu_crm_config_lead_doc_requirement"
+            name="Leads &amp; Opportunities Config"
+            parent="sales_team.menu_sale_config"
+            sequence="10"/>
+
+        <menuitem
+            id="menu_crm_lead_document"
+            name="Lead Document"
+            action="action_crm_lead_document"
+            parent="menu_crm_config_lead_doc_requirement"
+            sequence="8"/>
+	</data>
+</odoo>

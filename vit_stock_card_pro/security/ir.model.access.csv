@@ -1,0 +1,9 @@
+"id","name","model_id:id","group_id:id","perm_read","perm_write","perm_create","perm_unlink"
+access_vit_stock_card,access_vit_stock_card,model_vit_stock_card,stock.group_stock_user,1,1,1,1
+access_vit_stock_card_line,access_vit_stock_card_line,model_vit_stock_card_line,stock.group_stock_user,1,1,1,1
+access_vit_stock_summary,access_vit_stock_summary,model_vit_stock_summary,stock.group_stock_user,1,1,1,1
+access_vit_stock_summary_line,access_vit_stock_summary_line,model_vit_stock_summary_line,stock.group_stock_user,1,1,1,1
+access_stock_summary_new,access_stock_summary_new,model_stock_summary_new,stock.group_stock_user,1,1,1,1
+access_stock_summary_line_new,access_stock_summary_line_new,model_stock_summary_line_new,stock.group_stock_user,1,1,1,1
+access_stock_summary_line_new_soh,access_stock_summary_line_new_soh,model_stock_summary_line_new_soh,stock.group_stock_user,1,1,1,1
+access_stock_summary_line_new_history,access_stock_summary_line_new_history,model_stock_summary_line_new_history,stock.group_stock_user,1,1,1,1

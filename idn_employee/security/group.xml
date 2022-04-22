@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <!-- Create Manage Group and Inherit Hr Manager Group -->
+    <record id="property_rule_hr_employee_group_user" model="ir.rule">
+        <field name="name">Employee can see own record</field>
+        <field name="model_id" ref="model_hr_employee"/>
+        <field name="domain_force">['|',('company_id','=',False),('company_id','in',[user.company_id.id])]</field>
+        <field name="groups" eval="[(4,ref('base.group_user'))]"/>
+    </record>
+
+    <record id="propert_rule_hr_employee_officers" model="ir.rule">
+        <field name="name">Officer can see own and child employees record</field>
+        <field name="model_id" ref="model_hr_employee"/>
+        <field name="domain_force">['|',('user_id','child_of',user.id),('parent_id.user_id','child_of',user.id)]</field>
+        <field name="groups" eval="[(4,ref('hr.group_hr_user'))]"/>
+    </record>
+    
+    <record id="property_rule_hr_employee_manager" model="ir.rule">
+        <field name="name">Manager can see all employee records</field>
+        <field name="model_id" ref="model_hr_employee"/>
+        <field name="domain_force">[(1,'=',1)]</field>
+        <field name="groups" eval="[(4,ref('hr.group_hr_manager'))]"/>
+    </record>
+
+</odoo>

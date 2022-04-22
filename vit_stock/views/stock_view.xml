@@ -1,0 +1,50 @@
+<odoo>
+        
+        <record id="vit_stock_form_view" model="ir.ui.view">
+		    <field name="name">vit.stock.form</field>
+		    <field name="model">stock.picking</field>
+		    <field name="type">form</field>
+		    <field name="inherit_id" ref="stock.view_picking_form"/>
+		    <field name="arch" type="xml">
+		        
+		    	<xpath expr="/form/sheet/notebook/page[@name='extra']" position="after">
+                    <page name="backdate" string="Backdate After Done" attrs="{'invisible': [('state','!=','done')]}">
+                        <group>
+                            <group>
+                                <field name="backdate_done" attrs="{'readonly': [('backdated','=',True)]}"/>
+                                <field name="backdated" invisible="1"/>
+                            </group>
+                            <group>
+                                <button name="action_backdate" string="Confirm" type="object" attrs="{'invisible': [('backdated','=',True)]}" groups="vit_stock.group_backdate_after_done"/>
+                            </group>
+                        </group>
+                    </page>
+                </xpath>
+
+                <field name="picking_type_id" position="after">
+                    <field name="force_date"/>
+                    <field name="force_uid"/>
+                </field>
+                
+                <xpath expr="//button[@name='force_assign']" position="attributes">
+                    <attribute name="groups">vit_stock.group_force_picking</attribute>
+                </xpath> 
+		    	
+		     </field>
+		</record>
+
+     <record id="vit_view_picking_tree_common" model="ir.ui.view">
+        <field name="name">stock.picking.tree.inherit</field>
+        <field name="model">stock.picking</field>
+        <field name="inherit_id" ref="stock.vpicktree"/>
+        <field name="arch" type="xml">
+            <field name="backorder_id" position="after">
+                <field name="date_done"/>
+                <field name="date_due" groups="account.group_account_manager"/>
+                <field name="total_amount" groups="account.group_account_manager"/>
+            </field>
+        </field>
+     </record>
+
+
+</odoo>

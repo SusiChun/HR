@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <template id="print_tes2">
+        	<t t-foreach="docs" t-as="o">       	    
+           		<div class="page">
+		                 <div class="row">
+
+							 <span t-esc="o.terbilang(o.amount_total)"/>
+		                 </div>
+
+   		</div>
+	     </t>
+	          	                                                                     
+</template>
+
+    <report id="menu_print_invoice2" string="Print Tes2"
+    	model="account.invoice" report_type="qweb-pdf"
+    	file="amount_to_word_id.print_tes2"
+    	name="amount_to_word_id.print_tes2" header="True" />
+    
+</odoo>

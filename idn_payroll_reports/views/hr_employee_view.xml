@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+
+    <!-- inherit form view of hr employee -->
+    <record id="mgs_view_employee_form_inherit" model="ir.ui.view">
+        <field name="name">mgs.hr.employee.form.inherit</field>
+        <field name="model">hr.employee</field>
+        <field name="inherit_id" ref="hr.view_employee_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='company_id']" position="after">
+                <field name="is_apply_credit"/>
+            </xpath>
+        </field>
+    </record>
+</odoo>

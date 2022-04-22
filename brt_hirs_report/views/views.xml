@@ -1,0 +1,74 @@
+<odoo>
+  <data>
+
+   <!--   <record id="action_hr_contract_template" model="ir.actions.act_window">
+            <field name="name">Template Report</field>
+            <field name="res_model">report.template</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">tree,form</field>
+            <field name="search_view_id" ref="hr_contract_template_view_search"/>
+        </record>
+
+        <menuitem
+            id="hr_menu_template"
+            action="action_hr_contract_template"
+            parent="hr.menu_human_resources_configuration"
+            sequence="4"
+            groups="base.group_no_one"/> -->
+    <!-- explicit list view definition -->
+    <!--
+    <record model="ir.ui.view" id="brt_hirs_report.list">
+      <field name="name">brt_hirs_report list</field>
+      <field name="model">brt_hirs_report.brt_hirs_report</field>
+      <field name="arch" type="xml">
+        <tree>
+          <field name="name"/>
+          <field name="value"/>
+          <field name="value2"/>
+        </tree>
+      </field>
+    </record>
+    -->
+
+    <!-- actions opening views on models -->
+    <!--
+    <record model="ir.actions.act_window" id="brt_hirs_report.action_window">
+      <field name="name">brt_hirs_report window</field>
+      <field name="res_model">brt_hirs_report.brt_hirs_report</field>
+      <field name="view_mode">tree,form</field>
+    </record>
+    -->
+
+    <!-- server action to the one above -->
+    <!--
+    <record model="ir.actions.server" id="brt_hirs_report.action_server">
+      <field name="name">brt_hirs_report server</field>
+      <field name="model_id" ref="model_brt_hirs_report_brt_hirs_report"/>
+      <field name="code">
+        action = {
+          "type": "ir.actions.act_window",
+          "view_mode": "tree,form",
+          "res_model": self._name,
+        }
+      </field>
+    </record>
+    -->
+
+    <!-- Top menu item -->
+    <!--
+    <menuitem name="brt_hirs_report" id="brt_hirs_report.menu_root"/>
+    -->
+    <!-- menu categories -->
+    <!--
+    <menuitem name="Menu 1" id="brt_hirs_report.menu_1" parent="brt_hirs_report.menu_root"/>
+    <menuitem name="Menu 2" id="brt_hirs_report.menu_2" parent="brt_hirs_report.menu_root"/>
+    -->
+    <!-- actions -->
+    <!--
+    <menuitem name="List" id="brt_hirs_report.menu_1_list" parent="brt_hirs_report.menu_1"
+              action="brt_hirs_report.action_window"/>
+    <menuitem name="Server to list" id="brt_hirs_report" parent="brt_hirs_report.menu_2"
+              action="brt_hirs_report.action_server"/>
+    -->
+  </data>
+</odoo>

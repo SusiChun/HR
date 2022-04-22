@@ -1,0 +1,21 @@
+id,name,note,line_ids/days,line_ids/option,line_ids/value
+term1,Immediate,Immediate,0,Day(s) after the invoice date,Balance
+term2,Net 30 Days,Net 30 Days,30,Day(s) after the invoice date,Balance
+term3,Net 45 Days,Net 45 Days,45,Day(s) after the invoice date,Balance
+term4,Net 60 Days,Net 60 Days,60,Day(s) after the invoice date,Balance
+term5,Net 90 Days,Net 90 Days,90,Day(s) after the invoice date,Balance
+term6,Net 180 Days,Net 180 Days,180,Day(s) after the invoice date,Balance
+term7,Net 3 Days,Net 3 Days,3,Day(s) after the invoice date,Balance
+term8,Net 7 Days,Net 7 Days,7,Day(s) after the invoice date,Balance
+term9,Net 10 Days,Net 10 Days,10,Day(s) after the invoice date,Balance
+term10,Net 21 Days,Net 21 Days,21,Day(s) after the invoice date,Balance
+term11,Jatuh Tempo Tgl 24,Jatuh Tempo Tgl 24,0,Day(s) after the invoice date,Balance
+term12,Jatuh Tempo Tgl 10,Jatuh Tempo Tgl 10,0,Day(s) after the invoice date,Balance
+term13,Net 20 Days,Net 20 Days,20,Day(s) after the invoice date,Balance
+term14,Net 15 Days,Net 15 Days,15,Day(s) after the invoice date,Balance
+term15,Net 14 Days,Net 14 Days,14,Day(s) after the invoice date,Balance
+term16,After Delivery,After Delivery,0,Day(s) after the invoice date,Balance
+term17,Net 17 Days,Net 17 Days,17,Day(s) after the invoice date,Balance
+term18,Net 50 Days,Net 50 Days,50,Day(s) after the invoice date,Balance
+term19,Net 75 Days,Net 75 Days,75,Day(s) after the invoice date,Balance
+term20,Net 67 Days,Net 67 Days,67,Day(s) after the invoice date,Balance

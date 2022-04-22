@@ -1,0 +1,293 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+
+
+        <record id="view_employee_form_profile" model="ir.ui.view">
+            <field name="name">hr.employee.form.profile</field>
+            <field name="model">hr.employee</field>
+            <field name="arch" type="xml">
+                <form string="Employee">
+                    <sheet>
+                        <div class="oe_button_box" name="button_box">
+                            <button name="hr_contract.act_hr_employee_2_hr_contract"
+                                class="oe_stat_button"
+                                icon="fa-book"
+                                type="action">
+                            <field name="contracts_count" widget="statinfo" string="Contracts"/>
+                        </button>
+                        <button name="hr_holidays.act_hr_employee_holiday_request"
+                                type="action"
+                                class="oe_stat_button"
+                                icon="fa-calendar"
+                                groups="base.group_user"
+                                help="Remaining leaves">
+                            <field string="Leaves Left" name="leaves_count" widget="statinfo"/>
+                        </button>
+                        <button name="hr_payroll.act_hr_employee_payslip_list"
+                            class="oe_stat_button"
+                            icon="fa-money"
+                            type="action"
+                             groups="base.group_user">
+                            <field name="payslip_count" widget="statinfo" string="Payslips"/>
+                        </button>
+                            <button name="hr_timesheet_sheet.act_hr_employee_2_hr_timesheet"
+                            type="action"
+                            class="oe_stat_button"
+                            icon="fa-clock-o"
+                             groups="base.group_user">
+                            <field name="timesheet_count" widget="statinfo" string="Timesheets"/>
+                        </button>
+                        </div>
+                        <field name="image" widget='image' class="oe_avatar" options='{"preview_image":"image_medium"}'/>
+                        <div class="oe_title">
+                            <label for="name" class="oe_edit_only"/>
+                            <h1>
+                                <field name="name" placeholder="Employee's Name"/>
+                            </h1>
+                        </div>
+                        <field name="category_ids" widget="many2many_tags" placeholder="e.g. Part Time"
+                            options="{'no_create_edit': True}" groups="hr.group_hr_user" class="oe_inline" nolabel="1"/>
+                        <notebook>
+                            <page name="public" string="Public Information">
+                                <group>
+                                    <group string="Contact Information">
+                                        <field name="address_id"
+                                            context="{'show_address': 1}"
+                                            options='{"always_reload": True, "highlight_first_line": True}'/>
+                                        <field name="mobile_phone"/>
+                                        <field name="work_location"/>
+                                        <field name="work_email" widget="email"/>
+                                        <field name="work_phone"/>
+                                    </group>
+                                    <group string="Position">
+                                        <field name="department_id"/>
+                                        <field name="job_id"/>
+                                        <field name="parent_id"/>
+                                        <field name="coach_id"/>
+                                        <field name="calendar_id"/>
+                                    </group>
+                                </group>
+                                <field name="notes" placeholder="Other Information ..." colspan="4"/>
+                            </page>
+                            <page name="personal_information" string="Personal Information">
+                                <group>
+                                    <group string="Employee Information">
+                                        <label for="nik" string="NIK"/>
+                                         <div>
+                                         <field name="nik" readonly="1" width="80%%"/>
+                                            <button name="get_sequence" type="object" string="Get NIK" attrs="{'invisible': [('nik', '!=', False)]}" class="oe_highlight"/>
+                                         </div>
+                                        <field name="address"/>
+                                        <field name="religion"/>
+                                         <field name="start_date"/>
+                                        <field name="grade"/>
+                                        <field name="contract_type_id"/>
+                                        <field name="emp_country_id"/>
+                                        <field name="identification_id" string="No Ktp"/>
+                                        <field name="passport_id"/>
+                                         <field name="passport_exp_date"/>
+                                        <field name="own_vehicle"/>
+                                         <field name="sim_type"/>
+                                        <field name="insurance_no"/>
+                                    </group>
+                                    <group string="Benefit">
+                                        <field name="address_home_id"
+                                            context="{'show_address': 1}"
+                                            options='{"always_reload": True, "highlight_first_line": True}'/>
+                                        <field name="bank_account_id" context="{'default_partner_id': address_home_id}"/>
+                                        <field name="npwp"/>
+                                        <field name="tax_status"/>
+                                        <field name="bpjs_kesehatan"/>
+                                        <field name="bpjs_ketenagakerjaan"/>
+                                        <field name="plan_no"/>
+                                        <field name="card_no"/>
+                                        <field name="generali_no"/>
+                                        </group>
+                                    <group string="Status">
+                                        <field name="gender"/>
+                                        <field name="marital"/>
+                                        <field name="children"/>
+                                    </group>
+                                    <group string="Birth">
+                                        <field name="place_of_birth"/>
+                                        <field name="birthday"/>
+                                        <field name="age"/>
+                                        <field name="is_children" invisible="1"/>
+                                        <field name="birthday_day" invisible="1"/>
+                                        <field name="birthday_month" invisible="1"/>
+                                        <field name="user_id" invisible="1"/>
+                                    </group>
+                                    <group colspan="4" attrs="{'invisible': [('is_children', '!=', True)]}" string="Child Details">
+                                            <field name="emp_child_ids" nolabel="1">
+                                                <tree editable="bottom" colspan="4">
+                                                    <field name="name" required="1" placeholder="Name Of Child"/>
+                                                    <field name="age" required="1"/>
+                                                </tree>
+                                             </field>
+                                        </group>
+                                    </group>
+                                    <notebook>
+                                         <page string="Family Information" name="family_particulars">
+                                                <field name="relative_ids" nolabel="1">
+                                                <tree string="Family Information" editable="bottom">
+                                                    <field name="name" required = "1"/>
+                                                    <field name="relationship_id" required = "1"/>
+                                                    <field name="date_of_birth" />
+                                                    <field name="occupation" />
+                                                    <field name="address" />
+                                                    <field name="contact" />
+                                                    <field name="emr_telephone" />
+                                                </tree>
+                                                </field>
+                                            </page>
+                                            <page name='educational_information' string="Educational Information">
+                                                <field name="edu_ids" nolabel="1" colspan="4">
+                                                    <tree editable="bottom">
+                                                        <field name="edu_level" required="1"/>
+                                                        <field name="edu_school"/>
+                                                        <field name="period"/>
+                                                        <field name="edu_certificate"/>
+                                                    </tree>
+                                                </field>
+                                                <group string="Language Proficiency" colspan="4">
+                                                    <field name="language_ids" nolabel="1" colspan="4">
+                                                        <tree editable="bottom">
+                                                            <field name="employee_id" invisible="1"/>
+                                                            <field name="language_id" invisible="1"/>
+                                                            <field name="lang_name_id" required="1"/>
+                                                            <field name="spoken"/>
+                                                            <field name="written"/>
+                                                        </tree>
+                                                    </field>
+                                                </group>
+                                                <group string="Computer Knowledge and Skills" colspan="4">
+                                                    <field name="comp_prog_knw"/>
+                                                    <field name="typing"/>
+                                                    <field name="shorthand"/>
+                                                    <field name="other_know"/>
+                                                    <field name="course"/>
+                                                </group>
+                                            </page>
+                                            <page name='organisasi' string="Organization Experience">
+                                                <field name="organisasi_ids" nolabel="1" colspan="4">
+                                                    <tree editable="bottom">
+                                                        <field name="name"/>
+                                                        <field name="city"/>
+                                                        <field name="major"/>
+                                                        <field name="position"/>
+                                                        <field name="start_year"/>
+                                                        <field name="end_year"/>
+                                                    </tree>
+                                                </field>
+                                            </page>
+                                             <page string="Work Experience" name="employee_history">
+                                                <field name="employment_history_ids" nolabel="1" colspan="4">
+                                                    <tree editable="bottom">
+                                                        <field name="company"/>
+                                                        <field name="position"/>
+                                                        <field name="start_year"/>
+                                                        <field name="end_year"/>
+                                                        <field name="reason"/>
+                                                        <field name="last_salary"/>
+                                                    </tree>
+                                                </field>
+                                            </page>
+                                            <page name="training_workshop" string="Certificate">
+                                                <field name="training_ids" nolabel="1" colspan="4">
+                                                    <tree string="Certificate" editable="bottom">
+                                                        <field name="tr_title" required="1"/>
+                                                        <field name="tr_institution" />
+                                                        <field name="tr_date"/>
+                                                         <field name="date_expire"/>
+                                                        <field name="training_attachment"/>
+                                                    </tree>
+                                                </field>
+                                            </page>
+                                            <page name="other_info" string="Other Information">
+                                                <separator string="Mention People's reference that we can contact if you want to know more complete data about you"/>
+                                                <field name="contact_ids"  colspan="4">
+                                                    <tree string="Other Information" editable="bottom">
+                                                        <field name="name" required="1"/>
+                                                        <field name="position" />
+                                                        <field name="no_handphone"/>
+                                                    </tree>
+                                                </field>
+                                                <separator string="Mention the name and telephone number  that we can contact  to inform you if experience a disester"/>
+                                                <field name="contact_inform_ids" nolabel="1" colspan="4">
+                                                    <tree string="Other Information" editable="bottom">
+                                                        <field name="name" required="1"/>
+                                                        <field name="no_handphone"/>
+                                                        <field name="relation" />
+                                                    </tree>
+                                                </field>
+                                            </page>
+                                            </notebook>
+                            </page>
+                            <page string="Loan Details">
+							<group col="4" colspan="4">
+								<field name="loan_ids" height="360" nolabel="1" colspan="4">
+									<tree string="Loans">
+										<field name="name" />
+										<field name="date_applied" />
+										<field name="date_approved" />
+										<field name="loan_type" />
+										<field name="int_rate" string="Rate" />
+										<field name="principal_amount" string="Loan Amount" />
+										<field name="final_total" />
+										<field name="total_amount_paid" />
+										<field name="total_amount_due" />
+										<field name="state" />
+									</tree>
+								</field>
+							</group>
+						</page>
+                        <page string="Loan Policies">
+							<group col="4" colspan="4">
+								<separator string="Loan Policies" colspan="4" />
+								<field name="loan_policy" nolabel="1" colspan="4" />
+							</group>
+						</page>
+                        </notebook>
+                    </sheet>
+                    <div class="oe_chatter">
+                        <field name="message_follower_ids" widget="mail_followers" groups="base.group_user"/>
+                        <field name="message_ids" widget="mail_thread"/>
+                    </div>
+                </form>
+            </field>
+        </record>
+
+        <record model="ir.actions.act_window" id="action_employee_profile">
+            <field name="name">My Profile</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">hr.employee</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">kanban,tree,form</field>
+            <field name="domain">[('user_id','=',uid)]</field>
+        </record>
+
+        <record model="ir.actions.act_window.view" id="action_employee_profile_kanban">
+            <field name="act_window_id" ref="action_employee_profile" />
+            <field name="sequence" eval="10" />
+            <field name="view_mode">kanban</field>
+            <field name="view_id" ref="hr.hr_kanban_view_employees" />
+        </record>
+
+
+        <record model="ir.actions.act_window.view" id="action_employee_profile_form">
+            <field name="act_window_id" ref="action_employee_profile" />
+            <field name="sequence" eval="20" />
+            <field name="view_mode">form</field>
+            <field name="view_id" ref="view_employee_form_profile" />
+        </record>
+        <record model="ir.actions.act_window.view" id="action_employee_profile_tree">
+            <field name="act_window_id" ref="action_employee_profile" />
+            <field name="sequence" eval="30" />
+            <field name="view_mode">tree</field>
+            <field name="view_id" ref="hr.view_partner_tree2" />
+        </record>
+       <menuitem action="action_employee_profile"
+            id="menu_employee_profile"
+            name="My Profile" parent="idn_employee.menu_hr_employees" sequence="1"/>
+
+</odoo>

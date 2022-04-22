@@ -1,0 +1,57 @@
+<odoo>
+	<data>
+		<record id="document_type_form" model="ir.ui.view">
+			<field name="name">document.type.form</field>
+			<field name="model">document.type</field>
+			<field name="arch" type="xml">
+				<form string="Document">
+					<sheet>
+						<group>
+							<field name="name"/>
+							<field name="code"/>
+						</group>
+					</sheet>
+				</form>
+			</field>
+		</record>
+
+		<record id="document_type_tree" model="ir.ui.view">
+			<field name="name">document.type.tree</field>
+			<field name="model">document.type</field>
+			<field name="arch" type="xml">
+				<tree string="Document">
+					<field name="name"/>
+					<field name="code"/>
+				</tree>
+			</field>
+		</record>
+
+		<record id="document_type_search" model="ir.ui.view">
+			<field name="name">document.type.search</field>
+			<field name="model">document.type</field>
+			<field name="arch" type="xml">
+				<search string="Search Document">
+					<field name="name"/>
+				</search>
+			</field>
+		</record>
+
+		<record id="action_document_type" model="ir.actions.act_window">
+	        <field name="name">Document</field>
+	        <field name="res_model">document.type</field>
+	        <field name="view_mode">tree,form</field>
+	        <field name="help" type="html">
+	          <p class="o_view_nocontent_smiling_face">
+	            Add a new Document
+	          </p>
+	        </field>
+	    </record>
+
+	    <menuitem
+            id="menu_document_type"
+            name="Document Type"
+            action="action_document_type"
+            parent="mjt_crm_ext.menu_crm_config_lead_doc_requirement"
+            sequence="7"/>
+	</data>
+</odoo>

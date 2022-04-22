@@ -1,0 +1,25 @@
+<odoo>
+    <data>
+        <record id="inherit_cetak_btn_kontrak" model="ir.ui.view">
+            <field name="name">inherit_cetak_btn_kontrak</field>
+            <field name="model">hr.contract</field>
+            <field name="inherit_id" ref="hr_contract.hr_contract_view_form"/>
+            <field name="arch" type="xml">
+                <xpath expr="//header" position="inside">
+                    <button name="cetak_kontrak" type="object" string="Print Contract" class="oe_highlight" />
+                    <!-- <button name="cetak_kontrak" type="object" string="Print Contract" class="oe_highlight" attrs="{'invisible': [('state','!=','paid')]}"/> -->
+                    <button name="buat_nomor" type="object" string="Generate No. Kontrak" class="oe_highlight" attrs="{'invisible': [('no_kontrak','!=',False)]}"/>
+                </xpath>
+                 <xpath expr="//field[@name='name']" position="after">
+                    <field name="no_kontrak" readonly="1"/>
+                </xpath>
+                <!-- <data>
+                    <field name="name" position="after">
+                        <field name="no_kontrak" readonly="1"/>
+                    </field>
+                </data> -->
+            </field>
+        </record>
+
+    </data>
+</odoo>

@@ -1,0 +1,9 @@
+<odoo>
+    <data>
+
+     <record id="group_user_outlet" model="res.groups">
+        <field name="name">User Outlet</field>
+        <field name="category_id" ref="base.module_category_point_of_sale"/>
+    </record>
+    </data>
+</odoo>

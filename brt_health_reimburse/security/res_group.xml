@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+	<data noupdate="1">
+		<record id="group_reimberse" model="ir.module.category">
+			<field name="name">Reimburse</field>
+		</record>
+
+		<record model="res.groups" id="manager"> 
+		    <field name="category_id" ref="brt_health_reimburse.group_reimberse" /> 
+		    <field name="name">Head Group</field> 
+		</record>
+
+		<record model="res.groups" id="admin_reimburse"> 
+		    <field name="category_id" ref="brt_health_reimburse.group_reimberse" /> 
+		    <field name="name">Admin Reimburse</field> 
+		</record>
+	</data>
+</odoo>

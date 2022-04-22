@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <record id="attendance_cron" model="ir.cron">
+            <field name="name">Read and Update Attendance from Solution X302-S</field>
+            <field name="model">hr.attendance</field>
+            <field name="function">syncs_attendance</field>
+            <field name="interval_number">5</field>
+            <field name="interval_type">minutes</field>
+            <field name="numbercall">-1</field>
+            <field name="doall" eval="False"/>
+        </record>
+    </data>
+</odoo>

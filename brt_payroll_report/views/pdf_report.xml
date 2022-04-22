@@ -1,0 +1,348 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+	<data>
+	   	<report 
+            id="action_export_pdf"
+            model="report.brt_payroll_report.export_pdf"
+            string="PDF Report Payslip"
+            report_type="qweb-pdf"
+            name="brt_payroll_report.export_pdf"
+            file="brt_payroll_report.export_pdf"
+         	menu="False"
+            />
+
+        <record id="paperformat_lowmargin" model="report.paperformat">
+			<field name="name">Format PDF</field>
+			<field name="default" eval="True" />
+			<field name="format">A4</field>
+			<field name="page_height">0</field>
+			<field name="page_width">0</field>
+			<field name="orientation">Landscape</field>
+			<field name="margin_top">0</field>
+			<field name="margin_bottom">0</field>
+			<field name="margin_left">0</field>
+			<field name="margin_right">0</field>
+			<field name="header_line" eval="False" />
+			<field name="header_spacing">0</field>
+			<field name="dpi">80</field>
+		</record>
+<!-- 
+		<record id="brt_payroll_report.action_export_pdf" model="ir.actions.report.xml">
+		    <field name="paperformat_id" ref="brt_payroll_report.paperformat_lowmargin" />
+		</record>
+ -->
+
+		<template id="export_pdf">
+			<t t-call="report.html_container">
+				<div class="page">
+					<div t-foreach="docs" t-as="o" >
+						<b style="font-size:16px"><span t-field="o.company_id" /></b>
+						<br></br>
+						Periode : <b><span t-field="o.date_start" /> s/d <span t-field="o.date_end" /></b> 
+						<hr></hr>
+						<div t-foreach="orders" t-as="x" class="row mt4 mb4">
+							<b style="font-size:11px"><span t-field="x.name" /></b>
+							<table class="table table-condensed table-bordered" style="border:1px solid #7b7e81;border-collapse: collapse">
+							 	<tr style="font-size:9px">
+								 	<th rowspan="2" style="border:1px solid #7b7e81;border-collapse: collapse">No.</th>
+								 	<th rowspan="2" style="border:1px solid #7b7e81;border-collapse: collapse">Nama</th>
+								 	<th rowspan="2" style="border:1px solid #7b7e81;border-collapse: collapse">Jabatan</th>
+								 	<th rowspan="2" style="border:1px solid #7b7e81;border-collapse: collapse">Status</th>
+								 	<th style="border:1px solid #7b7e81;border-collapse: collapse">P=tk=0</th>
+								 	<!-- <th style="border:1px solid #7b7e81;border-collapse: collapse">A</th> -->
+								 	<th rowspan="2" style="border:1px solid #7b7e81;border-collapse: collapse">GR</th>
+								 	<th rowspan="2" style="border:1px solid #7b7e81;border-collapse: collapse">Gaji Pokok</th>
+								 	<th rowspan="2" style="border:1px solid #7b7e81;border-collapse: collapse">Tunj. Jabatan</th>
+								 	<th rowspan="2" style="border:1px solid #7b7e81;border-collapse: collapse">Transport Makan</th>
+								 	<th rowspan="2" style="border:1px solid #7b7e81;border-collapse: collapse">Tunj. Lainnya</th>
+								 	<th rowspan="2" style="border:1px solid #7b7e81;border-collapse: collapse">Tunj. Proyek</th>
+								 	<th rowspan="2" style="border:1px solid #7b7e81;border-collapse: collapse">Rapel</th>
+								 	<th rowspan="2" style="border:1px solid #7b7e81;border-collapse: collapse">Lembur</th>
+								 	<th rowspan="2" style="border:1px solid #7b7e81;border-collapse: collapse">Tunj. HP</th>
+								 	<th rowspan="2" style="border:1px solid #7b7e81;border-collapse: collapse">Reimb. Medical</th>
+								 	<th rowspan="2" style="border:1px solid #7b7e81;border-collapse: collapse">Pot. Absen</th>
+								 	<th rowspan="2" style="border:1px solid #7b7e81;border-collapse: collapse">TOTAL THP</th>
+								 	<th rowspan="2" style="border:1px solid #7b7e81;border-collapse: collapse">Pinjaman</th>
+								 	<th rowspan="2" style="border:1px solid #7b7e81;border-collapse: collapse">Pot. Jamsostek</th>
+								 	<th rowspan="2" style="border:1px solid #7b7e81;border-collapse: collapse">Pot. BPJS</th>
+								 	<th rowspan="2" style="border:1px solid #7b7e81;border-collapse: collapse">Tot. Dibayarkan</th>
+								 	<th rowspan="2" style="border:1px solid #7b7e81;border-collapse: collapse">PPh 21</th>
+								 	<th rowspan="2" style="border:1px solid #7b7e81;border-collapse: collapse">TOTAL GAJI</th>
+								 </tr>
+							 	<tr style="font-size:9px">
+								 	<th style="border:1px solid #7b7e81;border-collapse: collapse">k=1</th>
+							 	</tr>
+							 	<tbody>
+								 	<tr t-foreach="request.env['brt.tb.payroll.export'].search([('id_department_export', '=', x.id)])" t-as="a" style="font-size:7px">
+										<td style="border:1px solid #7b7e81;border-collapse: collapse"><span t-esc = "a_index+1"/> </td>
+										<td style="border:1px solid #7b7e81;border-collapse: collapse"><span t-field="a.name" /></td>
+										<td style="border:1px solid #7b7e81;border-collapse: collapse"><span t-field="a.employee_id.job_id.name"/></td>
+										<td style="border:1px solid #7b7e81;border-collapse: collapse"><span t-field="a.status" /></td>
+										<td style="border:1px solid #7b7e81;border-collapse: collapse"><span t-field="a.employee_id.tax_status" /></td>
+										<!-- <td style="border:1px solid #7b7e81;border-collapse: collapse">
+											<span t-if="a.employee_id.marital=='Married'">
+												1
+											</span>
+											<span t-else="">
+												0
+											</span>
+										</td> -->
+										<!-- <td style="border:1px solid #7b7e81;border-collapse: collapse"><span t-field="a.employee_id.children"/></td> -->
+										<td style="border:1px solid #7b7e81;border-collapse: collapse"><span t-field="a.employee_id.grade"/></td>
+										<td style="border:1px solid #7b7e81;border-collapse: collapse">Rp. <span t-field="a.gapok"/></td>
+										<td style="border:1px solid #7b7e81;border-collapse: collapse">Rp. <span t-field="a.t_jabatan"/></td>
+										<td style="border:1px solid #7b7e81;border-collapse: collapse">Rp. <span t-field="a.tunj_transport_makan"/></td>
+										<td style="border:1px solid #7b7e81;border-collapse: collapse">Rp. <span t-field="a.tunj_lain"/></td>
+										<td style="border:1px solid #7b7e81;border-collapse: collapse">Rp. <span t-field="a.tunjangan_proyek"/></td>
+										<td style="border:1px solid #7b7e81;border-collapse: collapse">Rp. <span t-field="a.rapel"/></td>
+										<td style="border:1px solid #7b7e81;border-collapse: collapse">Rp. <span t-field="a.lembur"/></td>
+										<td style="border:1px solid #7b7e81;border-collapse: collapse">Rp. <span t-field="a.t_hp"/></td>
+										<td style="border:1px solid #7b7e81;border-collapse: collapse">Rp. <span t-field="a.reimb_medical"/></td>
+										<td style="border:1px solid #7b7e81;border-collapse: collapse">Rp. <span t-field="a.pot_absen"/></td>
+										<td style="border:1px solid #7b7e81;border-collapse: collapse">Rp. <span t-field="a.thp"/></td>
+										<td style="border:1px solid #7b7e81;border-collapse: collapse">Rp. <span t-field="a.pinjaman"/></td>
+										<td style="border:1px solid #7b7e81;border-collapse: collapse">Rp. <span t-field="a.jamsostek"/></td>
+										<td style="border:1px solid #7b7e81;border-collapse: collapse">Rp. <span t-field="a.bpjs"/></td>
+										<td style="border:1px solid #7b7e81;border-collapse: collapse">Rp. <span t-field="a.tot_dibayarkan"/></td>
+										<td style="border:1px solid #7b7e81;border-collapse: collapse">Rp. <span t-field="a.pph21"/></td>
+										<td style="border:1px solid #7b7e81;border-collapse: collapse">Rp. <span t-field="a.tot_gaji"/></td>
+									</tr>
+									<tr style="font-size:7px">
+										<th colspan="6">Total Gaji <b><span t-field="x.name" /></b></th>
+									 	
+									 	<td><span t-esc="round(sum(line.gapok for line in request.env['brt.tb.payroll.export'].search([('id_department_export', '=', x.id)])))" t-esc-options='{"widget": "monetary", "display_currency": "res_company.currency_id"}'/> </td> 
+									 	
+									 	<td><span t-esc="round(sum(line.t_jabatan for line in request.env['brt.tb.payroll.export'].search([('id_department_export', '=', x.id)])))" t-esc-options='{"widget": "monetary", "display_currency": "res_company.currency_id"}'/> </td>
+
+										<td><span t-esc="round(sum(line.tunj_transport_makan for line in request.env['brt.tb.payroll.export'].search([('id_department_export', '=', x.id)])))" t-esc-options='{"widget": "monetary", "display_currency": "res_company.currency_id"}'/> </td> 
+
+										<td><span t-esc="round(sum(line.tunj_lain for line in request.env['brt.tb.payroll.export'].search([('id_department_export', '=', x.id)])))" t-esc-options='{"widget": "monetary", "display_currency": "res_company.currency_id"}'/> </td>
+
+										<td><span t-esc="round(sum(line.tunjangan_proyek for line in request.env['brt.tb.payroll.export'].search([('id_department_export', '=', x.id)])))" t-esc-options='{"widget": "monetary", "display_currency": "res_company.currency_id"}'/> </td>
+										
+										<td><span t-esc="round(sum(line.rapel for line in request.env['brt.tb.payroll.export'].search([('id_department_export', '=', x.id)])))" t-esc-options='{"widget": "monetary", "display_currency": "res_company.currency_id"}'/> </td>
+
+										<td> <span t-esc="round(sum(line.lembur for line in request.env['brt.tb.payroll.export'].search([('id_department_export', '=', x.id)])))" t-esc-options='{"widget": "monetary", "display_currency": "res_company.currency_id"}'/> </td>
+										
+										<td><span t-esc="round(sum(line.t_hp for line in request.env['brt.tb.payroll.export'].search([('id_department_export', '=', x.id)])))" t-esc-options='{"widget": "monetary", "display_currency": "res_company.currency_id"}'/> </td> 
+										
+										<td><span t-esc="round(sum(line.reimb_medical for line in request.env['brt.tb.payroll.export'].search([('id_department_export', '=', x.id)])))" t-esc-options='{"widget": "monetary", "display_currency": "res_company.currency_id"}'/> </td> 
+										
+										<td><span t-esc="round(sum(line.pot_absen for line in request.env['brt.tb.payroll.export'].search([('id_department_export', '=', x.id)])))" t-esc-options='{"widget": "monetary", "display_currency": "res_company.currency_id"}'/> </td> 
+										
+										<td><span t-esc="round(sum(line.thp for line in request.env['brt.tb.payroll.export'].search([('id_department_export', '=', x.id)])))" t-esc-options='{"widget": "monetary", "display_currency": "res_company.currency_id"}'/> </td> 
+										
+										<td><span t-esc="round(sum(line.pinjaman for line in request.env['brt.tb.payroll.export'].search([('id_department_export', '=', x.id)])))" t-esc-options='{"widget": "monetary", "display_currency": "res_company.currency_id"}'/> </td> 
+										
+										<td><span t-esc="round(sum(line.jamsostek for line in request.env['brt.tb.payroll.export'].search([('id_department_export', '=', x.id)])))" t-esc-options='{"widget": "monetary", "display_currency": "res_company.currency_id"}'/> </td> 
+										
+										<td><span t-esc="round(sum(line.bpjs for line in request.env['brt.tb.payroll.export'].search([('id_department_export', '=', x.id)])))" t-esc-options='{"widget": "monetary", "display_currency": "res_company.currency_id"}'/> </td>
+										<td><span t-esc="round(sum(line.tot_dibayarkan for line in request.env['brt.tb.payroll.export'].search([('id_department_export', '=', x.id)])))" t-esc-options='{"widget": "monetary", "display_currency": "res_company.currency_id"}'/> </td>
+										<td> <span t-esc="round(sum(line.pph21 for line in request.env['brt.tb.payroll.export'].search([('id_department_export', '=', x.id)])))" t-esc-options='{"widget": "monetary", "display_currency": "res_company.currency_id"}'/> </td>
+										
+										<td><span t-esc="round(sum(line.tot_gaji for line in request.env['brt.tb.payroll.export'].search([('id_department_export', '=', x.id)])))" t-esc-options='{"widget": "monetary", "display_currency": "res_company.currency_id"}'/> </td>
+			                           
+									</tr>
+								 </tbody>
+							 </table>
+						</div>
+						<hr></hr>
+						<div class="row mt4 mb4">
+							<br></br>
+							<br></br>
+							<table class="table table-condensed table-bordered" style="border:1px solid #7b7e81;border-collapse: collapse">
+							 	<tr style="font-size:9px;border:1px solid #7b7e81;border-collapse: collapse">
+								 	<th rowspan="2" style="border:1px solid #7b7e81;border-collapse: collapse">No.</th>
+								 	<th rowspan="2" style="border:1px solid #7b7e81;border-collapse: collapse">Divisi</th>
+								 	<th rowspan="2" style="border:1px solid #7b7e81;border-collapse: collapse"></th>
+								 	<!-- <th rowspan="2"></th>
+								 	<th rowspan="2"></th>
+								 	<th></th>
+								 	<th></th>
+								 	<th rowspan="2"></th> -->
+								 	<th rowspan="2" style="border:1px solid #7b7e81;border-collapse: collapse">Gaji Pokok</th>
+								 	<th rowspan="2" style="border:1px solid #7b7e81;border-collapse: collapse">Tunj. Jabatan</th>
+								 	<th rowspan="2" style="border:1px solid #7b7e81;border-collapse: collapse">Tunj. Makan</th>
+								 	<th rowspan="2" style="border:1px solid #7b7e81;border-collapse: collapse">Tunj. Lainnya</th>
+								 	<th rowspan="2" style="border:1px solid #7b7e81;border-collapse: collapse">Tunj. Proyek</th>
+								 	<th rowspan="2" style="border:1px solid #7b7e81;border-collapse: collapse">Rapel</th>
+								 	<th rowspan="2" style="border:1px solid #7b7e81;border-collapse: collapse">Lembur</th>
+								 	<th rowspan="2" style="border:1px solid #7b7e81;border-collapse: collapse">Tunj. HP</th>
+								 	<th rowspan="2" style="border:1px solid #7b7e81;border-collapse: collapse">Reimb. Medical</th>
+								 	<th rowspan="2" style="border:1px solid #7b7e81;border-collapse: collapse">Pot. Absen</th>
+								 	<th rowspan="2" style="border:1px solid #7b7e81;border-collapse: collapse">Total THP</th>
+								 	<th rowspan="2" style="border:1px solid #7b7e81;border-collapse: collapse">Pinjaman/kasbon</th>
+								 	<th rowspan="2" style="border:1px solid #7b7e81;border-collapse: collapse">Pot. asuransi</th>
+								 	<th rowspan="2" style="border:1px solid #7b7e81;border-collapse: collapse">Pot. asuransi</th>
+								 	<th rowspan="2" style="border:1px solid #7b7e81;border-collapse: collapse">Tot. Dibayarkan</th>
+								 	<th rowspan="2" style="border:1px solid #7b7e81;border-collapse: collapse">PPh 21</th>
+								 	<th rowspan="2" style="border:1px solid #7b7e81;border-collapse: collapse">Total Gaji + PPH21</th>
+								 </tr>
+								 
+								 <tbody t-foreach="orders" t-as="x" style="border:1px solid #7b7e81;border-collapse: collapse">
+									<tr style="font-size:7px">
+										<td  style="border:1px solid #7b7e81;border-collapse: collapse"><span t-esc = "x_index+1"/> </td>
+										<td  style="border:1px solid #7b7e81;border-collapse: collapse"><b><span t-field="x.name" /></b></td>
+
+										<td  style="border:1px solid #7b7e81;border-collapse: collapse">
+												<span t-esc="sum(line.tot_kar for line in request.env['brt.tb.payroll.export'].search([('id_department_export', '=', x.id)]))"/> 
+										 </td>
+
+			                            <td style="border:1px solid #7b7e81;border-collapse: collapse">
+			                            	<span t-esc="sum(line.gapok for line in request.env['brt.tb.payroll.export'].search([('id_department_export', '=', x.id)]))" t-esc-options='{"widget": "monetary", "display_currency": "res_company.currency_id"}'/> 
+			                            </td>
+
+			                            <td style="border:1px solid #7b7e81;border-collapse: collapse"><span t-esc="sum(line.t_jabatan for line in request.env['brt.tb.payroll.export'].search([('id_department_export', '=', x.id)]))" t-esc-options='{"widget": "monetary", "display_currency": "res_company.currency_id"}'/> </td>
+
+										<td style="border:1px solid #7b7e81;border-collapse: collapse"><span t-esc="sum(line.tunj_transport_makan for line in request.env['brt.tb.payroll.export'].search([('id_department_export', '=', x.id)]))" t-esc-options='{"widget": "monetary", "display_currency": "res_company.currency_id"}'/> </td> 
+
+										<td style="border:1px solid #7b7e81;border-collapse: collapse"><span t-esc="sum(line.tunj_lain for line in request.env['brt.tb.payroll.export'].search([('id_department_export', '=', x.id)]))" t-esc-options='{"widget": "monetary", "display_currency": "res_company.currency_id"}'/> </td>
+
+			                            <td style="border:1px solid #7b7e81;border-collapse: collapse"><span t-esc="sum(line.tunjangan_proyek for line in request.env['brt.tb.payroll.export'].search([('id_department_export', '=', x.id)]))" t-esc-options='{"widget": "monetary", "display_currency": "res_company.currency_id"}'/> </td>
+
+			                            <td style="border:1px solid #7b7e81;border-collapse: collapse"><span t-esc="sum(line.rapel for line in request.env['brt.tb.payroll.export'].search([('id_department_export', '=', x.id)]))" t-esc-options='{"widget": "monetary", "display_currency": "res_company.currency_id"}'/> </td>
+
+			                            <td style="border:1px solid #7b7e81;border-collapse: collapse"><span t-esc="sum(line.lembur for line in request.env['brt.tb.payroll.export'].search([('id_department_export', '=', x.id)]))" t-esc-options='{"widget": "monetary", "display_currency": "res_company.currency_id"}'/> </td>
+
+			                            <td style="border:1px solid #7b7e81;border-collapse: collapse"><span t-esc="sum(line.t_hp for line in request.env['brt.tb.payroll.export'].search([('id_department_export', '=', x.id)]))" t-esc-options='{"widget": "monetary", "display_currency": "res_company.currency_id"}'/> </td> 
+
+			                            <td style="border:1px solid #7b7e81;border-collapse: collapse"><span t-esc="sum(line.reimb_medical for line in request.env['brt.tb.payroll.export'].search([('id_department_export', '=', x.id)]))" t-esc-options='{"widget": "monetary", "display_currency": "res_company.currency_id"}'/> </td> 
+
+			                            <td style="border:1px solid #7b7e81;border-collapse: collapse"><span t-esc="sum(line.pot_absen for line in request.env['brt.tb.payroll.export'].search([('id_department_export', '=', x.id)]))" t-esc-options='{"widget": "monetary", "display_currency": "res_company.currency_id"}'/> </td> 
+
+			                            <td style="border:1px solid #7b7e81;border-collapse: collapse"><span t-esc="sum(line.thp for line in request.env['brt.tb.payroll.export'].search([('id_department_export', '=', x.id)]))" t-esc-options='{"widget": "monetary", "display_currency": "res_company.currency_id"}'/> </td> 
+
+			                            <td style="border:1px solid #7b7e81;border-collapse: collapse"><span t-esc="sum(line.pinjaman for line in request.env['brt.tb.payroll.export'].search([('id_department_export', '=', x.id)]))" t-esc-options='{"widget": "monetary", "display_currency": "res_company.currency_id"}'/> </td> 
+
+			                            <td style="border:1px solid #7b7e81;border-collapse: collapse"><span t-esc="sum(line.jamsostek for line in request.env['brt.tb.payroll.export'].search([('id_department_export', '=', x.id)]))" t-esc-options='{"widget": "monetary", "display_currency": "res_company.currency_id"}'/> </td> 
+
+			                            <td style="border:1px solid #7b7e81;border-collapse: collapse"><span t-esc="sum(line.bpjs for line in request.env['brt.tb.payroll.export'].search([('id_department_export', '=', x.id)]))" t-esc-options='{"widget": "monetary", "display_currency": "res_company.currency_id"}'/> </td>
+
+			                            <td style="border:1px solid #7b7e81;border-collapse: collapse;"><span t-esc="sum(line.tot_dibayarkan for line in request.env['brt.tb.payroll.export'].search([('id_department_export', '=', x.id)]))" t-esc-options='{"widget": "monetary", "display_currency": "res_company.currency_id"}'/> </td>
+
+		                             	<td style="border:1px solid #7b7e81;border-collapse: collapse;"><span t-esc="sum(line.pph21 for line in request.env['brt.tb.payroll.export'].search([('id_department_export', '=', x.id)]))" t-esc-options='{"widget": "monetary", "display_currency": "res_company.currency_id"}'/> </td>
+
+			                            <td style="border:1px solid #7b7e81;border-collapse: collapse;"> <span t-esc="sum(line.tot_gaji for line in request.env['brt.tb.payroll.export'].search([('id_department_export', '=', x.id)]))" t-esc-options='{"widget": "monetary", "display_currency": "res_company.currency_id"}'/> </td>
+			                        </tr>
+			                       
+								 </tbody>
+								 <tbody>
+								 	<tr style="font-size:7px">
+								 		<td  style="border:1px solid #7b7e81;border-collapse: collapse;" colspan="2" ></td>
+								 		<td style="border:1px solid #7b7e81;border-collapse: collapse;"></td>
+								 		<td style="border:1px solid #7b7e81;border-collapse: collapse;"></td>
+								 		<td style="border:1px solid #7b7e81;border-collapse: collapse;"></td>
+								 		<td style="border:1px solid #7b7e81;border-collapse: collapse;"></td>
+								 		<td style="border:1px solid #7b7e81;border-collapse: collapse;"></td>
+								 		<td style="border:1px solid #7b7e81;border-collapse: collapse;"></td>
+								 		<td style="border:1px solid #7b7e81;border-collapse: collapse;"></td>
+								 		<td style="border:1px solid #7b7e81;border-collapse: collapse;"></td>
+								 		<td style="border:1px solid #7b7e81;border-collapse: collapse;"></td>
+								 		<td style="border:1px solid #7b7e81;border-collapse: collapse;"></td>
+								 		<td style="border:1px solid #7b7e81;border-collapse: collapse;"></td>
+								 		<td style="border:1px solid #7b7e81;border-collapse: collapse;"></td>
+								 		<td style="border:1px solid #7b7e81;border-collapse: collapse;"></td>
+								 		<td style="border:1px solid #7b7e81;border-collapse: collapse;"></td>
+								 		<td style="border:1px solid #7b7e81;border-collapse: collapse;"></td>
+								 		<td style="border:1px solid #7b7e81;border-collapse: collapse;"></td>
+								 		<td style="border:1px solid #7b7e81;border-collapse: collapse;"></td>
+								 		<td style="border:1px solid #7b7e81;border-collapse: collapse;"></td>
+								 	</tr>
+								 	<tr style="font-size:7px">
+								 		<td  style="border:1px solid #7b7e81;border-collapse: collapse;" colspan="2" >TOTAL PPH21 KARYAWAN</td>
+								 		<td style="border:1px solid #7b7e81;border-collapse: collapse;"></td>
+								 		<td style="border:1px solid #7b7e81;border-collapse: collapse;"></td>
+								 		<td style="border:1px solid #7b7e81;border-collapse: collapse;"></td>
+								 		<td style="border:1px solid #7b7e81;border-collapse: collapse;"></td>
+								 		<td style="border:1px solid #7b7e81;border-collapse: collapse;"></td>
+								 		<td style="border:1px solid #7b7e81;border-collapse: collapse;"></td>
+								 		<td style="border:1px solid #7b7e81;border-collapse: collapse;"></td>
+								 		<td style="border:1px solid #7b7e81;border-collapse: collapse;"></td>
+								 		<td style="border:1px solid #7b7e81;border-collapse: collapse;"></td>
+								 		<td style="border:1px solid #7b7e81;border-collapse: collapse;"></td>
+								 		<td style="border:1px solid #7b7e81;border-collapse: collapse;"></td>
+								 		<td style="border:1px solid #7b7e81;border-collapse: collapse;"></td>
+								 		<td style="border:1px solid #7b7e81;border-collapse: collapse;"></td>
+								 		<td style="border:1px solid #7b7e81;border-collapse: collapse;"></td>
+								 		<td style="border:1px solid #7b7e81;border-collapse: collapse;"></td>
+								 		<td style="border:1px solid #7b7e81;border-collapse: collapse;"></td>
+								 		<td style="border:1px solid #7b7e81;border-collapse: collapse;">
+								 			<span t-esc="sum(line.pph21 for line in request.env['brt.tb.payroll.export'].search([('date_from', '&gt;=', o.date_start),('date_to', '&lt;=', o.date_end),('company', '=', o.company),('nm_department', '!=', 'BOD KRS')]))" t-esc-options='{"widget": "monetary", "display_currency": "res_company.currency_id"}'/> 
+								 		</td>
+								 		<td style="border:1px solid #7b7e81;border-collapse: collapse;"></td>
+								 	</tr>
+								 	<tr style="font-size:7px">
+								 		<td  style="border:1px solid #7b7e81;border-collapse: collapse;" colspan="2" >TOTAL PPH21 BOD</td>
+								 		<td style="border:1px solid #7b7e81;border-collapse: collapse;"></td>
+								 		<td style="border:1px solid #7b7e81;border-collapse: collapse;"></td>
+								 		<td style="border:1px solid #7b7e81;border-collapse: collapse;"></td>
+								 		<td style="border:1px solid #7b7e81;border-collapse: collapse;"></td>
+								 		<td style="border:1px solid #7b7e81;border-collapse: collapse;"></td>
+								 		<td style="border:1px solid #7b7e81;border-collapse: collapse;"></td>
+								 		<td style="border:1px solid #7b7e81;border-collapse: collapse;"></td>
+								 		<td style="border:1px solid #7b7e81;border-collapse: collapse;"></td>
+								 		<td style="border:1px solid #7b7e81;border-collapse: collapse;"></td>
+								 		<td style="border:1px solid #7b7e81;border-collapse: collapse;"></td>
+								 		<td style="border:1px solid #7b7e81;border-collapse: collapse;"></td>
+								 		<td style="border:1px solid #7b7e81;border-collapse: collapse;"></td>
+								 		<td style="border:1px solid #7b7e81;border-collapse: collapse;"></td>
+								 		<td style="border:1px solid #7b7e81;border-collapse: collapse;"></td>
+								 		<td style="border:1px solid #7b7e81;border-collapse: collapse;"></td>
+								 		<td style="border:1px solid #7b7e81;border-collapse: collapse;"></td>
+								 		<td style="border:1px solid #7b7e81;border-collapse: collapse;">
+	                            	<span t-esc="sum(line.pph21 for line in request.env['brt.tb.payroll.export'].search([('date_from', '&gt;=', o.date_start),('date_to', '&lt;=', o.date_end),('company', '=', o.company),('nm_department', '=', 'BOD KRS')]))" t-esc-options='{"widget": "monetary", "display_currency": "res_company.currency_id"}'/> 
+								 		</td>
+								 		<td style="border:1px solid #7b7e81;border-collapse: collapse;"></td>
+								 	</tr>
+								 	<tr style="font-size:7px">
+								 		<td  style="border:1px solid #7b7e81;border-collapse: collapse;" colspan="2" >TOTAL</td>
+								 		<td  style="border:1px solid #7b7e81;border-collapse: collapse">
+											<span t-esc="sum(line.tot_kar for line in request.env['brt.tb.payroll.export'].search([('date_from', '&gt;=', o.date_start),('date_to', '&lt;=', o.date_end),('company', '=', o.company)]))"/> 
+										 </td>
+								 		<td style="border:1px solid #7b7e81;border-collapse: collapse">
+			                            	<span t-esc="sum(line.gapok for line in request.env['brt.tb.payroll.export'].search([('date_from', '&gt;=', o.date_start),('date_to', '&lt;=', o.date_end),('company', '=', o.company)]))" t-esc-options='{"widget": "monetary", "display_currency": "res_company.currency_id"}'/> 
+			                            </td>
+
+			                            <td style="border:1px solid #7b7e81;border-collapse: collapse"><span t-esc="sum(line.t_jabatan for line in request.env['brt.tb.payroll.export'].search([('date_from', '&gt;=', o.date_start),('date_to', '&lt;=', o.date_end),('company', '=', o.company)]))" t-esc-options='{"widget": "monetary", "display_currency": "res_company.currency_id"}'/> </td>
+
+										<td style="border:1px solid #7b7e81;border-collapse: collapse"><span t-esc="sum(line.tunj_transport_makan for line in request.env['brt.tb.payroll.export'].search([('date_from', '&gt;=', o.date_start),('date_to', '&lt;=', o.date_end),('company', '=', o.company)]))" t-esc-options='{"widget": "monetary", "display_currency": "res_company.currency_id"}'/> </td> 
+
+										<td style="border:1px solid #7b7e81;border-collapse: collapse"><span t-esc="sum(line.tunj_lain for line in request.env['brt.tb.payroll.export'].search([('date_from', '&gt;=', o.date_start),('date_to', '&lt;=', o.date_end),('company', '=', o.company)]))" t-esc-options='{"widget": "monetary", "display_currency": "res_company.currency_id"}'/> </td>
+
+			                            <td style="border:1px solid #7b7e81;border-collapse: collapse"><span t-esc="sum(line.tunjangan_proyek for line in request.env['brt.tb.payroll.export'].search([('date_from', '&gt;=', o.date_start),('date_to', '&lt;=', o.date_end),('company', '=', o.company)]))" t-esc-options='{"widget": "monetary", "display_currency": "res_company.currency_id"}'/> </td>
+
+			                            <td style="border:1px solid #7b7e81;border-collapse: collapse"><span t-esc="sum(line.rapel for line in request.env['brt.tb.payroll.export'].search([('date_from', '&gt;=', o.date_start),('date_to', '&lt;=', o.date_end),('company', '=', o.company)]))" t-esc-options='{"widget": "monetary", "display_currency": "res_company.currency_id"}'/> </td>
+
+			                            <td style="border:1px solid #7b7e81;border-collapse: collapse"><span t-esc="sum(line.lembur for line in request.env['brt.tb.payroll.export'].search([('date_from', '&gt;=', o.date_start),('date_to', '&lt;=', o.date_end),('company', '=', o.company)]))" t-esc-options='{"widget": "monetary", "display_currency": "res_company.currency_id"}'/> </td>
+
+			                            <td style="border:1px solid #7b7e81;border-collapse: collapse"><span t-esc="sum(line.t_hp for line in request.env['brt.tb.payroll.export'].search([('date_from', '&gt;=', o.date_start),('date_to', '&lt;=', o.date_end),('company', '=', o.company)]))" t-esc-options='{"widget": "monetary", "display_currency": "res_company.currency_id"}'/> </td> 
+
+			                            <td style="border:1px solid #7b7e81;border-collapse: collapse"><span t-esc="sum(line.reimb_medical for line in request.env['brt.tb.payroll.export'].search([('company', '=',o.company)]))" t-esc-options='{"widget": "monetary", "display_currency": "res_company.currency_id"}'/> </td> 
+
+			                            <td style="border:1px solid #7b7e81;border-collapse: collapse"><span t-esc="sum(line.pot_absen for line in request.env['brt.tb.payroll.export'].search([('date_from', '&gt;=', o.date_start),('date_to', '&lt;=', o.date_end),('company', '=', o.company)]))" t-esc-options='{"widget": "monetary", "display_currency": "res_company.currency_id"}'/> </td> 
+
+			                            <td style="border:1px solid #7b7e81;border-collapse: collapse"><span t-esc="sum(line.thp for line in request.env['brt.tb.payroll.export'].search([('date_from', '&gt;=', o.date_start),('date_to', '&lt;=', o.date_end),('company', '=', o.company)]))" t-esc-options='{"widget": "monetary", "display_currency": "res_company.currency_id"}'/> </td> 
+
+			                            <td style="border:1px solid #7b7e81;border-collapse: collapse"><span t-esc="sum(line.pinjaman for line in request.env['brt.tb.payroll.export'].search([('date_from', '&gt;=', o.date_start),('date_to', '&lt;=', o.date_end),('company', '=', o.company)]))" t-esc-options='{"widget": "monetary", "display_currency": "res_company.currency_id"}'/> </td> 
+
+			                            <td style="border:1px solid #7b7e81;border-collapse: collapse"><span t-esc="sum(line.jamsostek for line in request.env['brt.tb.payroll.export'].search([('date_from', '&gt;=', o.date_start),('date_to', '&lt;=', o.date_end),('company', '=', o.company)]))" t-esc-options='{"widget": "monetary", "display_currency": "res_company.currency_id"}'/> </td> 
+
+			                            <td style="border:1px solid #7b7e81;border-collapse: collapse"><span t-esc="sum(line.bpjs for line in request.env['brt.tb.payroll.export'].search([('date_from', '&gt;=', o.date_start),('date_to', '&lt;=', o.date_end),('company', '=', o.company)]))" t-esc-options='{"widget": "monetary", "display_currency": "res_company.currency_id"}'/> </td>
+
+			                            <td style="border:1px solid #7b7e81;border-collapse: collapse;"><span t-esc="sum(line.tot_dibayarkan for line in request.env['brt.tb.payroll.export'].search([('date_from', '&gt;=', o.date_start),('date_to', '&lt;=', o.date_end),('company', '=', o.company)]))" t-esc-options='{"widget": "monetary", "display_currency": "res_company.currency_id"}'/> </td>
+
+		                             	<td style="border:1px solid #7b7e81;border-collapse: collapse;"><span t-esc="sum(line.pph21 for line in request.env['brt.tb.payroll.export'].search([('date_from', '&gt;=', o.date_start),('date_to', '&lt;=', o.date_end),('company', '=', o.company)]))" t-esc-options='{"widget": "monetary", "display_currency": "res_company.currency_id"}'/> </td>
+
+			                            <td style="border:1px solid #7b7e81;border-collapse: collapse;"> <span t-esc="sum(line.tot_gaji for line in request.env['brt.tb.payroll.export'].search([('date_from', '&gt;=', o.date_start),('date_to', '&lt;=', o.date_end),('company', '=', o.company)]))" t-esc-options='{"widget": "monetary", "display_currency": "res_company.currency_id"}'/> </td>
+								 	</tr>
+								 </tbody>
+							 </table>
+						</div>
+					</div>
+				</div> 
+			</t>
+		</template>
+
+
+	</data>
+</odoo>

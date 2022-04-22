@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id='mjt_view_partner_form_inherit' model='ir.ui.view'>
+        <field name='name'>mjt.view.partner.form.inherit</field>
+        <field name="model">res.partner</field>
+        <field name="inherit_id" ref="base.view_partner_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//form/sheet/group[1]" position="inside">
+                <group name="partner_dms" string="Documents">
+                    <group>
+                        <field name="dms_id"/>
+                    </group>
+                </group>
+            </xpath>
+        </field>
+    </record>
+</odoo>

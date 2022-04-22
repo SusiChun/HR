@@ -1,0 +1,24 @@
+<odoo>
+    <data>
+        <record id="inherit_contract_form_view_shift" model="ir.ui.view">
+            <field name="name">hr.contract.inherit_security_shift</field>
+            <field name="model">hr.contract</field>
+            <field name="inherit_id" ref="hr_contract.hr_contract_view_form"/>
+            <field name="arch" type="xml">
+                <xpath expr="//field[@name='working_hours']" position="after">
+                    <field name="security_shift_id"/>
+                </xpath>
+            </field>
+        </record>
+        <record id="inherit_job_form_view_shift" model="ir.ui.view">
+            <field name="name">hr.job.inherit_security_shift</field>
+            <field name="model">hr.job</field>
+            <field name="inherit_id" ref="hr.view_hr_job_form"/>
+            <field name="arch" type="xml">
+                <xpath expr="//field[@name='department_id']" position="after">
+                    <field name="security"/>
+                </xpath>
+            </field>
+        </record>
+    </data>
+</odoo>

@@ -1,0 +1,115 @@
+<odoo>
+  <data>
+
+       <record id="view_payslip_xls_export_report_wiz" model="ir.ui.view">
+            <field name="name">excel.export.payslip.report.wiz</field>
+            <field name="model">excel.export.payslip</field>
+            <field name="type">form</field>
+            <field name="arch" type="xml">
+                <form string="Excel Export">
+                   <group cospan="2" col="2">
+                        <field name="name" invisible="1"/>
+                        <h4>Click On Link To Download Xls File: &#160;<field name="file" filename="name" nolabel="1"/></h4>
+                    </group>
+                    <footer>
+                        <button special="cancel" string="Cancel" colspan="2" />
+                    </footer>
+                </form>
+            </field>
+        </record>
+
+      <record id="view_brt_payslip_export_report" model="ir.ui.view">
+         <field name="name">Payslip Export</field>
+         <field name="model">brt.export.report.wizard</field>
+         <field name="type">form</field>
+         <field name="arch" type="xml">
+             <form string="View Payslip Export">
+                <!--  <group string="Employees">
+                     <field name="employee_ids" nolabel="1" required="0">
+                         <tree>
+                             <field name="name" />
+                             <field name="department_id" />
+                             <field name="work_email" />
+                         </tree>
+                     </field>
+                 </group> -->
+                 <group >
+                     <field name="date_start" required="1" />
+                     <field name="date_end" required="1" />
+                     <field name="export_report" required="1" invisible="0"/>
+                     <field name="company_id" required="1" invisible="0"/>
+                     <field name="company" required="1" invisible="1"/>
+                 </group>
+                 <footer>
+                     <button name="print_payslip_export_report" string="Export" attrs="{'invisible': ['|', ('date_start', '=', False), ('date_end', '=', False)]}" type="object" colspan="2" class="oe_highlight" icon="fa-file-excel-o"/> 
+                     <button special="cancel" string="Cancel" colspan="2" />
+                 </footer>
+             </form>
+         </field>
+      </record>
+
+        <record id="action_export_pdf" model="ir.actions.act_window">
+            <field name="name">Payslip Export</field>
+            <field name="res_model">brt.export.report.wizard</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">form</field>
+            <field name="target">new</field>
+        </record>
+
+
+        <record id="detail_report_department" model="ir.actions.act_window">
+            <field name="name">Detail Report Per Divisi </field>
+            <field name="res_model">brt.tb.department.export</field>
+            <field name="target">current</field>
+            <field name="context">{}</field> 
+            <field name="domain"></field>
+            <field name="limit">80</field>  
+            <field name="view_type">form</field>
+            <field name="view_mode">tree,form,graph</field>
+            <field name="help" type="html">
+                <p class="oe_view_nocontent_create">Belum Ada Data</p>
+            </field>
+        </record>
+
+        <record id="detail_report_employee" model="ir.actions.act_window">
+            <field name="name">Detail Report Per Employee </field>
+            <field name="res_model">brt.tb.payroll.export</field>
+            <field name="target">current</field>
+            <field name="context">{}</field> 
+            <field name="domain"></field>
+            <field name="limit">80</field>  
+            <field name="view_type">form</field>
+            <field name="view_mode">tree,form,graph</field>
+            <field name="help" type="html">
+                <p class="oe_view_nocontent_create">Belum Ada Data</p>
+            </field>
+        </record>
+
+       
+
+
+        <!-- <menuitem action="action_print_brt_payslip_export_report"
+                id="menu_export_payroll_reports_file"
+                groups="base.group_hr_manager"
+                parent="hr.menu_hr_reporting"/> -->
+      <!-- <menuitem name="Export Payslip" id="menu_report_brt" web_icon="brt_payroll_report,static/description/icons.png"/> -->
+        <menuitem action="action_export_pdf" name="Export Payslip" id="menu_export_pdf" parent="idn_payroll_reports.menu_payroll_reports"/>
+
+        <menuitem name="Detail Report" id="menu_detail_report" parent="idn_payroll_reports.menu_payroll_reports"/>
+
+        <menuitem action="detail_report_employee" name="Detail Payslip Employee" id="menu_detail_report_employee" parent="brt_payroll_report.menu_detail_report"/>
+
+        <menuitem action="detail_report_department" name="Detail Payslip Department" id="menu_detail_report_department" parent="brt_payroll_report.menu_detail_report"/>
+       
+
+
+
+       
+
+      <!-- <menuitem action="action_export_pdf" name="Export Payslip" id="menu_export_pdf" parent="menu_report_brt"/> -->
+      <!-- <menuitem action="action_export_excel" name="To Excell" id="menu_export_excel" parent="menu_report_brt"/> -->
+
+       
+        
+  </data>
+</odoo>

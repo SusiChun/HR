@@ -1,0 +1,220 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data noupdate="1">
+
+        <record id="partner_categ_mezora" model="res.partner.category">
+            <field name="name">MITRA MEZORA</field>
+            <field name="active">True</field>
+        </record>
+        <record id="partner_categ_zoya" model="res.partner.category">
+            <field name="name">MITRA ZOYA</field>
+            <field name="active">True</field>
+        </record>
+
+        <!-- <record id="categ_view1" model="product.category">
+            <field name="parent_id">1</field>
+            <field name="name">Perlengkapan BU</field>
+            <field name="type">view</field>
+            <field name="property_valuation">real_time</field>
+        </record>
+        <record id="categ_view2" model="product.category">
+            <field name="parent_id">1</field>
+            <field name="name">Fixed Asset  Land</field>
+            <field name="type">view</field>
+            <field name="property_valuation">real_time</field>
+        </record>
+        <record id="categ_view3" model="product.category">
+            <field name="parent_id">1</field>
+            <field name="name">Barang Konsinyasi</field>
+            <field name="type">view</field>
+            <field name="property_valuation">real_time</field>
+        </record>
+        <record id="categ_view4" model="product.category">
+            <field name="parent_id">1</field>
+            <field name="name">Produk WIP</field>
+            <field name="type">view</field>
+            <field name="property_valuation">real_time</field>
+        </record>
+        <record id="categ_view5" model="product.category">
+            <field name="parent_id">1</field>
+            <field name="name">Fixed Asset  Building</field>
+            <field name="type">view</field>
+            <field name="property_valuation"></field>
+        </record>
+        <record id="categ_view6" model="product.category">
+            <field name="parent_id">1</field>
+            <field name="name">Fixed Asset  Furniture and Ficture</field>
+            <field name="type">view</field>
+            <field name="property_valuation">real_time</field>
+        </record>
+        <record id="categ_view7" model="product.category">
+            <field name="parent_id">1</field>
+            <field name="name">Fixed Asset  Machine</field>
+            <field name="type">view</field>
+            <field name="property_valuation">real_time</field>
+        </record>
+        <record id="categ_view8" model="product.category">
+            <field name="parent_id">1</field>
+            <field name="name">Fixed Asset  Office Equipment</field>
+            <field name="type">view</field>
+            <field name="property_valuation">real_time</field>
+        </record>
+        <record id="categ_view9" model="product.category">
+            <field name="parent_id">1</field>
+            <field name="name">Fixed Asset  Software</field>
+            <field name="type">view</field>
+            <field name="property_valuation">real_time</field>
+        </record>
+        <record id="categ_view10" model="product.category">
+            <field name="parent_id">1</field>
+            <field name="name">Fixed Asset  Store Equipment</field>
+            <field name="type">view</field>
+            <field name="property_valuation">real_time</field>
+        </record>
+        <record id="categ_view11" model="product.category">
+            <field name="parent_id">1</field>
+            <field name="name">Fixed Asset  Vehicle</field>
+            <field name="type">view</field>
+            <field name="property_valuation">real_time</field>
+        </record>
+        <record id="categ_view12" model="product.category">
+            <field name="parent_id">1</field>
+            <field name="name">ATK</field>
+            <field name="type">view</field>
+            <field name="property_valuation">real_time</field>
+        </record>
+        <record id="categ_view13" model="product.category">
+            <field name="parent_id">1</field>
+            <field name="name">BARANG CETAKAN  CATALOG</field>
+            <field name="type">view</field>
+            <field name="property_valuation">real_time</field>
+        </record>
+        <record id="categ_view14" model="product.category">
+            <field name="parent_id">1</field>
+            <field name="name">BARANG CETAKAN  FLYER</field>
+            <field name="type">view</field>
+            <field name="property_valuation">real_time</field>
+        </record>
+        <record id="categ_view15" model="product.category">
+            <field name="parent_id">1</field>
+            <field name="name">BARANG CETAKAN  PRODUKSI</field>
+            <field name="type">view</field>
+            <field name="property_valuation">real_time</field>
+        </record>
+        <record id="categ_view16" model="product.category">
+            <field name="parent_id">1</field>
+            <field name="name">BARANG CETAKAN  SERAGAM</field>
+            <field name="type">view</field>
+            <field name="property_valuation">real_time</field>
+        </record>
+        <record id="categ_view17" model="product.category">
+            <field name="parent_id">1</field>
+            <field name="name">Bahan Baku</field>
+            <field name="type">view</field>
+            <field name="property_valuation">real_time</field>
+        </record>
+        <record id="categ_view18" model="product.category">
+            <field name="parent_id">1</field>
+            <field name="name">Bahan Pembantu</field>
+            <field name="type">view</field>
+            <field name="property_valuation">real_time</field>
+        </record>
+        <record id="categ_view19" model="product.category">
+            <field name="parent_id">1</field>
+            <field name="name">Fixed Asset  Computer</field>
+            <field name="type">view</field>
+            <field name="property_valuation">real_time</field>
+        </record>
+        <record id="categ_view20" model="product.category">
+            <field name="parent_id">1</field>
+            <field name="name">Barang Cetakan</field>
+            <field name="type">view</field>
+            <field name="property_valuation">real_time</field>
+        </record>
+        <record id="categ_view21" model="product.category">
+            <field name="parent_id">1</field>
+            <field name="name">BARANG JADI</field>
+            <field name="type">view</field>
+            <field name="property_valuation">real_time</field>
+        </record>
+        <record id="categ_view22" model="product.category">
+            <field name="parent_id">1</field>
+            <field name="name">PERBAIKAN GEDUNG DAN SEKITARNYA</field>
+            <field name="type">view</field>
+            <field name="property_valuation">real_time</field>
+        </record>
+        <record id="categ_view23" model="product.category">
+            <field name="parent_id">1</field>
+            <field name="name">BARANG CETAKAN  POP</field>
+            <field name="type">view</field>
+            <field name="property_valuation">real_time</field>
+        </record>
+        <record id="categ_view24" model="product.category">
+            <field name="parent_id">1</field>
+            <field name="name">HANGER</field>
+            <field name="type">view</field>
+            <field name="property_valuation">real_time</field>
+        </record>
+        <record id="categ_view25" model="product.category">
+            <field name="parent_id">1</field>
+            <field name="name">MANNEQUIN</field>
+            <field name="type">view</field>
+            <field name="property_valuation">real_time</field>
+        </record>
+        <record id="categ_view26" model="product.category">
+            <field name="parent_id">1</field>
+            <field name="name">PERLENGKAPAN KANTOR</field>
+            <field name="type">view</field>
+            <field name="property_valuation">real_time</field>
+        </record>
+        <record id="categ_view27" model="product.category">
+            <field name="parent_id">1</field>
+            <field name="name">BALIGHO (SPANDUK)</field>
+            <field name="type">view</field>
+            <field name="property_valuation">real_time</field>
+        </record>
+        <record id="categ_view28" model="product.category">
+            <field name="parent_id">1</field>
+            <field name="name">GIFT (GWP)</field>
+            <field name="type">view</field>
+            <field name="property_valuation">real_time</field>
+        </record>
+        <record id="categ_view29" model="product.category">
+            <field name="parent_id">1</field>
+            <field name="name">BARANG CETAKAN  CALENDAR</field>
+            <field name="type">view</field>
+            <field name="property_valuation">real_time</field>
+        </record>
+        <record id="categ_view30" model="product.category">
+            <field name="parent_id">1</field>
+            <field name="name">PERLENGKAPAN TOKO</field>
+            <field name="type">view</field>
+            <field name="property_valuation">real_time</field>
+        </record>
+        <record id="categ_view31" model="product.category">
+            <field name="parent_id">1</field>
+            <field name="name">BUSANA</field>
+            <field name="type">view</field>
+            <field name="property_valuation">real_time</field>
+        </record>
+        <record id="categ_view32" model="product.category">
+            <field name="parent_id">1</field>
+            <field name="name">NONE</field>
+            <field name="type">view</field>
+            <field name="property_valuation">real_time</field>
+        </record>
+        <record id="categ_view33" model="product.category">
+            <field name="parent_id">1</field>
+            <field name="name">NON BUSANA</field>
+            <field name="type">view</field>
+            <field name="property_valuation">real_time</field>
+        </record>
+        <record id="categ_view34" model="product.category">
+            <field name="parent_id">1</field>
+            <field name="name">COSMETICS</field>
+            <field name="type">view</field>
+            <field name="property_valuation">real_time</field>
+        </record> -->
+
+    </data>
+</odoo>

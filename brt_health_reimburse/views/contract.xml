@@ -1,0 +1,34 @@
+<odoo>
+    <data>
+
+        <record id="view_hr_contract_form_inherit" model="ir.ui.view">
+            <field name="name">view_hr_contract_form_inherit</field>
+            <field name="model">hr.contract</field>
+            <field name="inherit_id" ref="hr_contract.hr_contract_view_form"/>
+            <field name="arch" type="xml">
+                <!-- <xpath expr="//page[2]" position="after"> -->
+                <!-- <xpath expr="//notebook/page[1]" position="after" > -->
+                <xpath expr="//notebook/page[1]" position="after">
+                    <page string="Reimbursement">
+                        <group colspan="2">
+                            <field name="limit_reimbers_year"/>
+                            <field name="berobat" readonly="1"/>
+                            <field name="kacamata" readonly="1"/>
+                            <field name="sisa" readonly="1"/>
+                        </group>
+                       <!--  <group string="History">
+                            <field name="history_ids" nolabel="1" colspan="4">
+                                <tree string="Log" editable="bottom" create="false">
+                                   <field name="date" readonly="1"/>
+                                   <field name="name" readonly="1"/>
+                                   <field name="amount" readonly="1"/>
+                                </tree>
+                            </field> 
+                        </group> -->
+                     </page>
+                 </xpath>
+            </field>
+        </record>
+
+    </data>
+</odoo>

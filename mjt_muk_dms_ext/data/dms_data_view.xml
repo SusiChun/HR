@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data noupdate="1">
+        <record id="dms_config" model="muk_dms.settings">
+            <field name="name">DMS Config</field>
+            <field name="save_type" >database</field>
+        </record>
+        <record id="customer_dms_directory" model="muk_dms.directory">
+            <field name="name">Customer</field>
+            <field name="is_root_directory" eval="True"/>
+            <field name="settings" ref="dms_config"/>
+        </record>
+    </data>
+</odoo>

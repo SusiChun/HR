@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+
+       <record id="employee_attendance_form_view" model="ir.ui.view">
+            <field name="name">Employee Attendance</field>
+            <field name="model">employee.attendance</field>
+            <field name="arch" type="xml">
+            	<form string="Group">
+                    <sheet>
+                        <group>	
+                        	<group>
+                                <field name="s_date" attrs="{'invisible': [('print_by', '=',False)]}" string="Date"/>
+                                <field name="start_date" invisible="1"/>
+            					<!-- <field name="start_date" attrs="{'invisible': [('print_by', '=',False)]}"/> -->.
+                                <field name="print_by" widget="radio"/>
+            				</group>
+                            <group>
+                                <field name="end_date" invisible="1"/>
+                                <!-- <field name="end_date" attrs="{'invisible': ['|'('print_by', '=','daily'),('start_date', '!=',True)]}"/> -->
+                                <field name="all_employee"/>
+                                <field name="employee_ids" widget = "many2many_tags" attrs="{'invisible': [('all_employee', '=',True)]}"/>
+                            </group>
+            			</group>
+                        <notebook>
+                        <page string="Attendance Details">
+                                     <field name="attendance_details" invisible="0" />
+                       </page>
+                       <page string="Attendance Details" invisible="1">
+                                     <field name="attendance_details_duplicate" invisible="0" />
+                       </page>
+                       
+                       </notebook>
+            			<footer>
+	                        <button name="print_report" type="object" string="PDF" class="oe_highlight"/>
+	                        or
+                            <!--<button name="print_report_excel" type="object" string="Excel" class="oe_highlight"/>
+                            or-->
+	                        <button string="Cancel" class="oe_link"
+	                            special="cancel" />
+                    	</footer>	
+            		</sheet>
+            	</form>		
+           </field>
+       </record>
+       
+      <record id="action_employee_attendance" model="ir.actions.act_window">
+        <field name="name">Employee Attendance</field>
+        <field name="res_model">employee.attendance</field>
+        <field name="view_type">form</field>
+        <field name="view_mode">form</field>
+        <field name="target">new</field>
+      </record>
+      
+      <menuitem id="menu_employee_attendances" name="Employee Attendance" parent="hr_attendance.menu_hr_attendance_report" sequence="11" action="action_employee_attendance"/>
+
+
+    </data>
+</odoo>

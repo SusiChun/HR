@@ -1,0 +1,6 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+request,request_regular,model_attendance_regular,base.group_user,1,1,1,0
+request_line,request_regular_line,model_attendance_correction_line,base.group_user,1,1,1,0
+requestes1,employee,hr.model_hr_employee,base.group_user,1,1,0,0
+request3,request_regular,hr_contract.model_hr_contract,base.group_user,1,1,1,0
+request4,request_regular,hr_payroll_allowance.model_hr_contract_wage,base.group_user,1,1,1,0

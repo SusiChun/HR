@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+            
+    <record id="attendance_wiz" model="ir.ui.view">
+        <field name="name">attend.wiz</field>
+        <field name="model">attendance.wiz</field>
+        <field name="arch" type="xml">
+           <form string="Attendance Check">
+               <sheet>
+
+                    <div class="oe_title">
+                        <h4>
+                            <field name="name" readonly="1" nolabel="1" invisible="1"/>
+                        </h4>
+        </div>
+                   <group col="4" colspan="4">
+                       <field name="from_date"/>
+                       <field name="to_date"/>
+                       <field name="employee_id" readonly ="1"/>
+                       <field name="grade" readonly ="1"/>
+                   </group>
+                   <group>
+                        <button name="generate_attendance" type="object" string="Show Data" class="oe_highlight"/>
+                        <button name="generate_excel" type="object" string="Export to Excel" class="oe_highlight"/>
+
+                   </group>
+                   <notebook>
+                       <page name="attendance" string="Attendance Line">
+                           <field name="attendance_ids" nolabel="1">
+                               <tree create="false" edit="false" delete="false" colors="red:marks in ('Hari Libur','Libur Nasional')">
+                                   <field name="hr_attendance_id" invisible="1"/>
+                                    <field name="atten_id" invisible="1"/>
+                                    <field name="employee_id"  invisible="1"/>
+                                    <field name="hari"/>
+                                    <field name="date_check"/>
+                                    <field name="check_in"/>
+                                    <field name="check_out"/>
+                                    <field name="marks"/>
+                                    <field name="reg_reason"/>
+                                    <field name="overtime"/>
+                                    <field name="overtime_amount" groups="hr.group_hr_user,idn_payroll.group_hr_payroll_admin"/>
+                                    <field name="meal_allowance" groups="hr.group_hr_user,idn_payroll.group_hr_payroll_admin"/>
+                                    <field name="ot_total" groups="hr.group_hr_user,idn_payroll.group_hr_payroll_admin"/>
+                               </tree>
+
+                           </field>
+                       </page>
+                   </notebook>
+               </sheet>
+           </form>
+        </field>
+    </record>
+
+<!--     <act_window id="attendance_wiz_action"
+            name="Attendance Data Check"
+            res_model="attendance.wiz"
+            src_model="attendance.regular"
+            view_mode="form"
+            target="current"
+        /> -->
+
+    <record id="action_attendance_wizard_form" model="ir.actions.act_window">
+         <field name="name">Attendance Data Check</field>
+         <field name="view_id" ref="attendance_wiz"/>
+         <field name="view_type">form</field>
+         <field name="view_mode">form</field>
+         <field name="res_model">attendance.wiz</field>
+         <field name="target">current</field>
+     </record>
+
+     <menuitem 
+        id="menu_hris_attendance_wiz"
+        name="Attendance Data"
+        parent="hr_attendance.menu_hr_attendance_manage_attendances"
+        action="action_attendance_wizard_form"
+        sequence="110"
+        groups="base.group_user"/>
+
+
+      <record  id="attendance_wiz_view_form_officer_hr_access" model="ir.ui.view">    
+          <field name="name">attendance_wiz_view_form_officer_hr_access</field>           
+          <field name="model">attendance.wiz</field>           
+          <field name="inherit_id" ref="hris_attendance_check.attendance_wiz" />
+          <field name="groups_id" eval="[(6, 0, [ref('hr.group_hr_user')])]" />
+          <field name="arch" type="xml">               
+            <xpath expr="//field[@name='employee_id']" position="attributes">
+              <attribute name="readonly">0</attribute> 
+            </xpath> 
+          </field> 
+      </record>
+
+      <record  id="attendance_wiz_view_form_manager_hr_access" model="ir.ui.view">    
+          <field name="name">attendance_wiz_view_form_manager_hr_access</field>           
+          <field name="model">attendance.wiz</field>           
+          <field name="inherit_id" ref="hris_attendance_check.attendance_wiz" />
+          <field name="groups_id" eval="[(6, 0, [ref('brt_health_reimburse.manager')])]" />
+          <field name="arch" type="xml">               
+            <xpath expr="//field[@name='employee_id']" position="attributes">
+              <attribute name="readonly">0</attribute> 
+            </xpath> 
+          </field> 
+      </record>
+
+</odoo>

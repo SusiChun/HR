@@ -1,0 +1,347 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+   <record id="attendance_regular_check" model="ir.ui.view">
+        <field name="name">attend.regular.check</field>
+        <field name="model">attendance.regular.check</field>
+        <field name="arch" type="xml">
+           <form string="Attendance Check">
+               <sheet>
+
+                    <div class="oe_title">
+                        <h4>
+                            <field name="name" readonly="1" nolabel="1" invisible="1"/>
+                        </h4>
+        </div>
+                   <group col="4" colspan="4">
+                       <field name="from_date"/>
+                       <field name="to_date"/>
+                       <field name="employee_id" readonly="1"/>
+                       <field name="grade" readonly="1"/>
+                   </group>
+                   <group>
+                        <button name="generate_attendance" type="object" string="Show Data" class="oe_highlight"/>
+                        <button name="generate_excel" type="object" string="Export to Excel" class="oe_highlight"/>
+
+                   </group>
+                   <notebook>
+                       <page name="attendance" string="Attendance Line">
+                           <field name="attendance_ids" nolabel="1">
+                               <tree create="false" edit="false" delete="false" colors="red:marks in ('Hari Libur','Libur Nasional')">
+                                   <field name="hr_attendance_id" invisible="1"/>
+                                    <field name="atten_id" invisible="1"/>
+                                    <field name="employee_id"  invisible="1"/>
+                                    <field name="hari"/>
+                                    <field name="date_check"/>
+                                    <field name="check_in"/>
+                                    <field name="check_out"/>
+                                    <field name="marks"/>
+                                    <field name="reg_reason"/>
+                               </tree>
+
+                           </field>
+                       </page>
+                   </notebook>
+               </sheet>
+           </form>
+        </field>
+    </record>
+
+   <record model="ir.actions.act_window" id="action_view_regularization_hris">
+        <field name="name">Attendance View Request</field>
+        <field name="res_model">attendance.regular.check</field>
+        <field name="view_type">form</field>
+        <field name="view_mode">form</field>
+        <field name="view_id" ref="attendance_regular_check"/>
+        <field name="target">current</field>
+    </record>
+
+ <!--    <menuitem 
+      id="applying_regular_hris"
+      name="Attendance Data"
+      parent="hr_attendance.menu_hr_attendance_manage_attendances"
+      action="action_view_regularization_hris"
+      sequence="50"
+      groups="base.group_user"/>
+ -->
+
+    <record id="view_regular_check_tree" model="ir.ui.view">
+        <field name="name">attendance.regular.check.tree</field>
+        <field name="model">attendance.regular.check</field>
+        <field name="priority" eval="8" />
+        <field name="arch" type="xml">
+            <tree string="Attendance Check">
+                <field name="from_date"/>
+                <field name="to_date"/>
+                <field name="employee_id"/>
+                 <field name="company_id"/>
+            </tree>
+        </field>
+    </record>
+
+   <record model="ir.actions.act_window" id="action_view_regularization_check">
+        <field name="name">Attendance Data</field>
+        <field name="res_model">attendance.regular.check</field>
+        <field name="view_type">form</field>
+        <field name="view_mode">tree,form</field>
+        <field name="domain">[]</field>
+        <field name="help" type="html">
+            <p class="oe_view_no_content_create">Create new Attendance Check
+            </p>
+        </field>
+    </record>
+
+<!--     <menuitem 
+      id="applying_regular_check"
+      name="Attendance Data List"
+      parent="hr_attendance.menu_hr_attendance_manage_attendances"
+      action="action_view_regularization_check"
+      sequence="60"
+      groups="base.group_no_one"/>
+ -->
+    <!-- Excel Report Download Wizard Form View-->
+    <record id="view_recap_excel" model="ir.ui.view">
+     <field name="name">view.report.excel</field>
+     <field name="model">report.excel</field>
+     <field name="arch" type="xml">
+     <form string="Excel Report file">
+         <group>
+             <field name="file_download" readonly="1" filename="name"/>
+             <field name="name" invisible="1"/>
+         </group>
+         <footer>
+             <button string="Cancel" class="oe_link oe_highlight" special="cancel"/>
+        </footer>
+         </form>
+         </field>
+    </record>
+
+     <!-- Excel Report Download Wizard Action View-->
+     <record id="action_report_excel_form" model="ir.actions.act_window">
+         <field name="name">Reports Excel</field>
+         <field name="view_id" ref="view_recap_excel"/>
+         <field name="view_type">form</field>
+         <field name="view_mode">form</field>
+         <field name="res_model">report.excel</field>
+         <field name="target">new</field>
+     </record>
+
+
+     <record model="ir.actions.act_window" id="action_view_request_regularization">
+        <field name="name">Approval Attendance Correction</field>
+        <field name="res_model">attendance.regular</field>
+        <field name="view_type">form</field>
+        <field name="view_mode">tree,form</field>
+        <field name="domain">[('state_select','!=','approved'),('state_select','!=','reject')]</field>
+        <field name="context">{'group_by':['state_select']}</field>
+        <field name="help" type="html">
+            <p class="oe_view_no_content_create">Create new Record
+            </p>
+        </field>
+    </record>
+
+    <record model="ir.actions.act_window" id="attendance_regularization.action_view_regularization1">
+        <field name="name">Attendance Correction Request</field>
+        <field name="res_model">attendance.regular</field>
+        <field name="view_type">form</field>
+        <field name="view_mode">tree,form</field>
+        <field name="domain">[]</field>
+        <field name="context">{'group_by':['state_select']}</field>
+        <field name="help" type="html">
+            <p class="oe_view_no_content_create">Create new Request
+            </p>
+        </field>
+    </record>
+
+    <record  id="correction_view_form_employee_access" model="ir.ui.view">    
+        <field name="name">correction_view_form_employee_access</field>           
+        <field name="model">attendance.regular</field>           
+        <field name="inherit_id" ref="attendance_regularization.attendance_regular11" />
+        <field name="groups_id" eval="[(6, 0, [ref('base.group_user')])]" />
+        <field name="arch" type="xml">               
+          <xpath expr="//field[@name='attendance_ids']" position="attributes">                   
+            <attribute name="attrs">{'readonly':[('state_select','in',['requested', 'Confirm Manager', 'Confirm HRD'])]}</attribute> 
+          </xpath> 
+          <xpath expr="//field[@name='from_date']" position="attributes">                   
+            <attribute name="attrs">{'readonly':[('state_select','in',['requested', 'Confirm Manager', 'Confirm HRD'])]}</attribute> 
+          </xpath> 
+          <xpath expr="//field[@name='to_date']" position="attributes">                   
+            <attribute name="attrs">{'readonly':[('state_select','in',['requested', 'Confirm Manager', 'Confirm HRD'])]}</attribute> 
+          </xpath> 
+          <xpath expr="//field[@name='employee_id']" position="attributes">                   
+            <attribute name="attrs">{'readonly':[('state_select','in',['requested', 'Confirm Manager', 'Confirm HRD'])]}</attribute> 
+          </xpath> 
+          <xpath expr="//button[@name='generate_attendance']" position="attributes">                   
+            <attribute name="attrs">{'invisible':[('state_select','in',['requested', 'Confirm Manager', 'Confirm HRD'])]}</attribute> 
+          </xpath> 
+        </field> 
+    </record>
+
+    <record  id="correction_view_form_manager_access" model="ir.ui.view">    
+        <field name="name">correction_view_form_manager_access</field>           
+        <field name="model">attendance.regular</field>           
+        <field name="inherit_id" ref="attendance_regularization.attendance_regular11" />
+        <field name="groups_id" eval="[(6, 0, [ref('brt_health_reimburse.manager')])]" />
+        <field name="arch" type="xml">               
+          <xpath expr="//field[@name='attendance_ids']" position="attributes">                   
+            <attribute name="attrs">{'readonly':[('state_select','in',['Confirm HRD', 'Confirm Manager'])]}</attribute> 
+          </xpath> 
+          <!-- <xpath expr="//button[@name='regular_approval']" position="attributes">                   
+            <attribute name="attrs">{'invisible':[('state_select','not in',['Confirm Manager'])]}</attribute> 
+          </xpath>  -->
+        </field> 
+    </record>
+
+    <record  id="correction_view_form_manager_hr_access" model="ir.ui.view">    
+          <field name="name">correction_view_form_manager_hr_access</field>           
+          <field name="model">attendance.regular</field>           
+          <field name="inherit_id" ref="attendance_regularization.attendance_regular11" />
+          <field name="groups_id" eval="[(6, 0, [ref('hr.group_hr_manager')])]" />
+          <field name="arch" type="xml">               
+            <xpath expr="//field[@name='attendance_ids']" position="attributes">                   
+              <attribute name="attrs">{'readonly':[('state_select','in',['Confirm HRD'])]}</attribute> 
+            </xpath> 
+           
+          </field> 
+      </record>
+
+
+    <record id="correction_regular_form_inherit_hris" model="ir.ui.view">
+      <field name="name">correction.regular.form.inherit.hris</field>
+      <field name="model">attendance.regular</field>
+       <field name="inherit_id" ref="attendance_regularization.attendance_regular11"/>
+      <field name="arch" type="xml">
+          <xpath expr="//button[@name='submit_reg']" position="attributes">                   
+            <attribute name="string">Submit To GH</attribute> 
+          </xpath>
+          <xpath expr="//button[@name='confirm_manager']" position="attributes">
+            <attribute name="string">Submit To HRD</attribute> 
+            <attribute name="groups">hr.group_hr_manager,brt_health_reimburse.manager</attribute>
+          </xpath> 
+          <xpath expr="//field[@name='check_in_correction']" position="attributes">                   
+            <attribute name="attrs">{'readonly': [('state_select','not in',['To Submit','requested','Confirm Manager'])]}</attribute> 
+          </xpath> 
+          <xpath expr="//field[@name='check_out_correction']" position="attributes">                   
+            <attribute name="attrs">{'readonly': [('state_select','not in',['To Submit','requested','Confirm Manager'])]}</attribute> 
+          </xpath> 
+          <xpath expr="//field[@name='overtime']" position="attributes">                   
+            <attribute name="attrs">{'readonly': [('state_select','not in',['To Submit','requested','Confirm Manager'])]}</attribute> 
+          </xpath>
+          <xpath expr="//field[@name='employee_id']" position="attributes">
+            <attribute name="groups">base.group_user</attribute>
+            <attribute name="readonly">1</attribute>
+          </xpath>
+          <xpath expr="//h4" position="after">                   
+            
+              <label for="att_number" class="oe_edit_only"/>
+              <h2>
+                <field name="att_number" readonly="1"/>
+              </h2>
+          
+          </xpath>
+          <xpath expr="//field[@name='overtime_total']" position="attributes"> 
+            <attribute name="groups">hr.group_hr_user,brt_health_reimburse.manager</attribute>
+          </xpath>
+          <xpath expr="//field[@name='check_out_correction']" position="after">                   
+            <field name="is_early_ot"/>
+            <field name="start_shift" widget="float_time" attrs="{'invisible':[('is_early_ot', '=', False)]}" readonly="1"/>
+          </xpath> 
+          <xpath expr="//field[@name='overtime']" position="attributes"> 
+            <attribute name="widget">float_time</attribute>
+          </xpath>
+          <xpath expr="//button[@name='change_date']" position="after"> 
+            <button name="recalculate_ot" type="object" class="oe_highlight" string="Calculate" attrs="{'invisible': ['|',('check_in_correction','=',False), ('check_out_correction','=',False)]}"/>
+          </xpath>
+      </field>
+    </record>
+
+    <record  id="correction_view_form_officer_hr_access" model="ir.ui.view">    
+          <field name="name">correction_view_form_officer_hr_access</field>           
+          <field name="model">attendance.regular</field>           
+          <field name="inherit_id" ref="attendance_regularization.attendance_regular11" />
+          <field name="groups_id" eval="[(6, 0, [ref('hr.group_hr_user')])]" />
+          <field name="arch" type="xml">               
+            <xpath expr="//field[@name='employee_id']" position="attributes">
+              <attribute name="readonly">0</attribute> 
+            </xpath>
+            <xpath expr="//field[@name='attendance_ids']" position="attributes">                   
+              <attribute name="attrs">{'readonly':[('state_select','in',['Confirm HRD'])]}</attribute> 
+            </xpath> 
+
+          </field> 
+      </record>
+
+      <record  id="attendance_check_view_form_officer_hr_access" model="ir.ui.view">    
+          <field name="name">attendance_check_view_form_officer_hr_access</field>           
+          <field name="model">attendance.regular.check</field>           
+          <field name="inherit_id" ref="hris_attendance_check.attendance_regular_check" />
+          <field name="groups_id" eval="[(6, 0, [ref('hr.group_hr_user')])]" />
+          <field name="arch" type="xml">               
+            <xpath expr="//field[@name='employee_id']" position="attributes">
+              <attribute name="readonly">0</attribute> 
+            </xpath> 
+          </field> 
+      </record>
+
+      <record  id="attendance_check_view_form_manager_hr_access" model="ir.ui.view">    
+          <field name="name">attendance_check_view_form_manager_hr_access</field>           
+          <field name="model">attendance.regular.check</field>           
+          <field name="inherit_id" ref="hris_attendance_check.attendance_regular_check" />
+          <field name="groups_id" eval="[(6, 0, [ref('brt_health_reimburse.manager')])]" />
+          <field name="arch" type="xml">               
+            <xpath expr="//field[@name='employee_id']" position="attributes">
+              <attribute name="readonly">0</attribute> 
+            </xpath> 
+          </field> 
+      </record>
+
+      <record id="correction_regular_tree_inherit_hris" model="ir.ui.view">
+        <field name="name">correction.regular.tree.inherit.hris</field>
+        <field name="model">attendance.regular</field>
+        <field name="inherit_id" ref="attendance_regularization.view_regular_approve_tree"/>
+        <field name="arch" type="xml">
+          <xpath expr="//field[@name='name']" position="before">                  
+                <field name="att_number" readonly="1"/>
+          </xpath>
+        </field>
+      </record>
+
+      <record id="hr_attendance_view_form_inherit_hris" model="ir.ui.view">
+        <field name="name">hr_attendance_view_form_inherit_hris</field>
+        <field name="model">hr.attendance</field>
+        <field name="inherit_id" ref="hr_attendance.hr_attendance_view_form"/>
+        <field name="arch" type="xml">
+          <field name="check_out" position="after">
+              <field name="is_correction"/>
+          </field>
+          <xpath expr="//group" position="after">
+                <group>
+                    <group string="Attendance Correction" attrs="{'invisible':[('is_correction', '=', False)]}" groups="hr.group_hr_user,idn_payroll.group_hr_payroll_admin">
+                        <field name="correction_reason" readonly="1"/>
+                        <field name="correction_duration" readonly="1"/>
+                        <field name="correction_amount" readonly="1"/>
+                        <field name="correction_meal" readonly="1"/>
+                        <field name="correction_total" readonly="1"/>
+                    </group>
+                </group>
+            </xpath>
+        </field>
+      </record>
+
+      <record id="approve_attendance_form_view_inherit_hris" model="ir.ui.view">
+        <field name="name">approve_attendance_form_view_inherit_hris</field>
+        <field name="model">approve.attendance</field>
+        <field name="inherit_id" ref="attendance_regularization.approve_attendance_form_view"/>
+        <field name="arch" type="xml">
+            <xpath expr="//p" position="attributes">
+              <attribute name="invisible">1</attribute> 
+            </xpath>
+            <xpath expr="//p" position="after">
+              <p class="oe_grey">
+                  Are You sure approve this request(s)?
+              </p>
+            </xpath>
+        </field>
+      </record>
+  
+</odoo>

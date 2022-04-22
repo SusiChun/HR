@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <record model="ir.ui.view" id="account_cashflow_statement_form_account">
+            <field name="name">account.account.inherited.form</field>
+            <field name="model">account.account</field>
+            <field name="inherit_id" ref="account.view_account_form"/>
+            <field name="arch" type="xml">
+                <xpath expr="//form/sheet/group/group[1]/field[@name='deprecated']" position="after">
+                    <field name="cash_flow_type"/>
+                    <field name="financial_report_id" attrs="{'required': [('cash_flow_type', '!=', False)]}" domain="[('type','=','accounts')]"/>
+                </xpath>
+            </field>
+        </record>
+    </data>
+</odoo>

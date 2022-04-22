@@ -1,0 +1,115 @@
+<?xml version="1.0"?>
+<t t-name="hr_payroll.report_payslip">
+    <t t-call="report.html_container">
+        <t t-foreach="docs" t-as="o">
+            <t t-call="report.external_layout">
+                <div class="page">
+                    <h2>SLIP GAJI</h2>
+                    <p t-field="o.name"/>
+                    
+                    <table width="100%">
+                        <tr>
+                            <td style="border:1px solid #000;padding:15px" width="50%">
+                                <span t-field="o.employee_id"/><br></br>
+                                <span t-field="o.employee_id.job_id"/><br></br>
+                                NPWP : <br></br>
+                                 <span t-field="o.employee_id.npwp"/><br></br>
+                            </td>
+                            <td style="border:1px solid #000;padding:15px" width="50%">
+                                <span t-field="o.employee_id.bank_account_id.bank_id.name"/><br></br>
+                                <span t-field="o.employee_id.bank_account_id"/><br></br>
+                                <span t-field="o.employee_id"/><br></br>
+                                
+                            </td>
+                        </tr>
+                    </table>
+                    <br></br>
+                    <br></br>
+                    <h2>KOMPONEN GAJI</h2>
+                    <!--<table class="table table-condensed table-bordered">-->
+                    <!--    <tr>-->
+                    <!--        <td><strong>Name</strong></td>-->
+                    <!--        <td><span t-field="o.employee_id"/></td>-->
+                    <!--        <td><strong>Designation</strong></td>-->
+                    <!--        <td><span t-field="o.employee_id.job_id"/></td>-->
+                    <!--    </tr>-->
+                    <!--    <tr>-->
+                    <!--        <td><strong>Address</strong></td>-->
+                    <!--        <td colspan="3">-->
+                    <!--            <div t-field="o.employee_id.address_home_id" t-options="{&quot;widget&quot;: &quot;contact&quot;, &quot;fields&quot;: [&quot;address&quot;, &quot;name&quot;, &quot;phone&quot;, &quot;fax&quot;], &quot;no_marker&quot;: True, &quot;phone_icons&quot;: True}"/>-->
+                    <!--        </td>-->
+                    <!--    </tr>-->
+                    <!--    <tr>-->
+                    <!--        <td><strong>Email</strong></td>-->
+                    <!--        <td><span t-field="o.employee_id.work_email"/></td>-->
+                    <!--        <td><strong>Identification No</strong></td>-->
+                    <!--        <td><span t-field="o.employee_id.identification_id"/></td>-->
+                    <!--    </tr>-->
+                    <!--    <tr>-->
+                    <!--        <td><strong>Reference</strong></td>-->
+                    <!--        <td><span t-field="o.number"/></td>-->
+                    <!--        <td><strong>Bank Account</strong></td>-->
+                    <!--        <td><span t-field="o.employee_id.bank_account_id"/></td>-->
+                    <!--    </tr>-->
+                    <!--    <tr>-->
+                    <!--        <td><strong>Date From</strong></td>-->
+                    <!--        <td><span t-field="o.date_from"/></td>-->
+                    <!--        <td><strong>Date To</strong></td>-->
+                    <!--        <td><span t-field="o.date_to"/></td>-->
+                    <!--    </tr>-->
+                    <!--</table>-->
+                    <table width="100%">
+                        <tr t-foreach="o.line_ids.filtered(lambda line: line.appears_on_payslip)" t-as="line">
+                            <td width="10%"></td>
+                            <td width="50%"><span t-field="line.name"/></td>
+                            <td width="3%">:</td>
+                            <td width="30%"><span t-esc="line.amount" t-esc-options="{&quot;widget&quot;: &quot;monetary&quot;, &quot;display_currency&quot;: o.company_id.currency_id}"/></td>
+                        </tr>
+                    </table>
+                    <!--<table class="table table-condensed">-->
+                    <!--    <thead>-->
+                    <!--        <tr>-->
+                    <!--            <th>Code</th>-->
+                    <!--            <th>Name</th>-->
+                    <!--            <th>Quantity/rate</th>-->
+                    <!--            <th>Amount</th>-->
+                    <!--            <th>Total</th>-->
+                    <!--        </tr>-->
+                    <!--    </thead>-->
+                    <!--    <tbody>-->
+                    <!--            <tr t-foreach="o.line_ids.filtered(lambda line: line.appears_on_payslip)" t-as="line">-->
+                    <!--            <td><span t-field="line.code"/></td>-->
+                    <!--            <td><span t-field="line.name"/></td>-->
+                    <!--            <td><span t-field="line.quantity"/></td>-->
+                    <!--            <td><span t-esc="line.amount" t-esc-options="{&quot;widget&quot;: &quot;monetary&quot;, &quot;display_currency&quot;: o.company_id.currency_id}"/></td>-->
+                    <!--            <td><span t-esc="line.total" t-esc-options="{&quot;widget&quot;: &quot;monetary&quot;, &quot;display_currency&quot;: o.company_id.currency_id}"/></td>-->
+
+                    <!--        </tr>-->
+                    <!--    </tbody>-->
+                    <!--</table>-->
+                    <br></br>
+                    <br></br>
+                    <table width="100%">
+                        <tr>
+                            <td style="border:1px solid #000;padding:15px" width="50%">
+                                NOTE :
+                                <br></br>
+                                <br></br> <br></br> <br></br>
+                            </td>
+                            <td width="50%">
+                                <center>
+                                    Jakarta, ....... / .......................... / 20 .....
+                                     <br></br>
+                                      <br></br>
+                                       <br></br>
+                                </center>
+                            </td>
+                            
+                        </tr>
+                    </table>
+                    <p class="text-right"><strong>Authorized signature</strong></p>
+                </div>
+            </t>
+        </t>
+    </t>
+</t>

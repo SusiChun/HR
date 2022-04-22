@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="los_view_dms_file_form_inherit" model="ir.ui.view">
+        <field name="name">los.view.dms.file.form.inherit</field>
+        <field name="type">form</field>
+        <field name="inherit_id" ref="muk_dms.view_dms_file_form"/>
+        <field name="model">muk_dms.file</field>
+        <field name="arch" type="xml">
+        	<xpath expr="//form/sheet/group[2]" position="inside">
+        		<group>
+        			<field name="document_type_id"/>
+        		</group>
+            </xpath>
+        </field>
+    </record>
+</odoo>

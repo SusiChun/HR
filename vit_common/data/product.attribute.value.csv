@@ -1,0 +1,115 @@
+id,attribute_id,name,code
+size1,Size,XXS,V
+size2,Size,XS,K
+size3,Size,S,S
+size4,Size,M,M
+size5,Size,L,L
+size6,Size,XL,X
+size7,Size,XXL,D
+size8,Size,XXXL,E
+size9,Size,NONE,0
+size10,Size,2,1
+size11,Size,4,2
+size12,Size,6,3
+size13,Size,8,4
+size14,Size,10,5
+size15,Size,12,6
+size16,Size,J1,A
+size17,Size,J2,B
+size18,Size,J3,C
+size19,Size,1,E
+size20,Size,3,F
+size21,Size,5,G
+size22,Size,7,H
+size23,Size,9,I
+size24,Size,11,J
+size25,Size,14,7
+size26,Size,16,8
+color1,Color,NONE,0
+color2,Color,GREY,A
+color3,Color,BLACK,B
+color4,Color,CREAM,C
+color5,Color,BROKEN WHITE,D
+color6,Color,DARK BROWN,E
+color7,Color,FANTA,F
+color8,Color,GREEN,G
+color9,Color,DARK GREEN,H
+color10,Color,IRON,I
+color11,Color,BROWN,J
+color12,Color,KHAKI,K
+color13,Color,LIGHT BLUE,L
+color14,Color,MAROON,M
+color15,Color,NAVY,N
+color16,Color,ORANGE,O
+color17,Color,PEACH,P
+color18,Color,PINK,Q
+color19,Color,RED,R
+color20,Color,TERRAKOTA,S
+color21,Color,TURKIS,T
+color22,Color,GRAPE,U
+color23,Color,VIOLET,V
+color24,Color,WHITE,W
+color25,Color,GOLD,X
+color26,Color,YELLOW,Y
+color27,Color,DARK YELLOW,Z
+Color2_1,Color2,NONE,00
+Color2_2,Color2,WHITE,01
+Color2_3,Color2,SILVER GREY,02
+Color2_4,Color2,NAVY,03
+Color2_5,Color2,BROWN,04
+Color2_6,Color2,BLACK,05
+Color2_7,Color2,OFF WHITE,06
+Color2_8,Color2,IVORY,07
+Color2_9,Color2,LIGHT GREY,08
+Color2_10,Color2,KHAKI,21
+Color2_11,Color2,STATE GREY,22
+Color2_12,Color2,PEACH,23
+Color2_13,Color2,LIGHT ORANGE,24
+Color2_14,Color2,DARK ORANGE,25
+Color2_15,Color2,LIGHT PINK,26
+Color2_16,Color2,PINK,27
+Color2_17,Color2,TROPICAL PINK,28
+Color2_18,Color2,ROSE,29
+Color2_19,Color2,RASBERRY ROSE,30
+Color2_20,Color2,RED,31
+Color2_21,Color2,MAROON,32
+Color2_22,Color2,LIGHT TOSCA,34
+Color2_23,Color2,TOSCA,35
+Color2_24,Color2,SWEET GREEN,36
+Color2_25,Color2,DEEP GREEN,37
+Color2_26,Color2,DARK GREEN,38
+Color2_27,Color2,AMBER,39
+Color2_28,Color2,ANTIQUE GOLD,40
+Color2_29,Color2,DARK GOLD,41
+Color2_30,Color2,CARAMEL,42
+Color2_31,Color2,LAVENDER,43
+Color2_32,Color2,VIOLET,44
+Color2_33,Color2,DAHLIA,45
+Color2_34,Color2,GRAPE PURPLE,46
+Color2_35,Color2,LIGHT PURPLE,47
+Color2_36,Color2,PURPLE,48
+Color2_37,Color2,MAGENTA,49
+Color2_38,Color2,TURKISH BLUE,50
+Color2_39,Color2,LIGHT NAVY,51
+Color2_40,Color2,ELECTRIC BLUE,52
+Color2_41,Color2,ROYAL BLUE,53
+Color2_42,Color2,MAJESTIC PURPLE,54
+Color2_43,Color2,MONACRON BLUE,55
+Color2_44,Color2,DEEP RED,56
+Color2_45,Color2,ORCHID,57
+Color2_46,Color2,DEEP CORAL,58
+Color2_47,Color2,MANDARIN ORANGE,59
+Color2_48,Color2,ORANGE,61
+Color2_49,Color2,BLUE OCEAN,62
+Color2_50,Color2,SAND,63
+Color2_51,Color2,COFFE LATTE,64
+Color2_52,Color2,MUSTARD,65
+Color2_53,Color2,COPPER,66
+Color2_54,Color2,VIOLA,67
+Color2_55,Color2,MILKY BLUE,68
+Color2_56,Color2,DUSTY GREEN,69
+Color2_57,Color2,MINT,70
+Color2_58,Color2,PINK BERRY,71
+Color2_59,Color2,BLOSSOM CORAL,72
+Color2_60,Color2,SUNSET,73
+Color2_61,Color2,ICE GREY,74

@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+<template id="report_attendance_summary">
+    <t t-call="report.html_container">
+        <t t-call="report.internal_layout">
+            <t t-foreach="docs" t-as="o">
+            <div class="page">
+                <h3 class="mb32">Attendance Summary</h3>
+
+                <h3 class="text-center mb32">
+                    Summary from <u><t t-esc="o.start_date"/></u> to <u><t t-esc="o.end_date"/></u>.
+                </h3>
+
+                <table class="table table-bordered mb32" style="table-layout:auto">
+                    <thead>
+                        <tr>
+                            <th>Month</th>
+                            <t t-foreach="o._get_months()" t-as="month">
+                                &lt;th class="text-center" colspan=<t t-esc="month['days']"/>><t t-esc="month['month_name']"/>&lt;/th&gt;
+                            </t>
+                            <th/>
+                        </tr>
+                        <tr>
+                            <td rowspan="2">
+                                <strong>Employees</strong>
+                            </td>
+                            <t t-foreach="o._get_day()" t-as="day">
+                                &lt;td class="text-center oe_leftfit oe_rightfit" style="background-color:<t t-esc="day['color']"/>!important; font-size: 8px; min-width: 18px"&gt; <t t-esc="day['day_str']"/>&lt;/td&gt;
+                            </t>
+                            <td/>
+                        </tr>
+                        <tr>
+                            <t t-foreach="o._get_day()" t-as="day">
+                                &lt;td class="text-center oe_leftfit oe_rightfit" style="background-color:<t t-esc="day['color']"/>!important; font-size: 10px" &gt; <t t-esc="day['day']"/>&lt;/td&gt;
+                            </t>
+                            <td class="text-center">Sum</td>
+                        </tr>
+                    </thead>
+                        <tbody>
+<!--                            <tr t-foreach="o.get_employee()" t-as="emp">-->
+<!--                                <td><span t-esc="emp.get('name')"/></td>-->
+<!--                              &lt;!&ndash;  <t t-foreach="emp['display']" t-as="details">-->
+<!--                                    &lt;td style=background-color:<t t-esc="details['color']"/> !important /&gt;-->
+<!--                                </t>-->
+<!--                                <td class="text-center"><strong><t t-esc="emp['sum']"/></strong></td>&ndash;&gt;-->
+<!--                            </tr>-->
+                             <t t-foreach="o._get_data_from_report()" t-as="obj">
+                                <tr t-foreach="obj.get('data')" t-as="emp">
+                                <td><t t-esc="emp['emp']"/></td>
+                               <!-- <t t-foreach="emp['display']" t-as="details">
+                                    &lt;td style=background-color:<t t-esc="details['marks']"/> !important /&gt;
+                                </t>-->
+                               <!-- <td class="text-center"><strong><t t-esc="emp['sum']"/></strong></td>-->
+                            </tr>
+                             </t>
+
+                    </tbody>
+                </table>
+
+                <!--<div class="col-xs-3 col-xs-offset-5 mt32">
+                    <table class="table table-bordered">
+                        <thead>
+                            <tr>
+                                <th class="col-xs-1">Color</th>
+                                <th class="text-center">Leave Type</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr t-foreach="get_holidays_status" t-as="status">
+                                &lt;td style=background-color:<t t-esc="status['color']"/>!important &gt;&lt;/td&gt;
+                                <td><t t-esc="status['name']"/></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>-->
+            </div>
+            </t>
+        </t>
+    </t>
+</template>
+
+        <report
+            id="report_attendance_summary_menu"
+            string="Attendance Summary"
+            model="attendance.summary"
+            report_type="qweb-pdf"
+            name="attendance_summary.report_attendance_summary"
+            file="attendance_summary.report_attendance_summary"
+            menu="False"/>
+       <record id="report_attendance_summary_menu" model="ir.actions.report.xml">
+            <field name="paperformat_id" ref="hr_holidays.paperformat_hrsummary"/>
+        </record>
+</odoo>

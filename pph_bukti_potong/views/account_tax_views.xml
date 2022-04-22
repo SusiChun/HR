@@ -1,0 +1,16 @@
+<odoo>
+    <data>
+        <record id="view_tax_form_inherit" model="ir.ui.view">
+            <field name="name">view_tax_form_inherit</field>
+            <field name="model">account.tax</field>
+            <field name="inherit_id" ref="account.view_tax_form"/>
+            <field name="arch" type="xml">
+                <xpath expr="//field[@name='tax_adjustment']" position="after">
+                    <field name="is_pph23"/>
+                    <field name="pph23_type" attrs="{'invisible' : [('is_pph23', '=', False)], 'required' : [('is_pph23', '!=', False)]}"/>
+                    <field name="is_pphfinal"/>
+                </xpath>
+            </field>
+        </record>
+    </data>
+</odoo>

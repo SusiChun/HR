@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="los_view_dms_directory_form_inherit" model="ir.ui.view">
+        <field name="name">los.view.ms.directory.form.inherit</field>
+        <field name="type">form</field>
+        <field name="inherit_id" ref="muk_dms.view_dms_directory_form"/>
+        <field name="model">muk_dms.directory</field>
+        <field name="arch" type="xml">
+        	<xpath expr="//form/sheet/group[2]" position="inside">
+        		<group>
+        			<field name="partner_id"/>
+        		</group>
+            </xpath>
+            <xpath expr="//field[@name='files']/tree/field[@name='name']" position="after">
+            	<field name="document_type_id"/>
+            	<field name="content"/>
+            </xpath>
+            <xpath expr="//field[@name='files']/tree" position="attributes">
+                <attribute name="editable">bottom</attribute>
+            </xpath>
+        </field>
+    </record>
+</odoo>

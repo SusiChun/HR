@@ -1,0 +1,22 @@
+<?xml version="1.0"?>
+<odoo>
+    <data>
+
+        <record id="vit_view_partner_form_contract_number" model="ir.ui.view">
+            <field name="name">res.partner.form.contract</field>
+            <field name="model">res.partner</field>
+            <field name="inherit_id" ref="base.view_partner_form"/>
+            <field name="arch" type="xml">
+                <!-- <xpath expr="//page[@name='sales_purchases']/group/group//field[@name='ref']" position="after">
+                    <field name="owner_id" options="{'no_open':True,'no_create':True}"/>
+                </xpath> -->
+                <page name="internal_notes" position="replace">                      
+                    <page name="internal_notes" string="Contract Number">
+                        <field name="comment" placeholder="Contract Number..."/>
+                    </page>
+                </page>
+            </field>
+        </record>
+
+    </data>
+</odoo>

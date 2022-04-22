@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+        <record id="attendance_correction_check_employee_rule" model="ir.rule">
+            <field name="name">Attendance Check Self Service - Employee</field>
+            <field ref="model_attendance_regular_check" name="model_id"/>
+            <field name="domain_force">['|',('employee_id.user_id','=',user.id),('message_partner_ids', 'in', [user.partner_id.id])]</field>
+            <field name="groups" eval="[(4, ref('base.group_user'))]"/>
+        </record>
+            <record id="attendance_correction_check_officer_rule" model="ir.rule">
+            <field name="name">Attendance Check All - Officer</field>
+            <field ref="model_attendance_regular_check" name="model_id"/>
+            <field name="domain_force">[(1,'=',1)]</field>
+            <field name="groups" eval="[(4, ref('hr.group_hr_user'))]"/>
+        </record>
+        <record id="attendance_correction_check_manager_rule" model="ir.rule">
+            <field name="name">Attendance Check All - Manager</field>
+            <field ref="model_attendance_regular_check" name="model_id"/>
+            <field name="domain_force">['|',(1,'=',1),('message_partner_ids', 'in', [user.partner_id.id])]</field>
+            <field name="groups" eval="[(4, ref('hr.group_hr_manager'))]"/>
+        </record>
+</odoo>

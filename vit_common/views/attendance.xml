@@ -1,0 +1,28 @@
+<odoo>
+    <data>
+
+        <record id="vit_view_attendace_latitude_longitude" model="ir.ui.view">
+            <field name="name">additional.form.view.hr.attendance</field>
+            <field name="model">hr.attendance</field>
+            <field name="inherit_id" ref="hr_attendance.hr_attendance_view_form"/>
+            <field name="arch" type="xml">
+                <xpath expr="/form/sheet" position="inside">
+                    <group>
+                        <group>
+                            <field name="latitude"/>
+                            <field name="longitude"/>
+                            <field name="image1" widget="image" class="oe_avatar"/>
+                        </group>
+                        <group>
+                            <field name="latitude2"/>
+                            <field name="longitude2"/>
+                            <field name="image2" widget="image" class="oe_avatar"/>
+                        </group>
+                        <field name="warehouse_id" options="{'no_open':True,'no_create':True}"/>
+                    </group>
+                </xpath>
+            </field>
+        </record>
+
+    </data>
+</odoo>

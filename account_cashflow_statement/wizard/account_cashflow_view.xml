@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<odoo>
+
+    <record id="accounting_report_view_inherit_statement" model="ir.ui.view">
+        <field name="name">Accounting CashFlow Statement</field>
+        <field name="model">accounting.report</field>
+        <field name="inherit_id" ref="account.accounting_report_view"/>
+        <field name="arch" type="xml">
+            <field name="target_move" position="before">
+                <field name="is_cash_flow" invisible="True"/>
+                <field name="init_balance_amount" required="True" attrs="{'invisible': [('is_cash_flow', '=', False)]}"/>
+                <field name="init_balance_date" attrs="{'invisible': [('is_cash_flow', '=', False)]}"/>
+            </field>
+        </field>
+    </record>
+
+    <record id="action_account_report_cashflow" model="ir.actions.act_window">
+        <field name="name">Accounting CashFlow Statement</field>
+        <field name="res_model">accounting.report</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="view_type">form</field>
+        <field name="view_mode">form</field>
+        <field name="view_id" ref="account_cashflow_statement.accounting_report_view_inherit_statement"/>
+        <field name="target">new</field>
+        <field name="context" eval="{'default_is_cash_flow': True, 'default_account_report_id': ref('account_cashflow_statement.account_financial_report_cashflow0')}"/>
+    </record>
+
+    <menuitem id="menu_account_cashflow_report" name="Cash Flow Statement" action="action_account_report_cashflow" parent="account.menu_finance_legal_statement"/>
+
+</odoo>

@@ -1,0 +1,42 @@
+<odoo>
+  <data>
+
+    <record model="ir.ui.view" id="surat_masuk_view_tree_id">
+      <field name="name">Detail Tunjangan.list</field>
+      <field name="model">hr.contract.wage</field>
+      <field name="arch" type="xml">
+      <tree string="Detail Tunjangan list" default_order='create_date'> 
+        <field name="contract_id"/>
+          <field name="start_periode"/>
+          <field name="end_periode"/>
+          <field name="wage"/>
+          <field name="tunjangan_jabatan"/>
+          <field name="tunjangan_makan"/>
+          <field name="tunjangan_proyek"/>
+          <field name="tunjangan_hp"/>
+          <field name="tunjangan_sertifikasi"/>
+          <field name="tunjangan_lainnya"/>
+          <field name="total" />
+      </tree>
+      </field>  
+  </record>
+
+    <record id="detail_tunjangan" model="ir.actions.act_window">
+            <field name="name">Detail Report Employee </field>
+            <field name="res_model">hr.contract.wage</field>
+            <field name="target">current</field>
+            <field name="context">{}</field> 
+            <field name="domain">[('contract_id.employee_id.user_id','=',uid)]</field>
+            <field name="limit">80</field>  
+            <field name="view_type">form</field>
+            <field name="view_mode">tree,form</field>
+            <field name="help" type="html">
+                <p class="oe_view_nocontent_create">Belum Ada Data</p>
+            </field>
+        </record>
+
+
+    <menuitem action="detail_tunjangan" name="Detail Tunjangan" id="hr_payroll_allowance.detail_tunjangan" parent="hr.menu_hr_root"/>
+
+  </data>
+</odoo>

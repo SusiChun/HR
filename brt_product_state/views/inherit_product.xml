@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+
+    <record id="product_template_form_view" model="ir.ui.view">
+        <field name="name">product.template.common.form</field>
+        <field name="model">product.template</field>
+        <field name="inherit_id" ref="product.product_template_form_view"/>
+        <field name="arch" type="xml">
+            <xpath expr="//header" position="inside">
+                <header>
+                    <field name="state" widget="statusbar" statusbar_visible="Draft,Confirmed"/>
+                </header>
+           </xpath>
+           <xpath expr="//header" position="inside">
+                <button name="confirm_produk" string="Confirm" type="object" class="oe_highlight" groups="brt_product_state.group_produk_user" attrs="{'invisible': [('state','!=','Draft')]}"/>
+            </xpath>
+        </field>
+    </record>
+
+    <record model="ir.ui.view" id="view_order_form_inherit">
+        <field name="name">view_order_form_inherit</field>
+        <field name="model">sale.order</field>
+        <field name="inherit_id" ref="sale.view_order_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='order_line']/tree/field[@name='product_id']" position="attributes">
+                <attribute name="domain">[('product_tmpl_id.state', '=', 'Confirmed')]</attribute>
+            </xpath>
+        </field>
+    </record>
+
+    <record model="ir.ui.view" id="view_purchase_order_form_inherit">
+        <field name="name">view_purchase_order_form_inherit</field>
+        <field name="model">purchase.order</field>
+        <field name="inherit_id" ref="purchase.purchase_order_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='order_line']/tree/field[@name='product_id']" position="attributes">
+                <attribute name="domain">[('product_tmpl_id.state', '=', 'Confirmed')]</attribute>
+            </xpath>
+        </field>
+    </record>
+
+
+</odoo>

@@ -1,0 +1,6 @@
+id,code,name,description,note
+class0,0,RK,?,FOB
+class1,1,SP,Konsinyasi yg dicodekan di ShafCo,
+class2,2,GB,Garmen Busana (internal MRP),CMT
+class3,3,GC,"Garmen (perlengkapan)  kerudung, acc dll",CMT
+class4,4,PL,Private Label,FOB

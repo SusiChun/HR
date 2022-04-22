@@ -1,0 +1,83 @@
+<section class="oe_container">
+   <div class="oe_row oe_spaced">
+           <h2 class="oe_slogan" style="color:olive;">Print Account Cash Flow Statement</h2>
+       <p  style="color:Maroon;" class="oe_mt32">
+This module allow you to print Cash Flow Statement.<br/> This module is only compatible for Odoo <b>COMMUNITY</b> edition.
+       </p>
+<p style="color:Maroon;">
+You have to configure on your chart of accounts with two fields:<br/> 1. Cash Flow Type and 2. Financial Report.<br/><br/> 
+Cash Flow Type Options: 1. Operating Activities 2. Investing Activities 3. Financial Activities.<br/>
+Financial Report Options: You have select Financial Report here which will push account to that Financial Report.<br/> <br/> 
+
+For your existing chart of accounts you have to setup above configuration by going to every accounts which should be included on Cash Flow Statement and in future if you add new account in your chart of accounts you have to set up same things.<br/> <br/>
+
+This report is totally based on accounts you configured for Cash Flow Statement using two above new fields on account form. All accounts configured for Cash Flow will be automatically add up on respected Financial Report selected on that account.
+<br/> <br/> 
+You can watch video demo.
+</p>
+   </div>
+</section>
+<section class="oe_container">
+   <div class="oe_row oe_spaced">
+       <h3 class="oe_slogan" style="color:olive;"><b>Chart of Accounts - Configuration</b></h3>
+       <div class="oe_demo oe_screenshot">
+           <img src="Selection_097.png">
+       </div>
+   </div>
+ </section>
+<section class="oe_container">
+   <div class="oe_row oe_spaced">
+       <h3 class="oe_slogan" style="color:olive;"><b>Account Reports Hierarchy - Cash Flow Statement</b> </h3>
+<p style="color:Maroon;">This hierarchy will be setup and installed automatically once you install our app.</p>
+       <div class="oe_demo oe_screenshot">
+           <img src="Selection_094.png">
+       </div>
+   </div>
+</section>
+<section class="oe_container">
+   <div class="oe_row oe_spaced">
+       <h3 class="oe_slogan" style="color:olive;"><b>Menu to Print Cash Flow Statement</b></h3>
+       <div class="oe_demo oe_screenshot">
+           <img src="Selection_096.png">
+       </div>
+   </div>
+</section>
+<section class="oe_container">
+   <div class="oe_row oe_spaced">
+       <h3 class="oe_slogan" style="color:olive;"><b>Print Cash Flow Statement - Wizard</b></h3>
+<p style="color:Maroon;">You have to enter manually begining balance and date in wizard which will be used in Cash at Begining of Period/Year. App will not bring this value automatically.</p>
+       <div class="oe_demo oe_screenshot">
+           <img src="Selection_095.png">
+       </div>
+   </div>
+</section>
+ <section class="oe_container">
+   <div class="oe_row oe_spaced">
+       <h3 class="oe_slogan" style="color:olive;"><b>PDF Sample Report</h3>
+       <div class="oe_demo oe_screenshot">
+           <img src="s5.png">
+           <img src="s6.png">
+       </div>
+   </div>
+ </section>
+<section class="oe_container" >
+   <div class="oe_row oe_spaced">
+       <div class="oe_span6">
+           <div class="oe_picture" style="margin: 25px 10%;">
+               <a href="http://www.probuse.com/">
+                   <img src="logo.png">
+               </a>
+           </div>
+       </div>
+       <div class="oe_span6">
+           <p class="oe_mt32">
+               If you need any help or want more additional features,<br/> you may contact us through:<br/>
+               Email: <a href="contact@probuse.com">contact@probuse.com</a> <br/>
+               Website: <a href="http://www.probuse.com/" target='new'><u>www.probuse.com</u></a> <br/>
+               Skype: mustufa_probuse<br/>
+           </p>
+       </div>
+   </div>
+</section>
+
+

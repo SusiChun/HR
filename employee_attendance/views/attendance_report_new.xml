@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+    <data>
+
+        <report id="report_employee_attendance" string="Attendance Report"
+            model="employee.attendance" report_type="qweb-pdf" file="employee_attendance.employee_attendance_report"
+            name="employee_attendance.employee_attendance_report" menu="False" />
+          
+<!-- <record id="paperformat_report_appointment" model="report.paperformat">
+            <field name="name">Report Appointment Paper Format</field>
+            <field name="default" eval="True" />
+            <field name="format">A4</field>
+            <field name="page_height">0</field>
+            <field name="page_width">0</field>
+            <field name="orientation">Landscape</field>
+            <field name="margin_top">40</field>
+            <field name="margin_bottom">23</field>
+            <field name="margin_left">7</field>
+            <field name="margin_right">7</field>
+            <field name="header_line" eval="False" />
+            <field name="header_spacing">35</field>
+            <field name="dpi">90</field>
+            <field name="report_ids" eval="[(6, 0, [ref('v9c_ayurveda.report_appointment'),
+                                                    ])]"/>
+        </record> -->
+
+
+
+    </data>
+</openerp>

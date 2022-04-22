@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <!-- inherit form view of payslip employee object -->
+    <record id="view_hr_payslip_by_employees_view_inherited" model="ir.ui.view">
+        <field name="name">hr_payroll_payslip_employees</field>
+        <field name="model">hr.payslip.employees</field>
+        <field name="inherit_id" ref="hr_payroll.view_hr_payslip_by_employees"/>
+        <field name="type">form</field>
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='employee_ids']" position="replace">
+                <field name="date_start" invisible="1"/>
+                <field name="date_end" invisible="1"/>
+                <field name="employee_ids" nolabel="1" context="{'batch_start_date': date_start, 'batch_end_date': date_end}" 
+                                colspan="4">
+                    <tree string="Employees" editable="bottom">
+                        <field name="name" string="Employee"/>
+                    </tree>
+                </field>
+               	<footer>
+                    <button string="Cancel" class="btn-default" special="cancel"/>
+                </footer>
+            </xpath>
+        </field>
+    </record>
+
+</odoo>

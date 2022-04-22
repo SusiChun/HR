@@ -1,0 +1,573 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+
+    <!-- Form view of Country state -->
+    <record model="ir.ui.view" id="view_ppi_res_country_state_form">
+        <field name="name">res.country.state.form</field>
+        <field name="model">res.country.state</field>
+        <field name="type">form</field>
+        <field name="arch" type="xml">
+            <form string="State">
+                <group>
+                    <field name="name"/>
+                    <field name="code"/>
+                    <field name="country_id" invisible="1"/>
+                </group>
+            </form>
+        </field>
+    </record>
+
+
+
+
+
+    <!-- inherit form view of hr employee -->
+    <record id="view_employee_form_parent2" model="ir.ui.view">
+        <field name="name">hr.employee.form.parent2</field>
+        <field name="model">hr.employee</field>
+        <field name="inherit_id" ref="hr.view_employee_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='calendar_id']" position="attributes">
+                <attribute name="required">1</attribute>
+            </xpath>
+            <xpath expr='//field[@name="category_ids"]' position="replace">
+                <group>
+
+                    <field name="category_ids" widget="many2many_tags" placeholder="e.g. Part Time" 
+                    options="{'no_create_edit': True}" groups="hr.group_hr_user" class="oe_inline" nolabel="1"/>
+                </group>
+            </xpath>
+            <xpath expr="//field[@name='passport_id']" position="after">
+                <field name="passport_exp_date"/>
+            </xpath>
+            <xpath expr="//field[@name='birthday']" position="attributes">
+                <attribute name="required">1</attribute>
+            </xpath>
+            <xpath expr="//field[@name='country_id']" position="replace">
+                <field name="emp_country_id"/>
+            </xpath>
+            <xpath expr="//field[@name='bank_account_id']" position="replace">
+            </xpath>
+            <xpath expr="//field[@name='birthday']" position="after">
+                <field name="age"/>
+                <field name="is_children" invisible="1"/>
+                <field name="birthday_day" invisible="1"/>
+                <field name="birthday_month" invisible="1"/>
+            </xpath>
+            <xpath expr="//form/sheet/notebook/page[@name='personal_information']/group[1]" position="after">
+                <group colspan="4" attrs="{'invisible': [('is_children', '!=', True)]}" string="Child Details">
+                    <field name="emp_child_ids" nolabel="1">
+                        <tree editable="bottom" colspan="4">
+                            <field name="name" required="1" placeholder="Name Of Child"/>
+                            <field name="age" required="1"/>
+                        </tree>
+                     </field>
+                </group>
+            </xpath>
+            <xpath expr="//notebook/page[@name='personal_information']/group[1]" position="after">
+            <notebook>
+             <page string="Family Information" name="family_particulars">
+                    <field name="relative_ids" nolabel="1">
+                    <tree string="Family Information" editable="bottom">
+                        <field name="name" required = "1"/>
+                        <field name="relationship_id" required = "1"/>
+                        <field name="date_of_birth" />
+                        <field name="occupation" />
+                        <field name="address" />
+                        <field name="contact" />
+                        <field name="emr_telephone" />
+                    </tree>
+                    </field>
+                </page>
+                <page name='educational_information' string="Educational Information">
+                    <field name="edu_ids" nolabel="1" colspan="4">
+                        <tree editable="bottom">
+                            <field name="edu_level" required="1"/>
+                            <field name="edu_school"/>
+                            <field name="period"/>
+                            <field name="edu_certificate"/>
+                        </tree>
+                    </field>
+                    <group string="Language Proficiency" colspan="4">
+                        <field name="language_ids" nolabel="1" colspan="4">
+                            <tree editable="bottom">
+                                <field name="employee_id" invisible="1"/>
+                                <field name="language_id" invisible="1"/>
+                                <field name="lang_name_id" required="1"/>
+                                <field name="spoken"/>
+                                <field name="written"/>
+                            </tree>
+                        </field>
+                    </group>
+                    <group string="Computer Knowledge and Skills" colspan="4">
+                        <field name="comp_prog_knw"/>
+                        <field name="typing"/>
+                        <field name="shorthand"/>
+                        <field name="other_know"/>
+                        <field name="course"/>
+                    </group>
+                </page>
+                <page name='organisasi' string="Organization Experience">
+                    <field name="organisasi_ids" nolabel="1" colspan="4">
+                        <tree editable="bottom">
+                            <field name="name"/>
+                            <field name="city"/>
+                            <field name="major"/>
+                            <field name="position"/>
+                            <field name="start_year"/>
+                            <field name="end_year"/>
+                        </tree>
+                    </field>
+                </page>
+                 <page string="Work Experience" name="employee_history">
+                    <field name="employment_history_ids" nolabel="1" colspan="4">
+                        <tree editable="bottom">
+                            <field name="company"/>
+                            <field name="position"/>
+                            <field name="start_year"/>
+                            <field name="end_year"/>
+                            <field name="reason"/>
+                            <field name="last_salary"/>
+                        </tree>
+                    </field>
+                </page>
+                <page name="training_workshop" string="Certificate">
+                    <field name="training_ids" nolabel="1" colspan="4">
+                        <tree string="Certificate" editable="bottom">
+                            <field name="tr_title" required="1"/>
+                            <field name="tr_institution" />
+                            <field name="tr_date"/>
+                             <field name="date_expire"/>
+                            <field name="training_attachment"/>
+                        </tree>
+                    </field>
+                </page>
+                <page name="other_info" string="Other Information">
+                    <separator string="Mention People's reference that we can contact if you want to know more complete data about you"/>
+                    <field name="contact_ids"  colspan="4">
+                        <tree string="Other Information" editable="bottom">
+                            <field name="name" required="1"/>
+                            <field name="position" />
+                            <field name="no_handphone"/>
+                        </tree>
+                    </field>
+                    <separator string="Mention the name and telephone number  that we can contact  to inform you if experience a disester"/>
+                    <field name="contact_inform_ids" nolabel="1" colspan="4">
+                        <tree string="Other Information" editable="bottom">
+                            <field name="name" required="1"/>
+                            <field name="no_handphone"/>
+                            <field name="relation" />
+                        </tree>
+                    </field>
+                </page>
+                </notebook>
+            </xpath>
+
+
+            <xpath expr="//form/sheet/notebook/page[@name='public']/group/group[1]/field[@name='work_phone']" position="attributes">
+                <attribute name="string">Work Phone 2</attribute>
+            </xpath>
+             <field name="passport_exp_date" position="after">
+                <field name="barcode"/>
+                <field name="own_vehicle"/>
+                <field name="sim_type"/>
+                 <field name="insurance_no"/>
+            </field>
+            <field name="work_phone" position="after">
+                <field name="work_phone2"/>
+                <field name="work_phone3"/>
+                <field name="is_phl"/>
+            </field>
+            <xpath expr="//page[@name='personal_information']/group/group[1]" position="attributes">
+                <attribute name="string">Employee Information</attribute>
+            </xpath>
+            <xpath expr="//page[@name='personal_information']/group/group[2]" position="attributes">
+                <attribute name="string">Benefit</attribute>
+            </xpath>
+             <xpath expr="//field[@name='identification_id']" position="attributes">
+                <attribute name="string">No KTP</attribute>
+            </xpath>
+             <field name="emp_country_id" position="before">
+                <label for="nik" string="NIK"/>
+                 <div>
+                 <field name="nik" readonly="1" width="80%%"/>
+                    <button name="get_sequence" type="object" string="Get NIK" attrs="{'invisible': [('nik', '!=', False)]}" class="oe_highlight"/>
+                 </div>
+                 <field name="address"/>
+                 <field name="religion"/>
+                 <field name="start_date"/>
+                 <field name="grade"/>
+                 <field name="contract_type_id"/>
+            </field>
+             <field name="address_home_id" position="after">
+                 <field name="bank_account_id"/>
+                 <field name="npwp"/>
+                  <field name="tax_status"/>
+                 <field name="bpjs_kesehatan"/>
+                 <field name="bpjs_ketenagakerjaan"/>
+                 <field name="plan_no"/>
+                 <field name="card_no"/>
+                <field name="generali_no"/>
+            </field>
+        </field>
+    </record>
+
+    <!-- inherit tree view of hr employee -->
+    <record id="inherit_hr_employee_tree_view" model="ir.ui.view">
+        <field name="name">hr.employee.tree</field>
+        <field name="model">hr.employee</field>
+        <field name="type">tree</field>
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='work_phone']" position="attributes">
+                <attribute name="invisible">True</attribute>
+            </xpath>
+            <xpath expr="//field[@name='work_email']" position="attributes">
+                <attribute name="string">E-mail</attribute>
+            </xpath>
+            <xpath expr="//field[@name='company_id']" position="attributes">
+                <attribute name="invisible">True</attribute>
+            </xpath>
+            <xpath expr="//field[@name='job_id']" position="attributes">
+                <attribute name="invisible">True</attribute>
+            </xpath>
+            <xpath expr="//field[@name='parent_id']" position="attributes">
+                <attribute name="invisible">True</attribute>
+            </xpath>
+        </field>
+    </record>
+
+
+    <record id="hr.open_view_employee_list_my" model="ir.actions.act_window">
+        <field name="name">Employees</field>
+        <field name="res_model">hr.employee</field>
+        <field name="view_type">form</field>
+        <field name="view_mode">kanban,tree,form</field>
+        <field name="domain">[]</field>
+        <field name="context">{}</field>
+        <field name="view_id" eval="False"/>
+        <field name="search_view_id" ref="hr.view_employee_filter"/>
+        <field name="help">Here you can manage your work force by creating employees
+        and assigning them specific properties in the system. Maintain all employee
+        related information and keep track of anything that needs to be recorded for them.
+        The personal information tab will help you maintain their identity data. The Categories
+        tab gives you the opportunity to assign them related employee categories depending on their position
+        and activities within the company. A category can be a seniority level within the company or a department.
+        The Timesheets tab allows to assign them a specific timesheet and analytic journal where they will
+        be able to enter time through the system. In the note tab, you can enter text data that should be
+        recorded for a specific employee.</field>
+    </record>
+
+    <!-- inherit depart menu to put under configuration menu -->
+  <menuitem
+        action="hr.open_module_tree_department"
+        id="hr.menu_hr_department_tree"
+        parent="hr.menu_human_resources_configuration"
+        sequence="1"
+        groups="hr.group_hr_manager"/>
+
+    <!-- Menu of Employees -->
+
+    <menuitem id="menu_hr_employees" name="Employees" sequence="2" parent="hr.menu_hr_root"/>
+
+
+    <!-- Inherit employee  menu to put under employees menu -->
+   <menuitem action="hr.open_view_employee_list_my"
+            id="hr.menu_open_view_employee_list_my"
+            name="Employees" parent="menu_hr_employees" sequence="2"/>
+
+    <!-- inherit form view of res company to add department field
+    <record model="ir.ui.view" id="view_company_inherit_form">
+        <field name="name">res.company.form.inherit</field>
+        <field name="inherit_id" ref="base.view_company_form"/>
+        <field name="model">res.company</field>
+        <field name="type">form</field>
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='currency_id']" position="after">
+                <field name="department_id"/>
+            </xpath>
+        </field>
+    </record>-->
+
+    <!-- tree view of employee id type(skill) -->
+    <record id="hr_employee_id_type_tree" model="ir.ui.view">
+        <field name='name'>employee.id.type.tree</field>
+        <field name='model'>employee.id.type</field>
+        <field name='type'>tree</field>
+        <field name='arch' type='xml'>
+            <tree string="Type Of ID">
+                <field name="name"/>
+                <field name="s_pass"/>
+                <field name="wp"/>
+            </tree>
+        </field>
+    </record>
+
+    <!-- from view od employee id type(skill) -->
+    <record id="hr_employee_id_type_form" model="ir.ui.view">
+        <field name='name'>employee.id.type.form</field>
+        <field name='model'>employee.id.type</field>
+        <field name='type'>form</field>
+        <field name='arch' type='xml'>
+            <form string="Type Of ID">
+                <group cols="4">
+                    <group>
+                        <field name="name"/>
+                    </group>
+                    <group>
+                        <field name="s_pass"/>
+                        <field name="wp"/>
+                    </group>
+                </group>
+            </form>
+        </field>
+    </record>
+
+    <!-- inherit form view of hr.applicant to made field required(job_id and email_from) -->
+    <record id="inherit_form_view_hr_applicant_required" model="ir.ui.view">
+        <field name="name">inherit.hr.applicant.form.view.required</field>
+        <field name="model">hr.applicant</field>
+        <field name="inherit_id" ref="hr_recruitment.crm_case_form_view_job"/>
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='job_id']" position="attributes">
+                <attribute name="required">1</attribute>
+            </xpath>
+            <xpath expr="//field[@name='email_from']" position="attributes">
+                <attribute name="required">1</attribute>
+            </xpath>
+        </field>
+    </record>
+
+
+    <!-- form view of applicant relationship -->
+    <record id="form_view_applicant_relationship" model="ir.ui.view">
+        <field name="name">form.view.applicant.relationship</field>
+        <field name="model">applicant.relationship</field>
+        <field name="arch" type="xml">
+            <form string="Relationship">
+                <group col="4">
+                    <field name="seq_code" required="1"/>
+                    <field name="name" required="1"/>
+                </group>
+            </form>
+        </field>
+    </record>
+
+    <!-- tree view of applicant relationship -->
+    <record id="tree_view_applicant_relationship" model="ir.ui.view">
+        <field name="name">tree.view.applicant.relationship</field>
+        <field name="model">applicant.relationship</field>
+        <field name="arch" type="xml">
+            <tree string="Relationship">
+                <field name="seq_code"/>
+                <field name="name"/>
+            </tree>
+        </field>
+    </record>
+
+    <!-- form view of applicant relative -->
+    <record id="form_view_applicant_relative" model="ir.ui.view">
+        <field name="name">form.view.applicant.relative</field>
+        <field name="model">applicant.relative</field>
+        <field name="arch" type="xml">
+            <form string="Relatives">
+                <group col="4">
+                    <field name="name" required="1"/>
+                    <field name="employee_id" required="1"/>
+                    <field name="relationship_id" required="1"/>
+                    <field name="date_of_birth"/>
+                    <field name="occupation"/>
+                    <field name="address"/>
+                    <field name="relative_id"/>
+                    <field name="contact"/>
+                    <field name="emr_telephone"/>
+                </group>
+            </form>
+        </field>
+    </record>
+
+    <!-- tree view of applicant relative -->
+    <record id="tree_view_applicant_relative" model="ir.ui.view">
+        <field name="name">tree.view.applicant.relative</field>
+        <field name="model">applicant.relative</field>
+        <field name="arch" type="xml">
+            <tree string="Relatives">
+                <field name="name" required="1"/>
+                <field name="employee_id" required="1"/>
+                <field name="relationship_id" required="1"/>
+                <field name="date_of_birth"/>
+                <field name="occupation"/>
+                <field name="address"/>
+                <field name="relative_id"/>
+                <field name="contact"/>
+                <field name="emr_telephone"/>
+            </tree>
+        </field>
+    </record>
+
+
+
+    <!-- form view education level -->
+    <record id="form_view_evucation_level" model="ir.ui.view">
+        <field name="name">form.view.education.level</field>
+        <field name="model">education.level</field>
+        <field name="arch" type="xml">
+            <form string="Education Level">
+                <sheet>
+                    <group col="4">
+                        <field name="code"/>
+                        <field name="type"/>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <!-- tree view education level -->
+    <record id="tree_view_evucation_level" model="ir.ui.view">
+        <field name="name">tree.view.education.level</field>
+        <field name="model">education.level</field>
+        <field name="arch" type="xml">
+            <tree string="Education Level">
+                <field name="code"/>
+                <field name="type"/>
+            </tree>
+        </field>
+    </record>
+
+    <!-- form view applicant education -->
+    <record id="form_view_applicant_evucation" model="ir.ui.view">
+        <field name="name">form.view.applicant.edu</field>
+        <field name="model">applicant.edu</field>
+        <field name="arch" type="xml">
+            <form string="Education">
+                <sheet>
+                    <group col="4">
+                        <field name="edu_level"/>
+                        <field name="employee_id"/>
+                        <field name="edu_school"/>
+                        <field name="period"/>
+                        <field name="edu_certificate"/>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <!-- tree view applicant education -->
+    <record id="tree_view_applicant_evucation" model="ir.ui.view">
+        <field name="name">tree.view.applicant.edu</field>
+        <field name="model">applicant.edu</field>
+        <field name="arch" type="xml">
+            <tree string="Education">
+                <field name="edu_level"/>
+                <field name="employee_id"/>
+                <field name="edu_school"/>
+                <field name="period"/>
+                <field name="edu_certificate"/>
+            </tree>
+        </field>
+    </record>
+
+    <!-- form view language -->
+    <record id="form_view_appl_lang" model="ir.ui.view">
+        <field name="name">form.view.appl.lang</field>
+        <field name="model">appl.lang</field>
+        <field name="arch" type="xml">
+            <form string="Education Level">
+                <sheet>
+                    <group col="4">
+                        <field name="name"/>
+                        <field name="code"/>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <!-- tree view Language -->
+    <record id="tree_view_appl_lang" model="ir.ui.view">
+        <field name="name">tree.view.appl.lang</field>
+        <field name="model">appl.lang</field>
+        <field name="arch" type="xml">
+            <tree string="Education Level">
+                <field name="name"/>
+                <field name="code"/>
+            </tree>
+        </field>
+    </record>
+
+    <!-- form view applicant language -->
+    <record id="form_view_appl_language" model="ir.ui.view">
+        <field name="name">form.view.applicant.language</field>
+        <field name="model">applicant.language</field>
+        <field name="arch" type="xml">
+            <form string="Education Level">
+                <sheet>
+                    <group col="4">
+                        <field name="lang_name_id"/>
+                        <field name="spoken"/>
+                        <field name="employee_id"/>
+                        <field name="written"/>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <!-- tree view applicant Language -->
+    <record id="tree_view_applicant_language" model="ir.ui.view">
+        <field name="name">tree.view.applicant.language</field>
+        <field name="model">applicant.language</field>
+        <field name="arch" type="xml">
+            <tree string="Education Level">
+                <field name="lang_name_id"/>
+                <field name="spoken"/>
+                <field name="employee_id"/>
+                <field name="written"/>
+            </tree>
+        </field>
+    </record>
+
+    <!-- form view of employee children -->
+    <record id="form_view_employee_children" model="ir.ui.view">
+        <field name="name">form.view.employee.children</field>
+        <field name="model">employee.children</field>
+        <field name="arch" type="xml">
+            <form string="Child details">
+                <group col="4">
+                    <field name="name" required="1"/>
+                    <field name="age" required="1"/>
+                    <field name="employee_id" required="1"/>
+                </group>
+            </form>
+        </field>
+    </record>
+
+    <!-- tree view of employee children -->
+    <record id="tree_view_employee_children" model="ir.ui.view">
+        <field name="name">tree.view.employee.children</field>
+        <field name="model">employee.children</field>
+        <field name="arch" type="xml">
+            <tree string="Child details">
+                <field name="name"/>
+                <field name="age"/>
+                <field name="employee_id"/>
+            </tree>
+        </field>
+    </record>
+
+
+
+    <!-- inherit contract form view to made required field -->
+    <record id="inherit_contract_form_view_to_required" model="ir.ui.view">
+        <field name="name">inherit.form.view.hr.contract</field>
+        <field name="model">hr.contract</field>
+        <field name="inherit_id" ref="hr_contract.hr_contract_view_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='working_hours']" position="attributes">
+                <attribute name="required">1</attribute>
+            </xpath>
+        </field>
+    </record>
+
+</odoo>
